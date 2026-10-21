@@ -1,0 +1,19 @@
+<svg viewBox='0 0 520 250' width='100%' role='img' aria-labelledby='chart-scatter-title' xmlns='http://www.w3.org/2000/svg'>
+<title id='chart-scatter-title'>Scatter plot of conversion rate against time on site, with a least-squares trend line</title>
+<g style='stroke:var(--color-rule)' stroke-width='1'><line x1='56' y1='204' x2='420' y2='204' /><line x1='56' y1='159' x2='420' y2='159' /><line x1='56' y1='114' x2='420' y2='114' /><line x1='56' y1='69' x2='420' y2='69' /><line x1='56' y1='24' x2='420' y2='24' /></g><g style='fill:var(--color-mute)' font-size='11' text-anchor='end'><text x='46' y='208'>0%</text><text x='46' y='163'>2%</text><text x='46' y='118'>4%</text><text x='46' y='73'>6%</text><text x='46' y='28'>8%</text></g>
+<line x1='56' y1='24' x2='56' y2='204' style='stroke:var(--color-rule)' stroke-width='1' /><line x1='56' y1='204' x2='420' y2='204' style='stroke:var(--color-ink)' stroke-opacity='0.45' stroke-width='1' />
+<g style='fill:var(--color-mute)' font-size='11' text-anchor='middle'><text x='70' y='224'>0</text><text x='157.5' y='224'>15</text><text x='245' y='224'>30</text><text x='332.5' y='224'>45</text><text x='420' y='224'>60</text></g>
+<line x1='70' y1='198.8' x2='420' y2='39.5' style='stroke:var(--color-ink)' stroke-opacity='0.45' stroke-width='1.5' stroke-dasharray='6 4' />
+<g style='fill:var(--color-chart-1)' fill-opacity='0.9'>
+<circle cx='93.33333333333333' cy='179.25' r='4' /><circle cx='116.66666666666666' cy='165.75' r='4' /><circle cx='134.16666666666669' cy='174.75' r='4' /><circle cx='140' cy='186' r='4' /><circle cx='151.66666666666669' cy='147.75' r='4' /><circle cx='169.16666666666669' cy='159' r='4' /><circle cx='186.66666666666669' cy='138.75' r='4' /><circle cx='204.16666666666666' cy='145.5' r='4' /><circle cx='221.66666666666666' cy='125.25' r='4' /><circle cx='239.16666666666666' cy='134.25' r='4' /><circle cx='262.5' cy='114' r='4' /><circle cx='280' cy='107.25' r='4' /><circle cx='297.5' cy='114' r='4' /><circle cx='315' cy='87' r='4' /><circle cx='326.6666666666667' cy='37.5' r='4' /><circle cx='338.3333333333333' cy='96' r='4' /><circle cx='361.6666666666667' cy='71.25' r='4' /><circle cx='385' cy='46.5' r='4' />
+</g>
+<g style='fill:var(--color-chart-2)'>
+<circle cx='140' cy='186' r='5' />
+<circle cx='326.6666666666667' cy='37.5' r='5' />
+<text x='336.6666666666667' y='29.5' font-size='11' font-weight='600' style='fill:var(--color-chart-2)'>outlier</text>
+</g>
+<text x='72' y='48' font-size='13' font-weight='600' style='fill:var(--color-ink)'>r = 0.94</text>
+<text x='72' y='64' font-size='11' style='fill:var(--color-mute)'>n = 18 sessions</text>
+<text x='16' y='114' font-size='11' text-anchor='middle' transform='rotate(-90 16 114)' style='fill:var(--color-mute)'>Conversion rate (%)</text>
+<text x='245' y='244' font-size='11' text-anchor='middle' style='fill:var(--color-mute)'>Time on site (minutes)</text>
+</svg>

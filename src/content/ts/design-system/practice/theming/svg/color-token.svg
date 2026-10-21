@@ -1,0 +1,9 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Color token mapping between themes</text>
+<rect x='60' y='70' width='120' height='50' rx='8' fill='var(--color-action-bg)'/>
+<text x='120' y='90' font-size='9' fill='var(--color-ink)'>--color-action-bg: var(--blue-600)</text>
+<text x='60' y='170' font-size='9' fill='var(--color-mute)'>Light</text>
+<rect x='60' y='140' width='120' height='30' rx='8' fill='var(--color-action-bg)' opacity='0.3'/>
+<text x='120' y='165' font-size='9' fill='var(--color-ink)'>--color-action-dark: rgba(...)</text>
+<text x='60' y='170' font-size='9' fill='var(--color-mute)'>Dark</text>
+</svg>

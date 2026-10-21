@@ -1,0 +1,18 @@
+<svg viewBox='0 0 660 230' width='100%' role='img' aria-labelledby='font-measure-title' xmlns='http://www.w3.org/2000/svg'>
+<title id='font-measure-title'>Two columns of the same text, one too narrow at 28 characters per line and one comfortable at 60</title>
+<text x='40' y='30' font-size='12' font-weight='600' style='fill:var(--color-ink)'>Too narrow · 28 characters</text>
+<g style='fill:var(--color-mute)' font-size='10'>
+<text x='40' y='56'>Typography is the craft</text><text x='40' y='72'>of arranging language so</text><text x='40' y='88'>that it can be read with</text><text x='40' y='104'>ease, and found again by</text><text x='40' y='120'>anyone who needs it, and</text><text x='40' y='136'>not hunted for. That is</text><text x='40' y='152'>the whole of the job, and</text><text x='40' y='168'>it is worth doing well.</text>
+</g>
+<text x='258' y='30' font-size='12' font-weight='600' style='fill:var(--color-ink)'>Comfortable · 60 characters</text>
+<g style='fill:var(--color-mute)' font-size='10'>
+<text x='258' y='60'>Typography is the craft of arranging language so that it can be read with</text><text x='258' y='76'>ease, and found again by anyone who needs it, without hunting for it at all.</text><text x='258' y='92'>A type system is a set of decisions made once — about size, weight, colour</text><text x='258' y='108'>and space — and then applied everywhere, so that every screen speaks in the</text><text x='258' y='124'>same voice and at the same size, which is harder than it sounds and worth a</text><text x='258' y='140'>great deal more when it actually works than when it almost works. Measure</text><text x='258' y='156'>is the width of the column, and the column is the single cheapest way to</text><text x='258' y='172'>make a page comfortable to read. Keep the line between 45 and 75 characters.</text>
+</g>
+<g style='stroke:var(--color-marker)' stroke-width='1'>
+<line x1='246' y1='48' x2='246' y2='180' />
+<line x1='246' y1='48' x2='252' y2='48' />
+<line x1='246' y1='180' x2='252' y2='180' />
+</g>
+<text x='238' y='114' font-size='11' text-anchor='middle' transform='rotate(-90 238 114)' style='fill:var(--color-marker)'>45–75 characters</text>
+<text x='40' y='212' font-size='11' style='fill:var(--color-mute)'>Same words, same size. Only the width of the column changed.</text>
+</svg>

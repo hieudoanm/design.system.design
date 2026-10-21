@@ -1,0 +1,9 @@
+<svg viewBox='0 0 560 230' width='100%' role='img' aria-labelledby='font-scale-title' xmlns='http://www.w3.org/2000/svg'>
+<title id='font-scale-title'>A five-step type scale, from a 12 pixel caption to a 49 pixel display size</title>
+<g style='font-family:var(--font-sans);fill:var(--color-ink)'>
+<text x='170' y='28' font-size='12'>Typography</text><text x='170' y='60' font-size='16'>Typography</text><text x='170' y='96' font-size='20'>Typography</text><text x='170' y='142' font-size='31'>Typography</text><text x='170' y='202' font-size='49'>Typography</text>
+</g>
+<g style='font-family:var(--font-mono);fill:var(--color-mute)' font-size='10'>
+<text x='16' y='28'>text-caption · 12 / 1.4</text><text x='16' y='60'>text-body · 16 / 1.6</text><text x='16' y='96'>text-lead · 20 / 1.5</text><text x='16' y='142'>text-heading · 31 / 1.2</text><text x='16' y='202'>text-display · 49 / 1.05</text>
+</g>
+</svg>

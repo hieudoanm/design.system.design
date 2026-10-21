@@ -1,0 +1,12 @@
+<svg viewBox='0 0 520 250' width='100%' role='img' aria-labelledby='chart-area-title' xmlns='http://www.w3.org/2000/svg'>
+<title id='chart-area-title'>Stacked area chart of desktop and mobile sessions per month, showing the total as the upper edge</title>
+<g style='stroke:var(--color-rule)' stroke-width='1'><line x1='56' y1='204' x2='420' y2='204' /><line x1='56' y1='144' x2='420' y2='144' /><line x1='56' y1='84' x2='420' y2='84' /><line x1='56' y1='24' x2='420' y2='24' /></g><g style='fill:var(--color-mute)' font-size='11' text-anchor='end'><text x='46' y='208'>0</text><text x='46' y='148'>20</text><text x='46' y='88'>40</text><text x='46' y='28'>60</text></g>
+<line x1='56' y1='24' x2='56' y2='204' style='stroke:var(--color-rule)' stroke-width='1' /><line x1='56' y1='204' x2='420' y2='204' style='stroke:var(--color-ink)' stroke-opacity='0.45' stroke-width='1' />
+<g style='fill:var(--color-mute)' font-size='11' text-anchor='middle'><text x='70' y='224'>Jan</text><text x='120' y='224'>Feb</text><text x='170' y='224'>Mar</text><text x='220' y='224'>Apr</text><text x='270' y='224'>May</text><text x='320' y='224'>Jun</text><text x='370' y='224'>Jul</text><text x='420' y='224'>Aug</text></g>
+<path d='M70,204 L70,138 L120,126 L170,129 L220,111 L270,102 L320,114 L370,90 L420,78 L420,204 Z' style='fill:var(--color-chart-1)' fill-opacity='0.85' />
+<path d='M70,102 L120,84 L170,81 L220,66 L270,48 L320,54 L370,39 L420,24 L420,78 L370,90 L320,114 L270,102 L220,111 L170,129 L120,126 L70,138 Z' style='fill:var(--color-chart-2)' fill-opacity='0.85' />
+<path d='M70,138 L120,126 L170,129 L220,111 L270,102 L320,114 L370,90 L420,78' fill='none' style='stroke:var(--color-chart-1)' stroke-width='2' />
+<path d='M70,102 L120,84 L170,81 L220,66 L270,48 L320,54 L370,39 L420,24' fill='none' style='stroke:var(--color-chart-2)' stroke-width='2' />
+<text x='428' y='16' font-size='12' font-weight='600' style='fill:var(--color-chart-2)'>Mobile</text>
+<text x='428' y='94' font-size='12' font-weight='600' style='fill:var(--color-chart-1)'>Desktop</text>
+</svg>

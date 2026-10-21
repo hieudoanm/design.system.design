@@ -1,0 +1,8 @@
+/* TEAM */
+  Site: design.system.design
+  Contact: https://github.com/hieudoanm/design.system.design
+  Standards: HTML5, CSS3, Next.js, Tailwind CSS
+  Components: No trackers, no third-party cookies, no analytics.
+  Software: Next.js, React, TypeScript, Tailwind CSS
+  Do you like the site? Read it left to right for design systems, right to
+  left for system design.

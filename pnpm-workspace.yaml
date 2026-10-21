@@ -1,0 +1,6 @@
+minimumReleaseAge: 0
+
+allowBuilds:
+  unrs-resolver: false
+  # Downloads the ffmpeg binary that turns the Playwright recordings into MP4s.
+  ffmpeg-static: true

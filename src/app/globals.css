@@ -1,0 +1,156 @@
+@import 'tailwindcss';
+
+/* The dark variant follows the attribute on <html>, not the system setting. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme {
+  --font-sans: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Drafting-table palette */
+  --color-paper: #f2f4f1;
+  --color-ink: #111827;
+  --color-mute: #566070;
+  --color-rule: #cfd6df;
+  --color-marker: #c2255c; /* Design System */
+  --color-cobalt: #1f4fd8; /* System Design */
+
+  /* Chart palette — categorical, fixed order (see the Charts chapter) */
+  --color-chart-1: #1f4fd8;
+  --color-chart-2: #c2255c;
+  --color-chart-3: #0f766e;
+  --color-chart-4: #b45309;
+  --color-chart-5: #6d28d9;
+  --color-chart-6: #475569;
+}
+
+/*
+ * The theme is one attribute on <html>: `data-theme="dark"`.
+ *
+ * These blocks sit outside every Tailwind layer, so they beat the palette
+ * above and the utilities built on it. The colours are the same tokens with
+ * new values, so no component changes and no component knows the theme.
+ */
+:root {
+  color-scheme: light;
+
+  /* Graph paper */
+  --grid-major: rgba(17, 24, 39, 0.07);
+  --grid-minor: rgba(17, 24, 39, 0.03);
+
+  /* Floating glass bar */
+  --glass-bg: rgba(255, 255, 255, 0.42);
+  --glass-edge: rgba(255, 255, 255, 0.75);
+  --glass-shadow: rgba(17, 24, 39, 0.14);
+  --glass-sheen: rgba(255, 255, 255, 0.9);
+
+  /* Selected text */
+  --selection: rgba(194, 37, 92, 0.22);
+  /* Cards */
+  --card-bg: rgba(255, 255, 255, 0.6);
+  /* Code blocks */
+  --code-bg: #111827;
+  --code-fg: #e2e8f0;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* The drafting table at night */
+  --color-paper: #0e1116;
+  --color-ink: #e8ecf1;
+  --color-mute: #98a3b3;
+  --color-rule: #2b323c;
+  --color-marker: #f2618f;
+  --color-cobalt: #7fa2ff;
+
+  /* Chart palette — the same order, lifted for a dark surface */
+  --color-chart-1: #7fa2ff;
+  --color-chart-2: #f2618f;
+  --color-chart-3: #34b3a5;
+  --color-chart-4: #e09a4a;
+  --color-chart-5: #a78bfa;
+  --color-chart-6: #9aa7b8;
+
+  /* Graph paper */
+  --grid-major: rgba(232, 236, 241, 0.07);
+  --grid-minor: rgba(232, 236, 241, 0.035);
+
+  /* Floating glass bar */
+  --glass-bg: rgba(20, 24, 31, 0.6);
+  --glass-edge: rgba(255, 255, 255, 0.12);
+  --glass-shadow: rgba(0, 0, 0, 0.5);
+  --glass-sheen: rgba(255, 255, 255, 0.07);
+
+  /* Selected text */
+  --selection: rgba(242, 97, 143, 0.3);
+  /* Cards */
+  --card-bg: rgba(20, 24, 31, 0.6);
+  /* Code blocks */
+  --code-bg: #0e1116;
+  --code-fg: #e2e8f0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  /* Graph paper: 24px minor grid, 120px major grid */
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    24px 24px,
+    24px 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cobalt);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--selection);
+}
+
+/* Floating glass bar */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-edge);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow:
+    0 8px 30px var(--glass-shadow),
+    inset 0 1px 0 var(--glass-sheen);
+}
+
+/* The sliding highlight of the toggle */
+.toggle-pill {
+  transition:
+    left 480ms cubic-bezier(0.34, 1.3, 0.64, 1),
+    width 480ms cubic-bezier(0.34, 1.3, 0.64, 1),
+    background-color 320ms ease,
+    box-shadow 320ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .toggle-pill {
+    transition: none;
+  }
+}

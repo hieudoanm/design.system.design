@@ -1,0 +1,15 @@
+<svg viewBox='0 0 640 200' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Table anatomy</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Table Anatomy</text>
+<text x='60' y='55' font-size='9' fill='var(--color-mute)'>1. Header row</text>
+<rect x='60' y='65' width='260' height='40' rx='6' fill='var(--color-surface)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='75' y='88' font-size='10' fill='var(--color-mute)'>Column 1</text>
+<text x='75' y='108' font-size='10' fill='var(--color-mute)'>Column 2</text>
+<text x='60' y='125' font-size='9' fill='var(--color-mute)'>2. Data rows</text>
+<rect x='60' y='135' width='260' height='80' rx='6' fill='var(--color-surface)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='75' y='150' font-size='9' fill='var(--color-mute)'>Record data</text>
+<text x='75' y='170' font-size='9' fill='var(--color-mute)'>Alternating row stripes</text>
+<text x='60' y='185' font-size='9' fill='var(--color-mute)'>3. Empty state</text>
+<rect x='60' y='195' width='100' height='20' rx='4' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='80' y='210' font-size='8' fill='var(--color-mute)'>No data available</text>
+</svg>

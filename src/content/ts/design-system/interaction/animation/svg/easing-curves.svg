@@ -1,0 +1,24 @@
+<svg viewBox='0 0 400 200' width='100%' role='img' aria-labelledby='animation-easing-curves' xmlns='http://www.w3.org/2000/svg'>
+<title id='animation-easing-curves'>Four easing curves: linear, ease-in, ease-out, ease-in-out</title>
+<g stroke='var(--color-rule)' stroke-width='1' fill='none'>
+<path d='M20,180 L380,20' />
+</g>
+<g stroke='var(--color-chart-1)' stroke-width='2' fill='none'>
+<path d='M20,180 C20,180 380,20 380,20' />
+</g>
+<g stroke='var(--color-chart-2)' stroke-width='2' fill='none'>
+<path d='M20,180 C100,180 300,20 380,20' />
+</g>
+<g stroke='var(--color-chart-3)' stroke-width='2' fill='none'>
+<path d='M20,180 C280,180 120,20 380,20' />
+</g>
+<g stroke='var(--color-chart-4)' stroke-width='2' fill='none'>
+<path d='M20,180 C100,180 280,20 380,20' />
+</g>
+<g font-size='10' fill='var(--color-mute)'>
+<text x='20' y='195'>linear</text>
+<text x='100' y='195'>ease-in</text>
+<text x='200' y='195'>ease-out</text>
+<text x='300' y='195'>ease-in-out</text>
+</g>
+</svg>

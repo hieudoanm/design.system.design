@@ -1,0 +1,36 @@
+<svg viewBox='0 0 640 220' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Spacing scale based on 4pt grid system</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>4pt Spacing Scale</text>
+<g fill='var(--color-action-bg)' opacity='0.8'>
+<rect x='24' y='40' width='4' height='16'/>
+<rect x='24' y='70' width='8' height='16'/>
+<rect x='24' y='100' width='12' height='16'/>
+<rect x='24' y='130' width='16' height='16'/>
+<rect x='24' y='160' width='24' height='16'/>
+<rect x='24' y='190' width='32' height='16'/>
+</g>
+<g fill='var(--color-mute)' font-size='9'>
+<text x='40' y='52'>space-0.5 • 2px</text>
+<text x='44' y='82'>space-1 • 4px</text>
+<text x='48' y='112'>space-1.5 • 6px</text>
+<text x='52' y='142'>space-2 • 8px</text>
+<text x='60' y='172'>space-3 • 12px</text>
+<text x='68' y='202'>space-4 • 16px</text>
+</g>
+<g fill='var(--color-action-bg)' opacity='0.6'>
+<rect x='200' y='40' width='32' height='16'/>
+<rect x='200' y='70' width='48' height='16'/>
+<rect x='200' y='100' width='64' height='16'/>
+<rect x='200' y='130' width='80' height='16'/>
+<rect x='200' y='160' width='96' height='16'/>
+<rect x='200' y='190' width='128' height='16'/>
+</g>
+<g fill='var(--color-mute)' font-size='9'>
+<text x='244' y='52'>space-4 • 16px</text>
+<text x='260' y='82'>space-6 • 24px</text>
+<text x='276' y='112'>space-8 • 32px</text>
+<text x='292' y='142'>space-10 • 40px</text>
+<text x='308' y='172'>space-12 • 48px</text>
+<text x='340' y='202'>space-16 • 64px</text>
+</g>
+</svg>

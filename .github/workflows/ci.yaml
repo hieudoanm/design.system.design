@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6.1.0
+        with:
+          version: '12.16.1'
+      - name: Install Node.js
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - name: Cache pnpm
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/.local/share/pnpm/store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm typecheck
+      # Unit tests with the 80% coverage threshold from vitest.config.mts.
+      - name: Test
+        run: pnpm test:coverage
+      # Browser tests: the exported site, driven with Playwright.
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Browser Test
+        run: pnpm e2e
+      # `pnpm build` runs `prebuild` first: eslint, then prettier --check.
+      # `next build` writes the static export to out/.
+      - name: Build
+        run: pnpm build
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: out/
+          retention-days: 1
+
+  deploy:
+    name: Deploy
+    needs: build
+    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

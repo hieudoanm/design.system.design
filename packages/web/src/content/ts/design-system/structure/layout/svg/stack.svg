@@ -1,0 +1,18 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Stack: vertical, horizontal, and nested layouts</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Layout Stack</text>
+<text x='60' y='55' font-size='9' fill='var(--color-mute)'>Vertical</text>
+<rect x='60' y='65' width='200' height='80' rx='6' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='75' y='78' font-size='8' fill='var(--color-ink)'>Item 1</text>
+<text x='75' y='105' font-size='8' fill='var(--color-ink)'>Item 2</text>
+<text x='75' y='122' font-size='8' fill='var(--color-ink)'>Item 3</text>
+<text x='60' y='175' font-size='9' fill='var(--color-mute)'>Horizontal</text>
+<rect x='170' y='65' width='200' height='80' rx='6' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='185' y='78' font-size='8' fill='var(--color-ink)'>Item 1</text>
+<text x='280' y='78' font-size='8' fill='var(--color-ink)'>Item 2</text>
+<text x='170' y='175' font-size='9' fill='var(--color-mute)'>Nested</text>
+<rect x='330' y='75' width='240' height='80' rx='6' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='345' y='78' font-size='8' fill='var(--color-ink)'>Sidebar</text>
+<text x='460' y='78' font-size='8' fill='var(--color-ink)'>Content</text>
+<text x='330' y='175' font-size='9' fill='var(--color-mute)'>Sidebar above on mobile</text>
+</svg>

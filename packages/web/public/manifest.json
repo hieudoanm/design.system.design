@@ -1,0 +1,32 @@
+{
+  "name": "design.system.design",
+  "short_name": "design.system",
+  "description": "Two subjects that share a word: how to build a design system with atomic design, and how to answer system design interview questions.",
+  "start_url": "/design.system.design/",
+  "scope": "/design.system.design/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f2f4f1",
+  "theme_color": "#f2f4f1",
+  "categories": ["education", "reference"],
+  "icons": [
+    {
+      "src": "/design.system.design/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/design.system.design/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/design.system.design/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

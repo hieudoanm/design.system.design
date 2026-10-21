@@ -1,0 +1,8 @@
+<svg viewBox='0 0 24 28' width='100%' role='img' aria-labelledby='icon-anatomy' xmlns='http://www.w3.org/2000/svg'>
+<title id='icon-anatomy'>Anatomy of a system icon: 24×24 grid, 2px stroke, 2px padding, optical center</title>
+<rect x='2' y='2' width='20' height='20' rx='2' style='stroke:#566070' stroke-width='1' stroke-dasharray='4 2' fill='none' />
+<line x1='12' y1='0' x2='12' y2='24' style='stroke:#566070' stroke-width='1' stroke-dasharray='4 2' />
+<line x1='0' y1='12' x2='24' y2='12' style='stroke:#566070' stroke-width='1' stroke-dasharray='4 2' />
+<circle cx='12' cy='12' r='1.5' style='fill:#c2255c' />
+<text x='12' y='27' font-size='4' style='fill:#566070' text-anchor='middle' font-family='monospace'>24×24</text>
+</svg>

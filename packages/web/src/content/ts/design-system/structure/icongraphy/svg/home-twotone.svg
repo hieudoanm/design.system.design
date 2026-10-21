@@ -1,0 +1,7 @@
+<svg viewBox='0 0 24 24' width='100%' role='img' aria-labelledby='icon-twotone-home' xmlns='http://www.w3.org/2000/svg'>
+<title id='icon-twotone-home'>Two-tone home icon</title>
+<g fill='none' style='stroke:#111827' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+<path d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' />
+<path d='M9 22V12h6v10' style='fill:#111827' fill-opacity='0.4' />
+</g>
+</svg>

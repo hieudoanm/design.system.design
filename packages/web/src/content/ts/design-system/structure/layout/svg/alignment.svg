@@ -1,0 +1,40 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Alignment: start, center, end, stretch</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Alignment Options</text>
+<text x='60' y='55' font-size='9' fill='var(--color-mute)'>Start</text>
+<g fill='var(--color-mute)' font-size='9'>
+  <rect x='60' y='70' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='86' y='92' font-size='8' text-anchor='middle' fill='var(--color-ink)'>flex-start</text>
+  <rect x='130' y='70' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='156' y='92' font-size='8' text-anchor='middle' fill='var(--color-ink)'>flex-start</text>
+  <rect x='200' y='70' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='226' y='92' font-size='8' text-anchor='middle' fill='var(--color-ink)'>flex-start</text>
+</g>
+<text x='60' y='130' font-size='9' fill='var(--color-mute)'>Center</text>
+<g fill='var(--color-mute)' font-size='9'>
+  <rect x='60' y='145' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='86' y='167' font-size='8' text-anchor='middle' fill='var(--color-ink)'>center</text>
+  <rect x='130' y='145' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='156' y='167' font-size='8' text-anchor='middle' fill='var(--color-ink)'>center</text>
+  <rect x='200' y='145' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='226' y='167' font-size='8' text-anchor='middle' fill='var(--color-ink)'>center</text>
+</g>
+<text x='60' y='200' font-size='9' fill='var(--color-mute)'>End</text>
+<g fill='var(--color-mute)' font-size='9'>
+  <rect x='60' y='215' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='86' y='237' font-size='8' text-anchor='middle' fill='var(--color-ink)'>flex-end</text>
+  <rect x='130' y='215' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='156' y='237' font-size='8' text-anchor='middle' fill='var(--color-ink)'>flex-end</text>
+  <rect x='200' y='215' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='226' y='237' font-size='8' text-anchor='middle' fill='var(--color-ink)'>flex-end</text>
+</g>
+<text x='60' y='270' font-size='9' fill='var(--color-mute)'>Stretch</text>
+<g fill='var(--color-mute)' font-size='9'>
+  <rect x='60' y='285' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='86' y='307' font-size='8' text-anchor='middle' fill='var(--color-ink)'>stretch</text>
+  <rect x='130' y='285' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='156' y='307' font-size='8' text-anchor='middle' fill='var(--color-ink)'>stretch</text>
+  <rect x='200' y='285' width='50' height='40' rx='4' fill='var(--color-paper)'/>
+  <text x='226' y='307' font-size='8' text-anchor='middle' fill='var(--color-ink)'>stretch</text>
+</g>
+</svg>

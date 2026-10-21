@@ -1,0 +1,14 @@
+<svg viewBox='0 0 640 200' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Templates: page-level layouts</title>
+<text x='24' y='30' font-size='12' font-weight='600' fill='var(--color-ink)'>Templates</text>
+<g fill='var(--color-action-bg)' opacity='0.8'>
+  <rect x='40' y='50' width='200' height='60' rx='6'/>
+  <text x='140' y='75' font-size='10' fill='var(--color-mute)'>dashboard shell</text>
+  <rect x='260' y='50' width='200' height='60' rx='6'/>
+  <text x='380' y='75' font-size='10' fill='var(--color-mute)'>article layout</text>
+  <rect x='40' y='130' width='200' height='60' rx='6'/>
+  <text x='140' y='155' font-size='10' fill='var(--color-mute)'>marketing page</text>
+  <rect x='260' y='130' width='200' height='60' rx='6'/>
+  <text x='380' y='155' font-size='10' fill='var(--color-mute)'>settings form</text>
+</g>
+</svg>

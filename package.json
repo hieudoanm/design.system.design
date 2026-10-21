@@ -1,0 +1,28 @@
+{
+  "name": "design.system.design",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@12.16.1",
+  "type": "module",
+  "engines": {
+    "node": "26.13.0"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "typecheck": "turbo run typecheck",
+    "build": "turbo run build",
+    "prepare": "husky || true"
+  },
+  "dependencies": {
+    "husky": "9.1.7",
+    "turbo": "2.11.10"
+  }
+}

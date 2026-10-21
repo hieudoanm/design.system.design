@@ -1,0 +1,18 @@
+<svg viewBox='0 0 640 200' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Atoms: basic HTML elements</title>
+<text x='24' y='30' font-size='12' font-weight='600' fill='var(--color-ink)'>Atoms</text>
+<g fill='var(--color-action-bg)' opacity='0.8'>
+  <rect x='40' y='50' width='100' height='40' rx='6'/>
+  <text x='90' y='75' font-size='10' fill='var(--color-mute)'>button</text>
+  <rect x='160' y='50' width='100' height='40' rx='6'/>
+  <text x='210' y='75' font-size='10' fill='var(--color-mute)'>input</text>
+  <rect x='280' y='50' width='100' height='40' rx='6'/>
+  <text x='330' y='75' font-size='10' fill='var(--color-mute)'>label</text>
+  <rect x='40' y='110' width='100' height='40' rx='6'/>
+  <text x='90' y='135' font-size='10' fill='var(--color-mute)'>icon</text>
+  <rect x='160' y='110' width='100' height='40' rx='6'/>
+  <text x='210' y='135' font-size='10' fill='var(--color-mute)'>badge</text>
+  <rect x='280' y='110' width='100' height='40' rx='6'/>
+  <text x='330' y='135' font-size='10' fill='var(--color-mute)'>spinner</text>
+</g>
+</svg>

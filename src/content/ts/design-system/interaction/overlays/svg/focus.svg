@@ -1,0 +1,17 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Focus management in a modal: touch, trap and restore</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Focus management</text>
+<text x='24' y='52' font-size='9' fill='var(--color-mute)'>inert background</text>
+<rect x='24' y='60' width='160' height='72' rx='8' fill='var(--color-rule)' opacity='0.25' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='104' y='100' font-size='9' text-anchor='middle' fill='var(--color-mute)'>rest of page</text>
+<rect x='248' y='48' width='368' height='96' rx='8' fill='var(--color-paper)' stroke='var(--color-cobalt)' stroke-width='1.5'/>
+<text x='276' y='72' font-size='9' fill='var(--color-ink)'>role="dialog" aria-modal="true"</text>
+<rect x='276' y='84' width='120' height='20' rx='4' fill='var(--color-paper)' stroke='var(--color-cobalt)' stroke-width='2'/>
+<text x='336' y='98' font-size='8' text-anchor='middle' fill='var(--color-cobalt)'>initial focus</text>
+<rect x='408' y='84' width='80' height='20' rx='4' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='448' y='98' font-size='8' text-anchor='middle' fill='var(--color-mute)'>cancel</text>
+<rect x='500' y='84' width='88' height='20' rx='4' fill='var(--color-cobalt)' opacity='0.9'/>
+<text x='544' y='98' font-size='8' text-anchor='middle' fill='var(--color-paper)'>confirm</text>
+<text x='276' y='126' font-size='8' fill='var(--color-mute)'>Tab cycles only inside the dialog</text>
+<text x='24' y='170' font-size='9' fill='var(--color-mute)'>On close, focus returns to the element that opened it.</text>
+</svg>

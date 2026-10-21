@@ -1,0 +1,10 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Elevation level 1: subtle shadow</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Elevation Level 1</text>
+<rect x='62' y='63' width='100' height='60' rx='8' fill='var(--color-ink)' opacity='0.05'/>
+<rect x='60' y='60' width='100' height='60' rx='8' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='110' y='85' font-size='10' text-anchor='middle' fill='var(--color-mute)'>level-1</text>
+<text x='110' y='100' font-size='9' text-anchor='middle' fill='var(--color-mute)'>subtle</text>
+<text x='60' y='150' font-size='9' fill='var(--color-mute)'>One offset: hovers and small raised surfaces.</text>
+<text x='60' y='168' font-size='9' fill='var(--color-mute)'>use: hover buttons, chips</text>
+</svg>

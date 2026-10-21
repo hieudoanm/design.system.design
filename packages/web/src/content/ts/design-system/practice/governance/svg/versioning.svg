@@ -1,0 +1,20 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Semantic versioning for a design system: major, minor and patch</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Semantic versioning</text>
+<rect x='24' y='48' width='184' height='92' rx='8' fill='var(--color-paper)' stroke='var(--color-marker)' stroke-width='1.5'/>
+<text x='116' y='76' font-size='16' font-weight='600' text-anchor='middle' fill='var(--color-marker)'>1.4.2</text>
+<text x='116' y='100' font-size='9' text-anchor='middle' fill='var(--color-ink)'>breaking</text>
+<text x='116' y='114' font-size='8' text-anchor='middle' fill='var(--color-mute)'>major — token removed</text>
+<text x='116' y='128' font-size='8' text-anchor='middle' fill='var(--color-mute)'>needs a codemod + note</text>
+<rect x='228' y='48' width='184' height='92' rx='8' fill='var(--color-paper)' stroke='var(--color-cobalt)' stroke-width='1'/>
+<text x='320' y='76' font-size='16' font-weight='600' text-anchor='middle' fill='var(--color-cobalt)'>1.5.0</text>
+<text x='320' y='100' font-size='9' text-anchor='middle' fill='var(--color-ink)'>additive</text>
+<text x='320' y='114' font-size='8' text-anchor='middle' fill='var(--color-mute)'>minor — new component</text>
+<text x='320' y='128' font-size='8' text-anchor='middle' fill='var(--color-mute)'>safe to adopt</text>
+<rect x='432' y='48' width='184' height='92' rx='8' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='524' y='76' font-size='16' font-weight='600' text-anchor='middle' fill='var(--color-mute)'>1.5.1</text>
+<text x='524' y='100' font-size='9' text-anchor='middle' fill='var(--color-ink)'>fix</text>
+<text x='524' y='114' font-size='8' text-anchor='middle' fill='var(--color-mute)'>patch — no API change</text>
+<text x='524' y='128' font-size='8' text-anchor='middle' fill='var(--color-mute)'>invisible to consumers</text>
+<text x='24' y='170' font-size='9' fill='var(--color-mute)'>Deprecate before you remove: warn, then delete in the next major.</text>
+</svg>

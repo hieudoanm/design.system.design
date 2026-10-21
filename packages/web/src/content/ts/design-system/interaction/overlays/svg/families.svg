@@ -1,0 +1,23 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Overlay families: modal, drawer, popover, menu and tooltip</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Overlay families</text>
+<rect x='24' y='44' width='120' height='104' rx='8' fill='var(--color-rule)' opacity='0.3'/>
+<text x='84' y='100' font-size='9' text-anchor='middle' fill='var(--color-mute)'>page</text>
+<rect x='40' y='58' width='88' height='76' rx='6' fill='var(--color-paper)' stroke='var(--color-cobalt)' stroke-width='1.5'/>
+<text x='84' y='92' font-size='9' text-anchor='middle' fill='var(--color-ink)'>modal</text>
+<text x='84' y='106' font-size='8' text-anchor='middle' fill='var(--color-mute)'>blocks</text>
+<rect x='180' y='44' width='120' height='104' rx='6' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<rect x='180' y='44' width='40' height='104' rx='6' fill='var(--color-cobalt)' opacity='0.15'/>
+<text x='200' y='100' font-size='9' text-anchor='middle' fill='var(--color-ink)'>drawer</text>
+<rect x='336' y='44' width='120' height='40' rx='6' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='396' y='68' font-size='9' text-anchor='middle' fill='var(--color-mute)'>trigger</text>
+<rect x='336' y='92' width='120' height='56' rx='6' fill='var(--color-paper)' stroke='var(--color-cobalt)' stroke-width='1.5'/>
+<text x='396' y='116' font-size='9' text-anchor='middle' fill='var(--color-ink)'>popover</text>
+<text x='396' y='130' font-size='8' text-anchor='middle' fill='var(--color-mute)'>anchored</text>
+<rect x='492' y='44' width='124' height='30' rx='6' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='554' y='63' font-size='9' text-anchor='middle' fill='var(--color-mute)'>trigger</text>
+<rect x='492' y='82' width='124' height='66' rx='6' fill='var(--color-ink)' opacity='0.9'/>
+<text x='554' y='108' font-size='9' text-anchor='middle' fill='var(--color-paper)'>menu / tooltip</text>
+<text x='554' y='122' font-size='8' text-anchor='middle' fill='var(--color-paper)'>light dismiss</text>
+<text x='24' y='170' font-size='9' fill='var(--color-mute)'>Blocking to light: modal → drawer → popover → menu → tooltip</text>
+</svg>

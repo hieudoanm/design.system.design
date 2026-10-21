@@ -1,0 +1,7 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>prefers-color-scheme media query</text>
+<text x='60' y='60' font-size='9' fill='var(--color-mute)'>user preference</text>
+<rect x='60' y='70' width='200' height='50' rx='8' fill='var(--color-surface)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='120' y='90' font-size='9' fill='var(--color-ink)'>@media (prefers-color-scheme: dark)</text>
+<text x='60' y='170' font-size='9' fill='var(--color-mute)'>no explicit theme set</text>
+</svg>

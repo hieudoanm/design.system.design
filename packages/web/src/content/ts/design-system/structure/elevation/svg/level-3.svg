@@ -1,0 +1,11 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Elevation level 3: overlay shadow</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Elevation Level 3</text>
+<rect x='70' y='71' width='100' height='60' rx='8' fill='var(--color-ink)' opacity='0.12'/>
+<rect x='65' y='66' width='100' height='60' rx='8' fill='var(--color-ink)' opacity='0.07'/>
+<rect x='60' y='61' width='100' height='60' rx='8' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='110' y='86' font-size='10' text-anchor='middle' fill='var(--color-mute)'>level-3</text>
+<text x='110' y='101' font-size='9' text-anchor='middle' fill='var(--color-mute)'>overlay</text>
+<text x='60' y='150' font-size='9' fill='var(--color-mute)'>Three offsets: floats clearly above the page.</text>
+<text x='60' y='168' font-size='9' fill='var(--color-mute)'>use: modals, drawers, popovers</text>
+</svg>

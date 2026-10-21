@@ -1,0 +1,16 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Overlay stacking on the elevation z-index scale</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Stacking order</text>
+<rect x='40' y='120' width='120' height='36' rx='6' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='100' y='142' font-size='9' text-anchor='middle' fill='var(--color-mute)'>page z-0</text>
+<rect x='170' y='96' width='120' height='60' rx='6' fill='var(--color-paper)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='230' y='120' font-size='9' text-anchor='middle' fill='var(--color-mute)'>dropdown z-2</text>
+<text x='230' y='134' font-size='8' text-anchor='middle' fill='var(--color-mute)'>shadow-md</text>
+<rect x='300' y='68' width='120' height='88' rx='6' fill='var(--color-paper)' stroke='var(--color-cobalt)' stroke-width='1.5'/>
+<text x='360' y='96' font-size='9' text-anchor='middle' fill='var(--color-ink)'>modal z-3</text>
+<text x='360' y='110' font-size='8' text-anchor='middle' fill='var(--color-mute)'>shadow-lg</text>
+<rect x='430' y='40' width='120' height='116' rx='6' fill='var(--color-ink)' opacity='0.9'/>
+<text x='490' y='76' font-size='9' text-anchor='middle' fill='var(--color-paper)'>toast z-4</text>
+<text x='490' y='90' font-size='8' text-anchor='middle' fill='var(--color-paper)'>shadow-xl</text>
+<text x='40' y='172' font-size='9' fill='var(--color-mute)'>Every overlay pairs a z-index with a proportional shadow.</text>
+</svg>

@@ -6,6 +6,7 @@ export const serviceDiscovery: Problem = {
   tagline: 'Let services find each other as instances come and go.',
   difficulty: 'Medium',
   tags: ['dns', 'infra'],
+  group: 'platform-services',
   functional: [
     'Register and deregister a service instance.',
     'Health-check instances and expire stale entries.',

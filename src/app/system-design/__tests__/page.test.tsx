@@ -1,12 +1,21 @@
 import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import SystemDesignPage, { metadata } from '@/app/system-design/page';
-import { framework, problems } from '@/content/ts/system-design';
+import { framework, problems, problemGroups, problemsByGroup } from '@/content/ts/system-design';
 
 describe('SystemDesignPage', () => {
   it('titles the page', () => {
     expect(metadata.title).toBe('System Design');
     expect(metadata.alternates?.canonical).toBe('/system-design');
+  });
+
+  it('groups the problems under six headings of four', () => {
+    render(<SystemDesignPage />);
+    problemGroups.forEach((group) => {
+      expect(screen.getByRole('heading', { level: 2, name: group.title })).toBeInTheDocument();
+    });
+    expect(problemGroups).toHaveLength(6);
+    problemGroups.forEach((group) => expect(problemsByGroup(group.id)).toHaveLength(4));
   });
 
   it('lists a card per problem', () => {

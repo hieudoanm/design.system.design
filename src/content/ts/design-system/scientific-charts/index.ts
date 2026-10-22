@@ -13,6 +13,113 @@ import type { Topic } from '../index';
 
 import { box_plot, density_plot, heatmap, histogram, qq_plot, violin_plot } from './svg-generated';
 
+const componentsChartsBoxPlotTsx = `interface BoxPlotData {
+  label: string;
+  min: number; q1: number; median: number; q3: number; max: number;
+  outliers: number[];
+}
+
+export function BoxPlot({ data, yDomain }: { data: BoxPlotData[]; yDomain: [number, number] }) {
+  const [yMin, yMax] = yDomain;
+  const y = d3.scaleLinear().domain([yMin, yMax]).range([height, 0]);
+
+  return (
+    <ChartFrame title="Group comparison" summary={...}>
+      <svg viewBox={...}>
+        {data.map((d, i) => {
+          const x = xScale(i);
+          return (
+            <g key={d.label}>
+              <line x1={x} y1={y(d.max)} x2={x} y2={y(d.q3)} />
+              <line x1={x} y1={y(d.min)} x2={x} y2={y(d.q1)} />
+              <rect x={x - w/2} y={y(d.q1)} width={w} height={y(d.q1) - y(d.q3)} fill={color(i)} fillOpacity={0.3} />
+              <line x1={x - w/2} y1={y(d.median)} x2={x + w/2} y2={y(d.median)} strokeWidth={2} />
+              {d.outliers.map(o => <circle key={o} cx={x} cy={y(o)} r={3} fill={color(i)} />)}
+            </g>
+          );
+        })}
+      </svg>
+      <DataTable data={data} />
+    </ChartFrame>
+  );
+}`;
+
+const componentsChartsScientificChartFrameTsx = `export function ScientificChartFrame({
+  title,
+  summary,
+  children,
+  table,
+  stats,
+}: {
+  title: string;
+  summary: string;
+  children: React.ReactNode;
+  table: React.ReactNode;
+  stats?: { label: string; value: string }[];
+}) {
+  return (
+    <figure aria-labelledby={\`\${title}-title\`}>
+      <figcaption id={\`\${title}-title\`} className="font-semibold">{title}</figcaption>
+      <p className="text-mute text-sm">{summary}</p>
+      {stats && (
+        <dl className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm my-4">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <dt className="text-mute">{s.label}</dt>
+              <dd className="font-mono">{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      <div aria-hidden="true">{children}</div>
+      <details className="mt-3">
+        <summary>View data table</summary>
+        {table}
+      </details>
+    </figure>
+  );
+}`;
+
+const libStatsTs = `// Pure statistical helpers — no rendering, testable in isolation
+
+export function boxPlotStats(values: number[]): BoxStats {
+  const sorted = [...values].sort((a, b) => a - b);
+  const q1 = quantile(sorted, 0.25);
+  const median = quantile(sorted, 0.5);
+  const q3 = quantile(sorted, 0.75);
+  const iqr = q3 - q1;
+  return {
+    min: sorted[0],
+    q1,
+    median,
+    q3,
+    max: sorted[sorted.length - 1],
+    iqr,
+    lowerFence: q1 - 1.5 * iqr,
+    upperFence: q3 + 1.5 * iqr,
+    outliers: sorted.filter(v => v < q1 - 1.5 * iqr || v > q3 + 1.5 * iqr),
+  };
+}
+
+export function kde(values: number[], bandwidth: number, grid: number[]): number[] {
+  return grid.map(x =>
+    values.reduce((sum, v) => sum + gaussianKernel((x - v) / bandwidth), 0) /
+    (values.length * bandwidth)
+  );
+}
+
+function gaussianKernel(u: number): number {
+  return Math.exp(-0.5 * u * u) / Math.sqrt(2 * Math.PI);
+}
+
+export function qqPlotData(values: number[], theoretical = 'normal'): QQPoint[] {
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted.map((v, i) => ({
+    theoretical: inverseNormalCDF((i + 0.5) / values.length),
+    sample: v,
+  }));
+}`;
+
 /* --- box plot ----------------------------------------------------------- */
 
 const boxData = [
@@ -144,6 +251,7 @@ export const scientificCharts: Topic = {
     'Statistical graphics for exploration and communication: box, violin, histogram, density, Q-Q, and correlation heatmap.',
   summary:
     'Scientific charts answer different questions than business charts: they show distributions, compare groups, check assumptions, and reveal structure in data. Each chart type here is a component built from the same chart primitives (frame, axes, marks, tooltip, data table) with statistical semantics baked in.',
+  group: 'data-charts',
   sections: [
     {
       id: 'choosing',
@@ -194,36 +302,7 @@ export const scientificCharts: Topic = {
       ],
       code: {
         label: 'components/charts/BoxPlot.tsx',
-        source: `interface BoxPlotData {
-  label: string;
-  min: number; q1: number; median: number; q3: number; max: number;
-  outliers: number[];
-}
-
-export function BoxPlot({ data, yDomain }: { data: BoxPlotData[]; yDomain: [number, number] }) {
-  const [yMin, yMax] = yDomain;
-  const y = d3.scaleLinear().domain([yMin, yMax]).range([height, 0]);
-
-  return (
-    <ChartFrame title="Group comparison" summary={...}>
-      <svg viewBox={...}>
-        {data.map((d, i) => {
-          const x = xScale(i);
-          return (
-            <g key={d.label}>
-              <line x1={x} y1={y(d.max)} x2={x} y2={y(d.q3)} />
-              <line x1={x} y1={y(d.min)} x2={x} y2={y(d.q1)} />
-              <rect x={x - w/2} y={y(d.q1)} width={w} height={y(d.q1) - y(d.q3)} fill={color(i)} fillOpacity={0.3} />
-              <line x1={x - w/2} y1={y(d.median)} x2={x + w/2} y2={y(d.median)} strokeWidth={2} />
-              {d.outliers.map(o => <circle key={o} cx={x} cy={y(o)} r={3} fill={color(i)} />)}
-            </g>
-          );
-        })}
-      </svg>
-      <DataTable data={data} />
-    </ChartFrame>
-  );
-}`,
+        source: componentsChartsBoxPlotTsx,
       },
       rules: [
         'Whiskers = 1.5×IQR (Tukey). Not min/max.',
@@ -364,41 +443,7 @@ export function BoxPlot({ data, yDomain }: { data: BoxPlotData[]; yDomain: [numb
       ],
       code: {
         label: 'components/charts/ScientificChartFrame.tsx',
-        source: `export function ScientificChartFrame({
-  title,
-  summary,
-  children,
-  table,
-  stats,
-}: {
-  title: string;
-  summary: string;
-  children: React.ReactNode;
-  table: React.ReactNode;
-  stats?: { label: string; value: string }[];
-}) {
-  return (
-    <figure aria-labelledby={\`\${title}-title\`}>
-      <figcaption id={\`\${title}-title\`} className="font-semibold">{title}</figcaption>
-      <p className="text-mute text-sm">{summary}</p>
-      {stats && (
-        <dl className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm my-4">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <dt className="text-mute">{s.label}</dt>
-              <dd className="font-mono">{s.value}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
-      <div aria-hidden="true">{children}</div>
-      <details className="mt-3">
-        <summary>View data table</summary>
-        {table}
-      </details>
-    </figure>
-  );
-}`,
+        source: componentsChartsScientificChartFrameTsx,
       },
     },
     {
@@ -407,45 +452,7 @@ export function BoxPlot({ data, yDomain }: { data: BoxPlotData[]; yDomain: [numb
       intro: 'Building scientific charts as components.',
       code: {
         label: 'lib/stats.ts',
-        source: `// Pure statistical helpers — no rendering, testable in isolation
-
-export function boxPlotStats(values: number[]): BoxStats {
-  const sorted = [...values].sort((a, b) => a - b);
-  const q1 = quantile(sorted, 0.25);
-  const median = quantile(sorted, 0.5);
-  const q3 = quantile(sorted, 0.75);
-  const iqr = q3 - q1;
-  return {
-    min: sorted[0],
-    q1,
-    median,
-    q3,
-    max: sorted[sorted.length - 1],
-    iqr,
-    lowerFence: q1 - 1.5 * iqr,
-    upperFence: q3 + 1.5 * iqr,
-    outliers: sorted.filter(v => v < q1 - 1.5 * iqr || v > q3 + 1.5 * iqr),
-  };
-}
-
-export function kde(values: number[], bandwidth: number, grid: number[]): number[] {
-  return grid.map(x =>
-    values.reduce((sum, v) => sum + gaussianKernel((x - v) / bandwidth), 0) /
-    (values.length * bandwidth)
-  );
-}
-
-function gaussianKernel(u: number): number {
-  return Math.exp(-0.5 * u * u) / Math.sqrt(2 * Math.PI);
-}
-
-export function qqPlotData(values: number[], theoretical = 'normal'): QQPoint[] {
-  const sorted = [...values].sort((a, b) => a - b);
-  return sorted.map((v, i) => ({
-    theoretical: inverseNormalCDF((i + 0.5) / values.length),
-    sample: v,
-  }));
-}`,
+        source: libStatsTs,
       },
       rules: [
         'Statistics first, rendering second. Pure functions in lib/stats.ts.',

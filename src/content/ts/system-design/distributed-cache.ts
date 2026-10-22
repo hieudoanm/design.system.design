@@ -6,6 +6,7 @@ export const distributedCache: Problem = {
   tagline: 'A sharded, replicated in-memory cache with eviction and consistency rules.',
   difficulty: 'Medium',
   tags: ['cache', 'distributed'],
+  group: 'building-blocks',
   functional: [
     'Read, write and delete a key across the cluster.',
     'Shard keys with consistent hashing.',

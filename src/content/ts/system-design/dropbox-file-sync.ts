@@ -6,6 +6,7 @@ export const dropboxFileSync: Problem = {
   tagline: 'Store files as deduplicated blocks and keep every device in sync.',
   difficulty: 'Easy',
   tags: ['file-sync', 'storage'],
+  group: 'collaboration-commerce',
   functional: [
     'Upload and download files and folders.',
     'Sync changes across every device a user owns.',

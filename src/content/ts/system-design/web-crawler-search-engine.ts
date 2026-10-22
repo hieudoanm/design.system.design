@@ -6,6 +6,7 @@ export const webCrawlerSearchEngine: Problem = {
   tagline: 'Crawl the web politely, index it, and answer queries from an inverted index.',
   difficulty: 'Easy',
   tags: ['cache', 'crawler', 'search'],
+  group: 'building-blocks',
   functional: [
     'Crawl from seed URLs and follow discovered links.',
     'Respect robots.txt and per-host politeness.',

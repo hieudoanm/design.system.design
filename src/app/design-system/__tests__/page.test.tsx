@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import DesignSystemPage, { metadata } from '@/app/design-system/page';
-import { topics } from '@/content/ts/design-system';
+import { topics, topicGroups } from '@/content/ts/design-system';
 
 const hrefs = () => screen.getAllByRole('link').map((link) => link.getAttribute('href') ?? '');
 
@@ -26,5 +26,13 @@ describe('DesignSystemPage', () => {
     topics[0].sections.forEach((section) => {
       expect(screen.getAllByText(section.title).length).toBeGreaterThan(0);
     });
+  });
+
+  it('groups the topics under five headings', () => {
+    render(<DesignSystemPage />);
+    topicGroups.forEach((group) => {
+      expect(screen.getByRole('heading', { level: 2, name: group.title })).toBeInTheDocument();
+    });
+    expect(topicGroups).toHaveLength(5);
   });
 });

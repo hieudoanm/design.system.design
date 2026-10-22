@@ -6,6 +6,7 @@ export const recommendationSystem: Problem = {
   tagline: 'Generate candidates, rank them and serve personalised results in milliseconds.',
   difficulty: 'Hard',
   tags: ['recommendation'],
+  group: 'collaboration-commerce',
   functional: [
     'Return a ranked list of items for a user and context.',
     'Use history, item features and real-time signals.',

@@ -11,6 +11,8 @@ export type Problem = {
   tagline: string;
   difficulty: Difficulty;
   tags: string[];
+  /** Which of the five groups the problem belongs to. */
+  group: string;
   functional: string[];
   nonFunctional: string[];
   /** Back-of-the-envelope numbers. */

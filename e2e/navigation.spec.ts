@@ -1,6 +1,11 @@
 import { expect, test, type Page } from '@playwright/test';
 import { topics } from '../src/content/ts/design-system';
-import { framework, problems } from '../src/content/ts/system-design';
+import {
+  framework,
+  problems,
+  problemGroups,
+  problemsByGroup,
+} from '../src/content/ts/system-design';
 
 /** The three-way toggle in the header. */
 const navbar = (page: Page) => page.getByRole('navigation', { name: 'Primary' });
@@ -102,10 +107,15 @@ test('the navbar walks from the landing page to both chapters', async ({ page })
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
     'Popular problems, with the questions interviewers ask next.',
   );
-  await expect(page.getByRole('heading', { name: 'Problems', exact: true })).toBeVisible();
-  await expect(page.locator('section[aria-labelledby="problems"] h3')).toHaveText(
-    problems.map((problem) => problem.title),
+  await expect(page.getByRole('heading', { name: 'Foundations', exact: true })).toBeVisible();
+  await expect(page.locator('section[aria-labelledby="foundations"] h3')).toHaveText(
+    problemsByGroup('foundations').map((problem) => problem.title),
   );
+  for (const group of problemGroups) {
+    await expect(page.locator(`section[aria-labelledby="${group.id}"] h3`)).toHaveText(
+      problemsByGroup(group.id).map((problem) => problem.title),
+    );
+  }
   for (const problem of problems) {
     await expect(page.getByText(problem.tagline).first()).toBeVisible();
   }

@@ -6,6 +6,7 @@ export const apiGateway: Problem = {
   tagline: 'One entry point for auth, rate limits, routing and observability.',
   difficulty: 'Medium',
   tags: ['auth', 'infra', 'monitoring'],
+  group: 'platform-services',
   functional: [
     'Route a request to the right service.',
     'Authenticate, authorise and rate limit it.',

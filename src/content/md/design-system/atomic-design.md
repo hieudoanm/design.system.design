@@ -1,38 +1,30 @@
 ---
-title: Components
-description: Atomic design hierarchy — atoms, molecules, organisms, templates, and pages — plus the principles and practices that keep a design system healthy.
-tags: [atomic-design, components, design-system, architecture]
+title: Atomic Design
+description: The five-level hierarchy that structures design systems — atoms, molecules, organisms, templates and pages — plus the principles and practices that keep a design system healthy.
+tags: [atomic-design, layout, design-system, architecture]
 ---
 
-# Components
+# Atomic Design
 
 Atomic design: atoms, molecules, organisms, templates and pages.
 
 A design system is a set of tokens, components and guidelines that lets many people build a consistent product quickly. Atomic design gives it a shape: small parts combine into bigger ones, and each layer only depends on the layers below it. Design tokens sit beneath atoms as the shared foundation.
 
-## Principles
+## Introduction
 
-Rules of thumb that decide most of the small calls.
+A philosophy for building design systems.
 
-### Tokens, not values
+Atomic design breaks down interfaces into fundamental building blocks. The five levels—atoms, molecules, organisms, templates, and pages—create a hierarchical system where each level is composed of the level below it. This ensures that everything built on top inherits consistency from the foundation.
 
-Anything visual that can change is a token. Hard-coded values are bugs waiting to happen.
+The key insight is that atoms are not just HTML elements; they are styled, stateful components that reference design tokens. Molecules are purposeful groups of atoms. Organisms are distinct interface regions. Templates define page structure, and pages are specific instances with real content.
 
-### Composition over configuration
+**Rules**
 
-Small parts that fit together beat one component with thirty props. If a prop list keeps growing, split the component.
-
-### Constrain on purpose
-
-A system is useful because it says no. A limited set of sizes, colours and variants makes decisions faster and results more consistent.
-
-### Document the why
-
-Show when to use a component and when not to, with real examples. Usage guidance saves more time than an API table.
-
-### Treat it as a product
-
-It has users (designers and developers), a roadmap, versions, support and a way to contribute. Without owners it decays.
+- Atoms style exclusively from design tokens.
+- Molecules own the layout between their atoms.
+- Organisms accept data through props, not fetching inside the component.
+- Templates use slots (props or children) instead of hard-coding content.
+- Pages are specific instances of templates with real content.
 
 ## Atoms
 
@@ -89,23 +81,6 @@ The test: if you can describe it in one short sentence without the word "and", i
 - Own the layout between the atoms, such as spacing and alignment.
 - Link labels, hints and errors with `aria-describedby` and `htmlFor`.
 
-**Code:** FormField.tsx
-
-```tsx
-export function FormField({ label, hint, error, children }: FormFieldProps) {
-  const id = useId();
-  return (
-    <div className="field">
-      <Label htmlFor={id}>{label}</Label>
-      {cloneElement(children, { id, "aria-invalid": !!error, "aria-describedby": id + "-msg" })}
-      <p id={id + "-msg" className={error ? "field-error" : "field-hint"}>
-        {error ?? hint}
-      </p>
-    </div>
-  );
-}
-```
-
 ## Organisms
 
 Larger sections made of molecules and atoms. Each one is a recognisable part of an interface.
@@ -125,23 +100,6 @@ Organisms are where components start to reflect your product, so keep the data l
 - Accept data through props. Do not fetch inside the component.
 - Handle empty, loading and error states explicitly.
 - Make it responsive from the start.
-
-**Code:** PricingTable.tsx
-
-```tsx
-export function PricingTable({ plans }: { plans: Plan[] }) {
-  if (plans.length === 0) return <EmptyState title='No plans yet' />;
-  return (
-    <ul className='grid gap-4 md:grid-cols-3'>
-      {plans.map((plan) => (
-        <li key={plan.id}>
-          <PlanCard plan={plan} />
-        </li>
-      ))}
-    </ul>
-  );
-}
-```
 
 ## Templates
 
@@ -164,22 +122,6 @@ Templates answer the question "what does this layout do when the content is shor
 - Define behaviour at each breakpoint.
 - Test it with the longest, shortest and empty content you can imagine.
 
-**Code:** DashboardTemplate.tsx
-
-```tsx
-export function DashboardTemplate({ nav, header, children }: Props) {
-  return (
-    <div className='shell'>
-      <aside className='shell-nav'>{nav}</aside>
-      <div className='shell-main'>
-        <header>{header}</header>
-        <main id='content'>{children}</main>
-      </div>
-    </div>
-  );
-}
-```
-
 ## Pages
 
 Templates filled with real content. The level where you test whether the system holds up.
@@ -200,56 +142,32 @@ Pages are usually owned by product teams, not the design system. They import fro
 - Turn repeated page-level patterns into new organisms or templates.
 - Run visual tests on real content, including edge cases.
 
-**Code:** app/projects/page.tsx
+## Practical guidelines
 
-```tsx
-export default async function ProjectsPage() {
-  const projects = await getProjects();
-  return (
-    <DashboardTemplate nav={<MainNav />} header={<PageHeader title='Projects' />}>
-      <ProjectTable projects={projects} />
-    </DashboardTemplate>
-  );
-}
-```
+Practical tips for applying atomic design.
 
-## Keeping it healthy
+Start with the atoms that are most commonly used in your product. Build molecules from those atoms, then organisms from molecules. Templates and pages emerge naturally as the system grows. Avoid creating atoms just for the sake of the framework — every atom should have a purpose.
 
-Layers get you started. These habits keep the system useful after year one.
+**Rules**
 
-### Versioning and releases
+- Start with commonly used atoms.
+- Build molecules intentionally, not by force.
+- Organisms should reflect real interface regions.
+- Templates define structure, not specific pages.
+- Pages are owned by product teams.
 
-Publish tokens and components as packages and follow semantic versioning: a removed prop or renamed token is a major release. Use Changesets to generate release notes. Deprecate before you delete, with a codemod where you can.
+**Do**
 
-### Testing
+- Focus on real use cases. Atoms should have multiple states. Organisms should handle empty and loading states.
 
-Unit-test behaviour with Testing Library. Add visual regression tests for every state of every component (Chromatic or Playwright screenshots). Run axe in CI. A system is only trusted when updates do not break products.
+**Don't**
 
-### Documentation
+- Do not create atoms without a clear purpose. Do not hard-code content in templates.
 
-Each component gets a short description, live examples for every variant and state, do and don't guidance, accessibility notes and an API table. Generate what you can from the TypeScript types so it does not go stale.
+## Checklist
 
-### Governance and contribution
+Verify your atomic design implementation.
 
-Decide who owns the system, how a proposal is made, and when something moves from a product into the system. A good rule: a pattern needs to appear in two or three places before it is promoted. Keep a public roadmap and an issue template for requests.
-
-## Repo structure
-
-A monorepo layout that matches the layers.
-
-**Code:** layout
-
-```text
-packages/
-  tokens/        JSON source, Style Dictionary build ─► CSS, JS, others
-  ui/            atoms, molecules, organisms, templates
-    src/
-      atoms/
-      molecules/
-      organisms/
-      templates/
-      index.ts   single public entry point
-  docs/          documentation site and live examples
-apps/
-  web/           product pages that consume @scope/ui
-```
+- **Hierarchy**: Atoms → Molecules → Organisms → Templates → Pages follows a consistent structure.
+- **Consistency**: Atoms style from tokens. Molecules own their layout. Organisms accept data via props.
+- **Responsiveness**: Organisms and templates are responsive from the start. Pages adapt to content changes.

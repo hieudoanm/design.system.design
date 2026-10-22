@@ -1,6 +1,6 @@
 import type { Metadata, NextPage } from 'next';
 import Link from 'next/link';
-import { framework, problems } from '@/content/ts/system-design';
+import { framework, problemGroups, problemsByGroup } from '@/content/ts/system-design';
 import type { Difficulty } from '@/content/ts/system-design/types';
 import { withBasePath } from '@/lib/paths';
 
@@ -26,45 +26,61 @@ const SystemDesignPage: NextPage = () => {
           Popular problems, with the questions interviewers ask next.
         </h1>
         <p className='text-mute mt-6 max-w-2xl text-xl leading-relaxed'>
-          Each problem walks through requirements, rough numbers, a diagram, the key design choices,
-          and a list of follow-up questions with answers.
+          Twenty-four problems in six groups of four. Each one walks through requirements, rough
+          numbers, a diagram, the key design choices, and a list of follow-up questions with
+          answers.
         </p>
       </header>
 
-      <section aria-labelledby='problems' className='border-ink/15 border-t py-12'>
-        <h2 id='problems' className='text-3xl font-semibold tracking-tight'>
-          Problems
-        </h2>
-        <ul className='mt-8 grid gap-5 md:grid-cols-2'>
-          {problems.map((problem) => (
-            <li key={problem.slug}>
-              <Link
-                href={`/system-design/${problem.slug}`}
-                className='border-ink/15 hover:border-cobalt flex h-full flex-col justify-between rounded-lg border bg-[var(--card-bg)] p-6 transition hover:-translate-y-1 hover:shadow-xl'>
-                <div>
-                  <div className='flex items-center justify-between gap-3'>
-                    <h3 className='text-2xl font-semibold tracking-tight'>{problem.title}</h3>
-                    <span
-                      className={`rounded-full px-2.5 py-0.5 font-mono text-xs ${difficultyStyle[problem.difficulty]}`}>
-                      {problem.difficulty}
-                    </span>
-                  </div>
-                  <p className='text-mute mt-2 leading-relaxed'>{problem.tagline}</p>
-                </div>
-                <ul className='mt-5 flex flex-wrap gap-2'>
-                  {problem.tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className='bg-cobalt/10 text-cobalt rounded-full px-2.5 py-0.5 font-mono text-xs'>
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {problemGroups.map((group) => {
+        const groupProblems = problemsByGroup(group.id);
+
+        return (
+          <section
+            key={group.id}
+            aria-labelledby={group.id}
+            className='border-ink/15 border-t py-12'>
+            <div className='flex flex-wrap items-baseline justify-between gap-2'>
+              <h2 id={group.id} className='text-3xl font-semibold tracking-tight'>
+                {group.title}
+              </h2>
+              <p className='text-mute font-mono text-sm'>
+                {groupProblems.length} {groupProblems.length === 1 ? 'problem' : 'problems'}
+              </p>
+            </div>
+            <p className='text-mute mt-2 max-w-2xl leading-relaxed'>{group.intro}</p>
+            <ul className='mt-8 grid gap-5 md:grid-cols-2'>
+              {groupProblems.map((problem) => (
+                <li key={problem.slug}>
+                  <Link
+                    href={`/system-design/${problem.slug}`}
+                    className='border-ink/15 hover:border-cobalt flex h-full flex-col justify-between rounded-lg border bg-[var(--card-bg)] p-6 transition hover:-translate-y-1 hover:shadow-xl'>
+                    <div>
+                      <div className='flex items-center justify-between gap-3'>
+                        <h3 className='text-2xl font-semibold tracking-tight'>{problem.title}</h3>
+                        <span
+                          className={`rounded-full px-2.5 py-0.5 font-mono text-xs ${difficultyStyle[problem.difficulty]}`}>
+                          {problem.difficulty}
+                        </span>
+                      </div>
+                      <p className='text-mute mt-2 leading-relaxed'>{problem.tagline}</p>
+                    </div>
+                    <ul className='mt-5 flex flex-wrap gap-2'>
+                      {problem.tags.map((tag) => (
+                        <li
+                          key={tag}
+                          className='bg-cobalt/10 text-cobalt rounded-full px-2.5 py-0.5 font-mono text-xs'>
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
 
       <section aria-labelledby='framework' className='border-ink/15 border-t py-12'>
         <h2 id='framework' className='text-3xl font-semibold tracking-tight'>

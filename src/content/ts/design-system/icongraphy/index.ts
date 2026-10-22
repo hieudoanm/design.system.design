@@ -27,6 +27,64 @@ import {
   grid_star,
 } from './svg-generated';
 
+const appGlobalsCss = `@theme {
+  --icon-xs: 16px;
+  --icon-sm: 20px;
+  --icon-md: 24px;
+  --icon-lg: 32px;
+  --icon-xl: 48px;
+}
+
+.icon { width: var(--icon-md); height: var(--icon-md); }
+.icon-sm { width: var(--icon-sm); height: var(--icon-sm); }
+.icon-lg { width: var(--icon-lg); height: var(--icon-lg); }`;
+
+const componentsIconTsx = `export function Icon({
+  name,
+  size = 'md',
+  'aria-label': label,
+  'aria-hidden': hidden,
+  ...props
+}: IconProps) {
+  const svg = ICON_REGISTRY[name];
+  if (!svg) return null;
+
+  return (
+    <svg
+      {...props}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      role={label ? 'img' : undefined}
+      aria-label={label}
+      aria-hidden={hidden}
+      focusable="false"
+    >
+      <title>{label}</title>
+      {svg}
+    </svg>
+  );
+}
+
+// Usage:
+<Icon name="search" aria-label="Search" />
+<Icon name="chevron-down" aria-hidden="true" /> // next to "Sort" text`;
+
+const componentsIconsRegistryTs = `// Generated from SVG files at build time — do not edit by hand
+export const ICON_REGISTRY: Record<string, React.ReactNode> = {
+  home: <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />,
+  search: <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" />,
+  // ... all icons
+};
+
+// components/Icon.tsx
+export function Icon({ name, size = 'md', ...props }: IconProps) {
+  const path = ICON_REGISTRY[name];
+  return path ? (
+    <svg viewBox="0 0 24 24" width={size} height={size} {...props}>{path}</svg>
+  ) : null;
+}`;
+
 /* --- sizing tokens ------------------------------------------------------- */
 
 const sizingTable = {
@@ -141,12 +199,13 @@ const gridIcons = [
   maxWidth: 300,
 }));
 
-export const icons: Topic = {
-  slug: 'icons',
+export const icongraphy: Topic = {
+  slug: 'icongraphy',
   title: 'Iconography',
   tagline: 'A coherent icon system: grid, style, sizing, and accessibility.',
   summary:
     'Icons are the visual vocabulary of an interface. A consistent system — fixed grid, unified stroke, optical alignment, and clear semantics — makes icons feel like part of the same family, not a collected set.',
+  group: 'structure',
   sections: [
     {
       id: 'principles',
@@ -228,17 +287,7 @@ export const icons: Topic = {
       intro: 'Size icons with tokens, not pixels. The token maps to a context, not a pixel value.',
       code: {
         label: 'app/globals.css',
-        source: `@theme {
-  --icon-xs: 16px;
-  --icon-sm: 20px;
-  --icon-md: 24px;
-  --icon-lg: 32px;
-  --icon-xl: 48px;
-}
-
-.icon { width: var(--icon-md); height: var(--icon-md); }
-.icon-sm { width: var(--icon-sm); height: var(--icon-sm); }
-.icon-lg { width: var(--icon-lg); height: var(--icon-lg); }`,
+        source: appGlobalsCss,
       },
       visuals: [
         {
@@ -259,36 +308,7 @@ export const icons: Topic = {
       intro: 'Icons are invisible to screen readers unless you make them visible.',
       code: {
         label: 'components/Icon.tsx',
-        source: `export function Icon({
-  name,
-  size = 'md',
-  'aria-label': label,
-  'aria-hidden': hidden,
-  ...props
-}: IconProps) {
-  const svg = ICON_REGISTRY[name];
-  if (!svg) return null;
-
-  return (
-    <svg
-      {...props}
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      role={label ? 'img' : undefined}
-      aria-label={label}
-      aria-hidden={hidden}
-      focusable="false"
-    >
-      <title>{label}</title>
-      {svg}
-    </svg>
-  );
-}
-
-// Usage:
-<Icon name="search" aria-label="Search" />
-<Icon name="chevron-down" aria-hidden="true" /> // next to "Sort" text`,
+        source: componentsIconTsx,
       },
       visuals: [
         {
@@ -311,20 +331,7 @@ export const icons: Topic = {
       intro: 'A single registry, a single component, tree-shakeable.',
       code: {
         label: 'components/icons/registry.ts',
-        source: `// Generated from SVG files at build time — do not edit by hand
-export const ICON_REGISTRY: Record<string, React.ReactNode> = {
-  home: <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />,
-  search: <path d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" />,
-  // ... all icons
-};
-
-// components/Icon.tsx
-export function Icon({ name, size = 'md', ...props }: IconProps) {
-  const path = ICON_REGISTRY[name];
-  return path ? (
-    <svg viewBox="0 0 24 24" width={size} height={size} {...props}>{path}</svg>
-  ) : null;
-}`,
+        source: componentsIconsRegistryTs,
       },
       rules: [
         'Store source SVGs in /icons/src, generate registry at build.',

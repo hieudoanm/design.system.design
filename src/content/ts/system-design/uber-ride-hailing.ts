@@ -6,6 +6,7 @@ export const uberRideHailing: Problem = {
   tagline: 'Match riders to nearby drivers in real time and dispatch trips at scale.',
   difficulty: 'Easy',
   tags: ['delivery', 'matching', 'mobile', 'payments'],
+  group: 'consumer-products',
   functional: [
     'A rider requests a trip and a driver goes online or offline.',
     'Match the rider to a nearby available driver, who accepts or declines.',

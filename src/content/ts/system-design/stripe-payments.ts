@@ -6,6 +6,7 @@ export const stripePayments: Problem = {
   tagline: 'Move money exactly once, with idempotency, ledgers and reconciliation.',
   difficulty: 'Easy',
   tags: ['auth', 'payments', 'realtime', 'security'],
+  group: 'search-media',
   functional: [
     'Create a charge or authorization for a merchant.',
     'Store payment methods and settle with the card network.',

@@ -119,7 +119,7 @@ public/
 | `/`                     | `src/app/page.tsx`                                         |
 | `/design-system`        | `topics` — the chapter index, one card per topic           |
 | `/design-system/[slug]` | `topics` — one page per topic, the id is the slug          |
-| `/system-design`        | `src/content/ts/system-design/index.ts`                    |
+| `/system-design`        | `src/content/ts/system-design/index.ts` — `problemGroups`  |
 | `/system-design/[slug]` | `problems` — one page per problem, the id is the file name |
 
 - To add a topic or a problem:
@@ -127,7 +127,7 @@ public/
   - Add the route to `public/sitemap.xml`.
   - The page appears with no other change.
 - The atomic design levels (tokens, atoms, molecules, organisms, templates,
-  pages) are sections of the `components` topic.
+  pages) are sections of the `atomic-design` topic.
 - They are not routes of their own.
 
 ## Content model
@@ -141,6 +141,7 @@ type Topic = {
   title: string;
   tagline: string; // one line, used on the index card
   summary: string; // long-form intro
+  group: TopicGroupId; // which of the five groups it belongs to
   sections: TopicSection[];
 };
 
@@ -178,6 +179,7 @@ type Problem = {
   tagline: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
   tags: string[];
+  group: ProblemGroupId; // which of the six groups it belongs to
   functional: string[];
   nonFunctional: string[];
   estimation: string[]; // back-of-the-envelope numbers
@@ -190,21 +192,35 @@ type Problem = {
 - `src/content/ts/design-system/` holds one file or folder per topic, plus
   `index.ts`:
 
-| Topic               | Shape                | Exports                                                                     |
-| ------------------- | -------------------- | --------------------------------------------------------------------------- |
-| `components`        | `components.ts`      | `components` plus `atomicLevels`, `principles`, `practice`, `repoStructure` |
-| `design-tokens`     | `design-tokens.ts`   | `designTokens`                                                              |
-| `colors`            | `colors/`            | `colors`                                                                    |
-| `spacing`           | `spacing/`           | `spacing`                                                                   |
-| `fonts`             | `fonts/`             | `fonts`                                                                     |
-| `forms`             | `forms/`             | `forms`                                                                     |
-| `charts`            | `charts/`            | `charts`                                                                    |
-| `scientific-charts` | `scientific-charts/` | `scientificCharts`                                                          |
-| `accessibility`     | `accessibility.ts`   | `accessibility`                                                             |
-| `responsive`        | `responsive/`        | `responsive`                                                                |
-| `icons`             | `icons/`             | `icons`                                                                     |
-| `animation`         | `animation/`         | `animation`                                                                 |
-| `index.ts`          | —                    | the `Topic` types, the `topics` array and `getTopic()`                      |
+| Topic               | Group       | Shape                | Exports                                                                                  |
+| ------------------- | ----------- | -------------------- | ---------------------------------------------------------------------------------------- |
+| `design-tokens`     | foundations | `design-tokens.ts`   | `designTokens`                                                                           |
+| `colors`            | foundations | `colors/`            | `colors`                                                                                 |
+| `typography`        | foundations | `typography/`        | `typography`                                                                             |
+| `spacing`           | foundations | `spacing/`           | `spacing`                                                                                |
+| `atomic-design`     | structure   | `atomic-design/`     | `atomicDesign`                                                                           |
+| `layout`            | structure   | `layout/`            | `layout`                                                                                 |
+| `elevation`         | structure   | `elevation/`         | `elevation`                                                                              |
+| `icongraphy`        | structure   | `icongraphy/`        | `icongraphy`                                                                             |
+| `data-display`      | data-charts | `data-display/`      | `dataDisplay`                                                                            |
+| `charts`            | data-charts | `charts/`            | `charts`                                                                                 |
+| `scientific-charts` | data-charts | `scientific-charts/` | `scientificCharts`                                                                       |
+| `feedback`          | data-charts | `feedback/`          | `feedback`                                                                               |
+| `forms`             | interaction | `forms/`             | `forms`                                                                                  |
+| `navigation`        | interaction | `navigation/`        | `navigation`                                                                             |
+| `overlays`          | interaction | `overlays/`          | `overlays`                                                                               |
+| `animation`         | interaction | `animation/`         | `animation`                                                                              |
+| `accessibility`     | practice    | `accessibility.ts`   | `accessibility`                                                                          |
+| `responsive`        | practice    | `responsive/`        | `responsive`                                                                             |
+| `theming`           | practice    | `theming/`           | `theming`                                                                                |
+| `governance`        | practice    | `governance/`        | `governance`                                                                             |
+| `index.ts`          | —           | —                    | the `Topic` types, `topicGroups`, the `topics` array, `topicsByGroup()` and `getTopic()` |
+
+- The five groups live in `topicGroups` in `index.ts`.
+- A topic declares its group with the `group` field.
+- `/design-system` renders one section per group, in `topicGroups` order.
+- The array order inside a group drives the reading order.
+- The group id is the section anchor id on that page.
 
 - A topic with drawings is a folder:
   - `index.ts` holds the prose, the data arrays and the tables.
@@ -327,9 +343,10 @@ type Problem = {
 ## Adding a design system chapter
 
 1. Create `src/content/ts/design-system/<slug>.ts` exporting one `Topic`.
-2. Add it to the `topics` array in `src/content/ts/design-system/index.ts`. The
-   array order drives the index page and the previous/next links.
-3. Add `/design-system/<slug>` to `public/sitemap.xml`.
+2. Give it a `group` — one of the five ids in `topicGroups`.
+3. Add it to the `topics` array in `src/content/ts/design-system/index.ts`. The
+   array order drives the previous/next links and the order within its group.
+4. Add `/design-system/<slug>` to `public/sitemap.xml`.
 
 - If the topic has drawings, make it a folder instead.
 - Put the `Topic` in `<slug>/index.ts` with `import type { Topic } from '../index'`.
@@ -342,9 +359,16 @@ type Problem = {
 ## Adding a system design problem
 
 1. Create `src/content/ts/system-design/<slug>.ts` exporting one `Problem`.
-2. Add it to the `problems` array in `src/content/ts/system-design/index.ts`.
-   The array order drives the index page and the "next problem" link.
-3. Add `/system-design/<slug>` to `public/sitemap.xml`.
+2. Give it a `group` — one of the six ids in `problemGroups`.
+3. Add it to the `problems` array in `src/content/ts/system-design/index.ts`.
+   The array order drives the "next problem" link and the order within its
+   group.
+4. Add `/system-design/<slug>` to `public/sitemap.xml`.
+
+- The six groups live in `problemGroups` in `index.ts`, four problems each.
+- `/system-design` renders one section per group, in `problemGroups` order.
+- The group id is the section anchor id on that page.
+- `problemsByGroup()` returns the problems of one group, in reading order.
 
 ## Tests
 

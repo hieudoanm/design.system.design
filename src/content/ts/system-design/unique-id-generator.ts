@@ -7,6 +7,7 @@ export const uniqueIdGenerator: Problem = {
     'Generate globally unique, roughly time-sortable IDs across many machines without coordination.',
   difficulty: 'Medium',
   tags: ['Snowflake', 'Clocks', 'Coordination'],
+  group: 'foundations',
   functional: [
     'IDs are unique across all servers and data centers.',
     'IDs fit in 64 bits and are numeric.',

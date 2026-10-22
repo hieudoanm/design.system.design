@@ -1,12 +1,69 @@
 import type { Topic } from '../index';
 import { scale, layout, grid, density } from './svg-generated';
 
+const spacingTokensCss = `:root {
+  --space-0: 0;
+  --space-0.5: 0.125rem; /* 2px */
+  --space-1: 0.25rem;    /* 4px */
+  --space-2: 0.5rem;     /* 8px */
+  --space-3: 0.75rem;    /* 12px */
+  --space-4: 1rem;       /* 16px */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px */
+  --space-8: 2rem;       /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+}`;
+
+const gridCss = `.container {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: var(--space-8);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-4);
+}`;
+
+const componentExampleTsx = `// Card component using spacing tokens
+export function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="card" style={{
+      padding: "var(--space-6)",
+      display: "flex",
+      flexDirection: "column",
+      gap: "var(--space-4)",
+      marginBottom: "var(--space-8)"
+    }}>
+      {children}
+    </div>
+  );
+}`;
+
 export const spacing: Topic = {
   slug: 'spacing',
   title: 'Spacing',
   tagline: 'Consistent rhythm through a systematic spacing scale.',
   summary:
     'Spacing creates visual hierarchy, improves readability, and establishes rhythm. A systematic spacing scale based on a grid (like 4pt) ensures consistency, scalability, and harmony across all interfaces.',
+  group: 'foundations',
   sections: [
     {
       id: 'philosophy',
@@ -55,22 +112,7 @@ export const spacing: Topic = {
       ],
       code: {
         label: 'spacing-tokens.css',
-        source: `:root {
-  --space-0: 0;
-  --space-0.5: 0.125rem; /* 2px */
-  --space-1: 0.25rem;    /* 4px */
-  --space-2: 0.5rem;     /* 8px */
-  --space-3: 0.75rem;    /* 12px */
-  --space-4: 1rem;       /* 16px */
-  --space-5: 1.25rem;    /* 20px */
-  --space-6: 1.5rem;     /* 24px */
-  --space-8: 2rem;       /* 32px */
-  --space-10: 2.5rem;    /* 40px */
-  --space-12: 3rem;      /* 48px */
-  --space-16: 4rem;      /* 64px */
-  --space-20: 5rem;      /* 80px */
-  --space-24: 6rem;      /* 96px */
-}`,
+        source: spacingTokensCss,
       },
     },
     {
@@ -127,29 +169,7 @@ export const spacing: Topic = {
       ],
       code: {
         label: 'grid.css',
-        source: `.container {
-  max-width: 1280px;
-  margin-inline: auto;
-  padding-inline: var(--space-4);
-}
-
-@media (min-width: 768px) {
-  .container {
-    padding-inline: var(--space-6);
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding-inline: var(--space-8);
-  }
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: var(--space-4);
-}`,
+        source: gridCss,
       },
     },
     {
@@ -216,20 +236,7 @@ export const spacing: Topic = {
       ],
       code: {
         label: 'component-example.tsx',
-        source: `// Card component using spacing tokens
-export function Card({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="card" style={{
-      padding: "var(--space-6)",
-      display: "flex",
-      flexDirection: "column",
-      gap: "var(--space-4)",
-      marginBottom: "var(--space-8)"
-    }}>
-      {children}
-    </div>
-  );
-}`,
+        source: componentExampleTsx,
       },
       items: [
         {

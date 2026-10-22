@@ -11,6 +11,149 @@ import type { Topic } from '../index';
 
 import { choreography, easing_curves, state_transitions } from './svg-generated';
 
+const appGlobalsCss = `@theme {
+  /* Durations */
+  --duration-instant: 0ms;
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+
+  /* Easings */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+:root {
+  /* Default transition for most properties */
+  --transition-default: var(--duration-normal) var(--ease-in-out);
+}
+
+/* Reduced motion: collapse all transform transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}`;
+
+const appGlobalsCss2 = `@media (prefers-reduced-motion: reduce) {
+  /* Disable all transform and complex animations */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Keep instant color/opacity changes */
+  .btn:hover,
+  .btn:focus {
+    transition: background-color 0ms, color 0ms;
+  }
+
+  /* Spinners: show static frame or pulse instead of rotation */
+  .spinner {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  /* Carousels: pause auto-play */
+  .carousel[data-auto] {
+    animation-play-state: paused;
+  }
+
+  /* Smooth scroll: off */
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* JavaScript check */
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (prefersReduced) {
+  // Skip Framer Motion initial/animate, use only exit
+}`;
+
+const libMotionTs = `import { Variants, Transition } from 'motion/react';
+
+/* Standard transitions from tokens */
+export const transitions = {
+  default: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
+  fast: { duration: 0.1, ease: [0, 0, 0.2, 1] },
+  slow: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+  spring: { type: 'spring', stiffness: 300, damping: 30 },
+  instant: { duration: 0 },
+} as const satisfies Record<string, Transition>;
+
+/* Choreography variants */
+export const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.05, delayChildren: 0.1 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { staggerChildren: 0.03, staggerDirection: -1 },
+  },
+};
+
+export const fadeSlideUp: Variants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: transitions.default },
+  exit: { opacity: 0, y: -10, transition: transitions.fast },
+};
+
+export const scaleFade: Variants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: transitions.default },
+  exit: { opacity: 0, scale: 0.95, transition: transitions.fast },
+};
+
+/* Reduced motion guard */
+export function useReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduced(media.matches);
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
+    media.addEventListener('change', handler);
+    return () => media.removeEventListener('change', handler);
+  }, []);
+  return reduced;
+}
+
+/* Usage in a component */
+function CardList({ items }) {
+  const reduced = useReducedMotion();
+  return (
+    <motion.ul
+      variants={reduced ? {} : staggerContainer}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      {items.map((item) => (
+        <motion.li
+          key={item.id}
+          variants={reduced ? {} : fadeSlideUp}
+        >
+          <Card {...item} />
+        </motion.li>
+      ))}
+    </motion.ul>
+  );
+}`;
+
 /* --- motion tokens ------------------------------------------------------- */
 
 const motionTable = {
@@ -96,6 +239,7 @@ export const animation: Topic = {
   tagline: 'Motion as a system: tokens, choreography, and accessibility.',
   summary:
     'Animation is not decoration — it communicates state, guides attention, and makes interactions feel causal. A motion system defines tokens for duration and easing, choreography rules for multi-element sequences, and accessibility guardrails so motion helps rather than harms.',
+  group: 'interaction',
   sections: [
     {
       id: 'principles',
@@ -137,38 +281,7 @@ export const animation: Topic = {
       intro: 'Duration and easing as design tokens. Never hard-code.',
       code: {
         label: 'app/globals.css',
-        source: `@theme {
-  /* Durations */
-  --duration-instant: 0ms;
-  --duration-fast: 100ms;
-  --duration-normal: 200ms;
-  --duration-slow: 300ms;
-  --duration-slower: 500ms;
-
-  /* Easings */
-  --ease-linear: linear;
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-:root {
-  /* Default transition for most properties */
-  --transition-default: var(--duration-normal) var(--ease-in-out);
-}
-
-/* Reduced motion: collapse all transform transitions */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}`,
+        source: appGlobalsCss,
       },
       visuals: [
         {
@@ -261,44 +374,7 @@ export const animation: Topic = {
       intro: 'prefers-reduced-motion: reduce is a user need, not a preference.',
       code: {
         label: 'app/globals.css',
-        source: `@media (prefers-reduced-motion: reduce) {
-  /* Disable all transform and complex animations */
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  /* Keep instant color/opacity changes */
-  .btn:hover,
-  .btn:focus {
-    transition: background-color 0ms, color 0ms;
-  }
-
-  /* Spinners: show static frame or pulse instead of rotation */
-  .spinner {
-    animation: none;
-    opacity: 0.7;
-  }
-
-  /* Carousels: pause auto-play */
-  .carousel[data-auto] {
-    animation-play-state: paused;
-  }
-
-  /* Smooth scroll: off */
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-/* JavaScript check */
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (prefersReduced) {
-  // Skip Framer Motion initial/animate, use only exit
-}`,
+        source: appGlobalsCss2,
       },
       visuals: [
         {
@@ -323,76 +399,7 @@ if (prefersReduced) {
       intro: 'How to apply the system in React components.',
       code: {
         label: 'lib/motion.ts',
-        source: `import { Variants, Transition } from 'motion/react';
-
-/* Standard transitions from tokens */
-export const transitions = {
-  default: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
-  fast: { duration: 0.1, ease: [0, 0, 0.2, 1] },
-  slow: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-  spring: { type: 'spring', stiffness: 300, damping: 30 },
-  instant: { duration: 0 },
-} as const satisfies Record<string, Transition>;
-
-/* Choreography variants */
-export const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.05, delayChildren: 0.1 },
-  },
-  exit: {
-    opacity: 0,
-    transition: { staggerChildren: 0.03, staggerDirection: -1 },
-  },
-};
-
-export const fadeSlideUp: Variants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: transitions.default },
-  exit: { opacity: 0, y: -10, transition: transitions.fast },
-};
-
-export const scaleFade: Variants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1, transition: transitions.default },
-  exit: { opacity: 0, scale: 0.95, transition: transitions.fast },
-};
-
-/* Reduced motion guard */
-export function useReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReduced(media.matches);
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
-    media.addEventListener('change', handler);
-    return () => media.removeEventListener('change', handler);
-  }, []);
-  return reduced;
-}
-
-/* Usage in a component */
-function CardList({ items }) {
-  const reduced = useReducedMotion();
-  return (
-    <motion.ul
-      variants={reduced ? {} : staggerContainer}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-    >
-      {items.map((item) => (
-        <motion.li
-          key={item.id}
-          variants={reduced ? {} : fadeSlideUp}
-        >
-          <Card {...item} />
-        </motion.li>
-      ))}
-    </motion.ul>
-  );
-}`,
+        source: libMotionTs,
       },
       rules: [
         'Centralize variants in lib/motion.ts — do not inline variants in components.',

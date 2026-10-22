@@ -1,5 +1,5 @@
 /**
- * The design system is six topics. Each one lives in its own file and exports
+ * The design system is twenty topics. Each one lives in its own file and exports
  * a `Topic`; this barrel is the only place the list is assembled.
  *
  * The topic files import their type from here with `import type`, which is
@@ -50,55 +50,116 @@ export type TopicSection = {
   visuals?: TopicVisual[];
 };
 
+/** The five groups the chapters are arranged into, in reading order. */
+export const topicGroups = [
+  {
+    id: 'foundations',
+    title: 'Foundations',
+    intro: 'The primitives every other chapter builds on.',
+  },
+  {
+    id: 'structure',
+    title: 'Structure',
+    intro: 'How the pieces are organised into a system.',
+  },
+  {
+    id: 'data-charts',
+    title: 'Data & charts',
+    intro: 'Showing information, from tables to scientific plots.',
+  },
+  {
+    id: 'interaction',
+    title: 'Interaction',
+    intro: 'The pieces a person actually operates.',
+  },
+  {
+    id: 'practice',
+    title: 'Practice',
+    intro: 'The cross-cutting concerns that keep a system healthy.',
+  },
+] as const;
+
+export type TopicGroupId = (typeof topicGroups)[number]['id'];
+
 export type Topic = {
   slug: string;
   title: string;
   tagline: string;
   summary: string;
+  /** Which of the five groups the chapter belongs to. */
+  group: TopicGroupId;
   sections: TopicSection[];
 };
 
-import { components } from './components';
+import { atomicDesign } from './atomic-design';
 import { designTokens } from './design-tokens';
 import { colors } from './colors';
+import { elevation } from './elevation';
 import { spacing } from './spacing';
-import { fonts } from './fonts';
+import { layout } from './layout';
+import { typography } from './typography';
 import { forms } from './forms';
+import { dataDisplay } from './data-display';
+import { feedback } from './feedback';
+import { icongraphy } from './icongraphy';
 import { charts } from './charts';
 import { scientificCharts } from './scientific-charts';
 import { accessibility } from './accessibility';
 import { responsive } from './responsive';
-import { icons } from './icons';
 import { animation } from './animation';
+import { theming } from './theming';
+import { navigation } from './navigation';
+import { overlays } from './overlays';
+import { governance } from './governance';
 
-export { components, atomicLevels, principles, practice, repoStructure } from './components';
+export { atomicDesign } from './atomic-design';
 export { designTokens } from './design-tokens';
 export { colors } from './colors';
+export { elevation } from './elevation';
 export { spacing } from './spacing';
-export { fonts } from './fonts';
+export { layout } from './layout';
+export { typography } from './typography';
 export { forms } from './forms';
+export { dataDisplay } from './data-display';
+export { feedback } from './feedback';
+export { icongraphy } from './icongraphy';
 export { charts } from './charts';
 export { scientificCharts } from './scientific-charts';
 export { accessibility } from './accessibility';
 export { responsive } from './responsive';
-export { icons } from './icons';
 export { animation } from './animation';
+export { theming } from './theming';
+export { navigation } from './navigation';
+export { overlays } from './overlays';
+export { governance } from './governance';
 
-/** The twelve topics, in reading order. */
+/** The twenty topics, in reading order. */
 export const topics: Topic[] = [
-  components,
   designTokens,
   colors,
+  typography,
   spacing,
-  fonts,
-  forms,
+  atomicDesign,
+  layout,
+  elevation,
+  icongraphy,
+  dataDisplay,
   charts,
   scientificCharts,
+  feedback,
+  forms,
+  navigation,
+  overlays,
+  animation,
   accessibility,
   responsive,
-  icons,
-  animation,
+  theming,
+  governance,
 ];
+
+/** The topics of one group, in reading order. */
+export const topicsByGroup = (group: TopicGroupId): Topic[] =>
+  topics.filter((topic) => topic.group === group);
 
 export const getTopic = (slug: string): Topic | undefined =>
   topics.find((topic) => topic.slug === slug);

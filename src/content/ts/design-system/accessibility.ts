@@ -1,11 +1,60 @@
 import type { Topic } from './index';
 
+const componentsContrastBadgeTsx = `export function ContrastBadge({ fg, bg }: { fg: string; bg: string }) {
+  const ratio = contrastRatio(fg, bg);
+  const pass = ratio >= 4.5;
+  return (
+    <span
+      className={pass ? "text-emerald-700" : "text-rose-700"}
+      aria-label={\`Contrast ratio \${ratio.toFixed(2)} to 1, \${pass ? "passes" : "fails"} AA\`}>
+      {ratio.toFixed(2)}:1 {pass ? "✓" : "✗"}
+    </span>
+  );
+}`;
+
+const appGlobalsCss = `:focus-visible {
+  outline: 2px solid var(--color-cobalt);
+  outline-offset: 2px;
+}
+
+/* Never this alone:
+   button:focus { outline: none; }
+   — replace it with a visible :focus-visible style. */`;
+
+const componentsFormFieldTsx = `export function FormField({ label, hint, error, children }: FormFieldProps) {
+  const id = useId();
+  const messageId = \`\${id}-msg\`;
+  return (
+    <div className="field">
+      <Label htmlFor={id}>{label}</Label>
+      {cloneElement(children, {
+        id,
+        "aria-invalid": !!error,
+        "aria-describedby": messageId,
+      })}
+      <p id={messageId} className={error ? "field-error" : "field-hint"}>
+        {error ?? hint}
+      </p>
+    </div>
+  );
+}`;
+
+const appGlobalsCss2 = `@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .toggle-pill {
+    transition: none;
+  }
+}`;
+
 export const accessibility: Topic = {
   slug: 'accessibility',
   title: 'Accessibility',
   tagline: 'Target WCAG 2.2 AA, and make the accessible path the default path.',
   summary:
     'Accessibility is a property of the component, not a review that happens at the end. If contrast, focus, keyboard support and semantics are part of the component, everything built from it inherits them.',
+  group: 'practice',
   sections: [
     {
       id: 'baseline',
@@ -37,17 +86,7 @@ export const accessibility: Topic = {
       ],
       code: {
         label: 'components/ContrastBadge.tsx',
-        source: `export function ContrastBadge({ fg, bg }: { fg: string; bg: string }) {
-  const ratio = contrastRatio(fg, bg);
-  const pass = ratio >= 4.5;
-  return (
-    <span
-      className={pass ? "text-emerald-700" : "text-rose-700"}
-      aria-label={\`Contrast ratio \${ratio.toFixed(2)} to 1, \${pass ? "passes" : "fails"} AA\`}>
-      {ratio.toFixed(2)}:1 {pass ? "✓" : "✗"}
-    </span>
-  );
-}`,
+        source: componentsContrastBadgeTsx,
       },
     },
     {
@@ -81,14 +120,7 @@ export const accessibility: Topic = {
       ],
       code: {
         label: 'app/globals.css',
-        source: `:focus-visible {
-  outline: 2px solid var(--color-cobalt);
-  outline-offset: 2px;
-}
-
-/* Never this alone:
-   button:focus { outline: none; }
-   — replace it with a visible :focus-visible style. */`,
+        source: appGlobalsCss,
       },
     },
     {
@@ -105,23 +137,7 @@ export const accessibility: Topic = {
       ],
       code: {
         label: 'components/FormField.tsx',
-        source: `export function FormField({ label, hint, error, children }: FormFieldProps) {
-  const id = useId();
-  const messageId = \`\${id}-msg\`;
-  return (
-    <div className="field">
-      <Label htmlFor={id}>{label}</Label>
-      {cloneElement(children, {
-        id,
-        "aria-invalid": !!error,
-        "aria-describedby": messageId,
-      })}
-      <p id={messageId} className={error ? "field-error" : "field-hint"}>
-        {error ?? hint}
-      </p>
-    </div>
-  );
-}`,
+        source: componentsFormFieldTsx,
       },
     },
     {
@@ -131,14 +147,7 @@ export const accessibility: Topic = {
       body: 'Animation helps people understand where something came from and where it went. It also makes some people ill. `prefers-reduced-motion: reduce` is a request from the operating system, and it must be honoured — turn transitions and parallax off rather than merely shortening them.\n\nKeep durations short. A UI transition that takes longer than about 300ms starts to feel like lag, and a page transition longer than that blocks the next action.',
       code: {
         label: 'app/globals.css',
-        source: `@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .toggle-pill {
-    transition: none;
-  }
-}`,
+        source: appGlobalsCss2,
       },
       rules: [
         'Honour `prefers-reduced-motion` for every animation, including transitions.',

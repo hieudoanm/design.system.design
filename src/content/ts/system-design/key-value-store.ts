@@ -7,6 +7,7 @@ export const keyValueStore: Problem = {
     'Design a highly available, horizontally scalable store in the style of Dynamo or Cassandra.',
   difficulty: 'Hard',
   tags: ['Consistent hashing', 'Replication', 'Quorums'],
+  group: 'foundations',
   functional: [
     'put(key, value), get(key) and delete(key).',
     'Values up to a few hundred kilobytes.',

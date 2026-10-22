@@ -6,6 +6,7 @@ export const googleDocsCollaboration: Problem = {
   tagline: 'Let many people edit the same document at once without conflicts.',
   difficulty: 'Easy',
   tags: ['collaboration', 'realtime'],
+  group: 'search-media',
   functional: [
     'Open and edit a document with several collaborators at once.',
     'Broadcast edits, presence and cursors in real time.',

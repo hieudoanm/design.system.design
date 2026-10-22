@@ -31,10 +31,12 @@ describe('generateStaticParams', () => {
 
 describe('generateMetadata', () => {
   it('describes a known topic', async () => {
-    const metadata = await generateMetadata({ params: Promise.resolve({ slug: 'components' }) });
-    expect(metadata.title).toBe('Components');
-    expect(metadata.description).toBe(topics[0].tagline);
-    expect(metadata.alternates?.canonical).toBe('/design-system/components');
+    const metadata = await generateMetadata({ params: Promise.resolve({ slug: 'atomic-design' }) });
+    expect(metadata.title).toBe('Atomic Design');
+    expect(metadata.description).toBe(
+      topics.find((topic) => topic.slug === 'atomic-design')?.tagline,
+    );
+    expect(metadata.alternates?.canonical).toBe('/design-system/atomic-design');
   });
 
   it('stays empty for an unknown topic', async () => {
@@ -45,18 +47,18 @@ describe('generateMetadata', () => {
 
 describe('DesignSystemTopicPage', () => {
   it('renders the topic title and tagline', async () => {
-    await renderTopic('components');
-    expect(screen.getByRole('heading', { level: 1, name: 'Components' })).toBeInTheDocument();
+    await renderTopic('design-tokens');
+    expect(screen.getByRole('heading', { level: 1, name: 'Design tokens' })).toBeInTheDocument();
     expect(screen.getByText(topics[0].tagline)).toBeInTheDocument();
   });
 
   it('numbers the topic in the reading order', async () => {
-    await renderTopic('design-tokens');
+    await renderTopic('colors');
     expect(screen.getByText(`Design System · 2 of ${topics.length}`)).toBeInTheDocument();
   });
 
   it('links to every section in the table of contents', async () => {
-    await renderTopic('components');
+    await renderTopic('design-tokens');
     const anchors = screen
       .getAllByRole('link')
       .map((link) => link.getAttribute('href') ?? '')
@@ -65,14 +67,16 @@ describe('DesignSystemTopicPage', () => {
   });
 
   it('renders the body of a section', async () => {
-    const { container } = await renderTopic('components');
+    const { container } = await renderTopic('design-tokens');
     const section = topics[0].sections.find((s) => s.body);
     expect(section).toBeDefined();
-    expect(container.textContent).toContain('An atom is a single HTML-level element');
+    expect(container.textContent).toContain(
+      'is a raw value with no opinion about where it is used',
+    );
   });
 
   it('renders the items, the examples and the rules of a section', async () => {
-    await renderTopic('components');
+    await renderTopic('design-tokens');
     const withItems = topics[0].sections.find((s) => s.items);
     expect(withItems).toBeDefined();
     withItems?.items?.forEach((item) => expect(screen.getByText(item.title)).toBeInTheDocument());
@@ -81,7 +85,7 @@ describe('DesignSystemTopicPage', () => {
   });
 
   it('wraps around to the last topic for the previous link', async () => {
-    await renderTopic('components');
+    await renderTopic('design-tokens');
     expect(screen.getByRole('link', { name: /Previous/ })).toHaveAttribute(
       'href',
       `/design-system/${topics[topics.length - 1].slug}`,
@@ -89,7 +93,7 @@ describe('DesignSystemTopicPage', () => {
   });
 
   it('links to the next topic', async () => {
-    await renderTopic('components');
+    await renderTopic('design-tokens');
     expect(screen.getByRole('link', { name: /Next/ })).toHaveAttribute(
       'href',
       `/design-system/${topics[1].slug}`,

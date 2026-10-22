@@ -6,6 +6,7 @@ export const autocompleteTypeahead: Problem = {
   tagline: 'Suggest the top queries for a prefix while the user is still typing.',
   difficulty: 'Easy',
   tags: ['cache', 'search'],
+  group: 'search-media',
   functional: [
     'Return the top-k suggestions for every prefix.',
     'Rank by popularity, recency and personalisation.',

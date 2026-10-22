@@ -6,6 +6,7 @@ export const distributedLockService: Problem = {
   tagline: 'Hand out leases so only one node acts at a time, even after a failure.',
   difficulty: 'Medium',
   tags: ['distributed'],
+  group: 'platform-services',
   functional: [
     'Acquire and release a named lock.',
     'Renew the lease while the holder is alive.',

@@ -12,12 +12,64 @@ import type { Topic } from '../index';
 
 import { desktop, laptop, mobile, tablet, tv } from './svg-generated';
 
+const appGlobalsCss = `@theme {
+  --breakpoint-sm: 40rem;   /* 640px */
+  --breakpoint-md: 48rem;   /* 768px */
+  --breakpoint-lg: 64rem;   /* 1024px */
+  --breakpoint-xl: 80rem;   /* 1280px */
+}`;
+
+const appGlobalsCss2 = `:root {
+  /* 16px on a 320px screen, 20px on a 1280px screen */
+  --text-lead: clamp(1.125rem, 0.9rem + 1vw, 1.375rem);
+  --space-section: clamp(3rem, 2rem + 4vw, 6rem);
+}
+
+.full-height {
+  min-height: 100dvh;
+}`;
+
+const componentsCardGridTsx = `export function CardGrid({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="@container">
+      <div className="grid gap-4 @md:grid-cols-2 @4xl:grid-cols-3">{children}</div>
+    </div>
+  );
+}`;
+
+const componentsHeroTsx = `<img
+  src="/images/hero-800.jpg"
+  srcSet="/images/hero-400.jpg 400w,
+          /images/hero-800.jpg 800w,
+          /images/hero-1600.jpg 1600w"
+  sizes="(min-width: 1024px) 50vw, 100vw"
+  width={1600}
+  height={900}
+  alt="A drafting table with the design system token sheet"
+  fetchPriority="high"
+  decoding="async"
+/>`;
+
+const testsResponsiveSpecTs = `import { test } from "@playwright/test";
+
+const widths = [320, 768, 1024, 1920];
+
+for (const width of widths) {
+  test(\`home page at \${width}px\`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    await expect(page.locator("main")).toBeVisible();
+    await expect(page).toHaveScreenshot(\`home-\${width}.png\`);
+  });
+}`;
+
 export const responsive: Topic = {
   slug: 'responsive',
   title: 'Responsive design',
   tagline: 'Design for the range of screens, not for a list of devices.',
   summary:
     'Responsive design in a system is not a set of breakpoints you check off. It is a decision about which properties change with the viewport, which change with the container, and which never change at all.',
+  group: 'practice',
   sections: [
     {
       id: 'strategy',
@@ -63,12 +115,7 @@ export const responsive: Topic = {
       ],
       code: {
         label: 'app/globals.css',
-        source: `@theme {
-  --breakpoint-sm: 40rem;   /* 640px */
-  --breakpoint-md: 48rem;   /* 768px */
-  --breakpoint-lg: 64rem;   /* 1024px */
-  --breakpoint-xl: 80rem;   /* 1280px */
-}`,
+        source: appGlobalsCss,
       },
     },
     {
@@ -154,15 +201,7 @@ export const responsive: Topic = {
       ],
       code: {
         label: 'app/globals.css',
-        source: `:root {
-  /* 16px on a 320px screen, 20px on a 1280px screen */
-  --text-lead: clamp(1.125rem, 0.9rem + 1vw, 1.375rem);
-  --space-section: clamp(3rem, 2rem + 4vw, 6rem);
-}
-
-.full-height {
-  min-height: 100dvh;
-}`,
+        source: appGlobalsCss2,
       },
     },
     {
@@ -178,13 +217,7 @@ export const responsive: Topic = {
       ],
       code: {
         label: 'components/CardGrid.tsx',
-        source: `export function CardGrid({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="@container">
-      <div className="grid gap-4 @md:grid-cols-2 @4xl:grid-cols-3">{children}</div>
-    </div>
-  );
-}`,
+        source: componentsCardGridTsx,
       },
     },
     {
@@ -214,18 +247,7 @@ export const responsive: Topic = {
       ],
       code: {
         label: 'components/Hero.tsx',
-        source: `<img
-  src="/images/hero-800.jpg"
-  srcSet="/images/hero-400.jpg 400w,
-          /images/hero-800.jpg 800w,
-          /images/hero-1600.jpg 1600w"
-  sizes="(min-width: 1024px) 50vw, 100vw"
-  width={1600}
-  height={900}
-  alt="A drafting table with the design system token sheet"
-  fetchPriority="high"
-  decoding="async"
-/>`,
+        source: componentsHeroTsx,
       },
     },
     {
@@ -242,18 +264,7 @@ export const responsive: Topic = {
       ],
       code: {
         label: 'tests/responsive.spec.ts',
-        source: `import { test } from "@playwright/test";
-
-const widths = [320, 768, 1024, 1920];
-
-for (const width of widths) {
-  test(\`home page at \${width}px\`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 900 });
-    await page.goto("/");
-    await expect(page.locator("main")).toBeVisible();
-    await expect(page).toHaveScreenshot(\`home-\${width}.png\`);
-  });
-}`,
+        source: testsResponsiveSpecTs,
       },
     },
   ],

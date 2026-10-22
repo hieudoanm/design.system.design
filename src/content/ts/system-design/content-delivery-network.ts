@@ -6,6 +6,7 @@ export const contentDeliveryNetwork: Problem = {
   tagline: 'Cache content at the edge and route every request to the nearest node.',
   difficulty: 'Medium',
   tags: ['analytics', 'cache', 'cdn'],
+  group: 'building-blocks',
   functional: [
     'Serve content from an edge node near the user.',
     'Cache objects and revalidate them against the origin.',

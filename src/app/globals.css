@@ -91,6 +91,27 @@
   --code-fg: #e2e8f0;
 }
 
+/*
+ * Shiki emits two CSS custom properties per token (--shiki-light and
+ * --shiki-dark) because the highlighter is built with `defaultColor: false`.
+ * The theme attribute on <html> picks which set wins, so one block of markup
+ * serves both themes with no re-highlighting and no client JavaScript.
+ */
+.shiki-block pre,
+.shiki-block code {
+  background: transparent !important;
+}
+
+.shiki-block .shiki,
+.shiki-block .shiki span {
+  color: var(--shiki-light);
+}
+
+[data-theme='dark'] .shiki-block .shiki,
+[data-theme='dark'] .shiki-block .shiki span {
+  color: var(--shiki-dark);
+}
+
 html {
   scroll-behavior: smooth;
 }

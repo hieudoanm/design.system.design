@@ -12,13 +12,68 @@ import type { Topic } from '../index';
 
 import { anatomy, measure, scale, specimens } from './svg-generated';
 
-export const fonts: Topic = {
-  slug: 'fonts',
+const appGlobalsCss = `@theme {
+  /* the stack is a contract: the first family that exists wins */
+  --font-sans: "Your Text Family", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Your Mono Family", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+}`;
+
+const appGlobalsCss2 = `@theme {
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.5;
+  --text-heading: 1.9375rem;
+  --text-heading--line-height: 1.2;
+  --text-display: 3.0625rem;
+  --text-display--line-height: 1.05;
+}`;
+
+const proseCss = `.prose {
+  max-width: 65ch;
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  font-weight: 400;
+}
+
+.prose h2 {
+  font-size: var(--text-heading);
+  line-height: var(--text-heading--line-height);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}`;
+
+const appLayoutTsx = `<link
+  rel="preload"
+  href="/fonts/your-text-family-latin.woff2"
+  as="font"
+  type="font/woff2"
+  crossOrigin="anonymous"
+/>
+
+/* Metric-matched fallback */
+@font-face {
+  font-family: "Your Text Family Fallback";
+  src: local("Arial");
+  size-adjust: 103%;
+  ascent-override: 96%;
+  descent-override: 24%;
+}`;
+
+export const typography: Topic = {
+  slug: 'typography',
   title: 'Typography',
   tagline:
     'Type as a system: families, a scale, a measure — and the most popular fonts in the world.',
   summary:
     'Typography is the loudest part of a design system and the part teams most often get wrong. A small set of roles, a modular scale, a readable measure and one or two well-chosen families get you most of the way there.',
+  group: 'foundations',
   sections: [
     {
       id: 'typography',
@@ -74,15 +129,7 @@ export const fonts: Topic = {
       ],
       code: {
         label: 'app/globals.css',
-        source: `@theme {
-  /* the stack is a contract: the first family that exists wins */
-  --font-sans: "Your Text Family", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Your Mono Family", ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-body {
-  font-family: var(--font-sans);
-}`,
+        source: appGlobalsCss,
       },
     },
     {
@@ -197,18 +244,7 @@ body {
       ],
       code: {
         label: 'app/globals.css',
-        source: `@theme {
-  --text-caption: 0.75rem;
-  --text-caption--line-height: 1.4;
-  --text-body: 1rem;
-  --text-body--line-height: 1.6;
-  --text-lead: 1.25rem;
-  --text-lead--line-height: 1.5;
-  --text-heading: 1.9375rem;
-  --text-heading--line-height: 1.2;
-  --text-display: 3.0625rem;
-  --text-display--line-height: 1.05;
-}`,
+        source: appGlobalsCss2,
       },
     },
     {
@@ -235,19 +271,7 @@ body {
       ],
       code: {
         label: 'prose.css',
-        source: `.prose {
-  max-width: 65ch;
-  font-size: var(--text-body);
-  line-height: var(--text-body--line-height);
-  font-weight: 400;
-}
-
-.prose h2 {
-  font-size: var(--text-heading);
-  line-height: var(--text-heading--line-height);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}`,
+        source: proseCss,
       },
     },
     {
@@ -276,22 +300,7 @@ body {
       ],
       code: {
         label: 'app/layout.tsx',
-        source: `<link
-  rel="preload"
-  href="/fonts/your-text-family-latin.woff2"
-  as="font"
-  type="font/woff2"
-  crossOrigin="anonymous"
-/>
-
-/* Metric-matched fallback */
-@font-face {
-  font-family: "Your Text Family Fallback";
-  src: local("Arial");
-  size-adjust: 103%;
-  ascent-override: 96%;
-  descent-override: 24%;
-}`,
+        source: appLayoutTsx,
       },
     },
     {

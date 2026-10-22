@@ -6,6 +6,7 @@ export const rateLimiter: Problem = {
   tagline: 'Protect services by capping how many requests a client can make in a time window.',
   difficulty: 'Medium',
   tags: ['Algorithms', 'Redis', 'Distributed counters'],
+  group: 'foundations',
   functional: [
     'Limit by user, IP address, API key or endpoint.',
     'Reject excess requests with HTTP 429 and a Retry-After header.',

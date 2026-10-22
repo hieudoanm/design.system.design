@@ -7,6 +7,7 @@ export const chatSystem: Problem = {
     'Real-time one-to-one and group messaging with delivery guarantees, presence and history.',
   difficulty: 'Hard',
   tags: ['WebSockets', 'Ordering', 'Presence'],
+  group: 'collaboration-commerce',
   functional: [
     'One-to-one and group chat (up to a few hundred members).',
     'Online and offline presence.',

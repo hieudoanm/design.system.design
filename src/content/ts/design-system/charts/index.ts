@@ -11,6 +11,51 @@ import type { Topic } from '../index';
 
 import { area, bar, line, pie, scatter } from './svg-generated';
 
+const appGlobalsCss = `@theme {
+  /* categorical — fixed order, distinct hues */
+  --color-chart-1: #1f4fd8;
+  --color-chart-2: #c2255c;
+  --color-chart-3: #0f766e;
+  --color-chart-4: #b45309;
+  --color-chart-5: #6d28d9;
+  --color-chart-6: #475569;
+
+  /* sequential — one hue, monotonic lightness */
+  --color-seq-100: #e0e7ff;
+  --color-seq-500: #6366f1;
+  --color-seq-900: #312e81;
+
+  /* diverging — two hues meeting at the midpoint */
+  --color-div-neg: #1f4fd8;
+  --color-div-pos: #c2255c;
+}`;
+
+const componentsChartsChartFrameTsx = `export function ChartFrame({
+  title,
+  summary,
+  children,
+  table,
+}: {
+  title: string;
+  summary: string;
+  children: React.ReactNode;
+  table: React.ReactNode;
+}) {
+  return (
+    <figure aria-labelledby={\`\${title}-title\`}>
+      <figcaption id={\`\${title}-title\`} className="font-semibold">
+        {title}
+      </figcaption>
+      <p className="text-mute text-sm">{summary}</p>
+      <div aria-hidden="true">{children}</div>
+      <details className="mt-3">
+        <summary>View data table</summary>
+        {table}
+      </details>
+    </figure>
+  );
+}`;
+
 const traffic = [
   { month: 'Jan', web: 20, ios: 12, android: 30 },
   { month: 'Feb', web: 28, ios: 15, android: 33 },
@@ -73,6 +118,7 @@ export const charts: Topic = {
   tagline: 'Data visualisation as a set of components, not a pile of one-off drawings.',
   summary:
     'Charts are components. They have the same obligations as any other part of the system: they use tokens, they ship in every state, they are accessible without colour, and they behave the same in every product.',
+  group: 'data-charts',
   sections: [
     {
       id: 'anatomy',
@@ -234,24 +280,7 @@ export const charts: Topic = {
       ],
       code: {
         label: 'app/globals.css',
-        source: `@theme {
-  /* categorical — fixed order, distinct hues */
-  --color-chart-1: #1f4fd8;
-  --color-chart-2: #c2255c;
-  --color-chart-3: #0f766e;
-  --color-chart-4: #b45309;
-  --color-chart-5: #6d28d9;
-  --color-chart-6: #475569;
-
-  /* sequential — one hue, monotonic lightness */
-  --color-seq-100: #e0e7ff;
-  --color-seq-500: #6366f1;
-  --color-seq-900: #312e81;
-
-  /* diverging — two hues meeting at the midpoint */
-  --color-div-neg: #1f4fd8;
-  --color-div-pos: #c2255c;
-}`,
+        source: appGlobalsCss,
       },
     },
     {
@@ -268,31 +297,7 @@ export const charts: Topic = {
       ],
       code: {
         label: 'components/charts/ChartFrame.tsx',
-        source: `export function ChartFrame({
-  title,
-  summary,
-  children,
-  table,
-}: {
-  title: string;
-  summary: string;
-  children: React.ReactNode;
-  table: React.ReactNode;
-}) {
-  return (
-    <figure aria-labelledby={\`\${title}-title\`}>
-      <figcaption id={\`\${title}-title\`} className="font-semibold">
-        {title}
-      </figcaption>
-      <p className="text-mute text-sm">{summary}</p>
-      <div aria-hidden="true">{children}</div>
-      <details className="mt-3">
-        <summary>View data table</summary>
-        {table}
-      </details>
-    </figure>
-  );
-}`,
+        source: componentsChartsChartFrameTsx,
       },
     },
     {

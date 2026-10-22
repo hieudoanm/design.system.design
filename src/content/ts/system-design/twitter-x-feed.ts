@@ -7,6 +7,7 @@ export const twitterFeed: Problem = {
     'Fan billions of posts into per-user timelines, with a push-pull hybrid for the celebrities.',
   difficulty: 'Easy',
   tags: ['event-driven', 'notification', 'search', 'social'],
+  group: 'consumer-products',
   functional: [
     'Post a tweet with text, media and links; follow and unfollow accounts.',
     'Read a home timeline of tweets from followed accounts, newest first and ranked.',

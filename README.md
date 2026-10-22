@@ -23,7 +23,7 @@ On top of that, design system material is often locked inside a company wiki, an
 
 `design.system.design` provides one focused, static reading experience: a **design system guide** and a **system design problem set**, reachable from a single landing page and signposted by a floating three-button toggle that slides a highlight across itself as you move between them.
 
-The design system half is twelve chapters. It walks the atomic design ladder in order — **tokens → atoms → molecules → organisms → templates → pages** — then goes deep on the concerns that break real systems: color, spacing, typography, forms, charts, scientific charts, accessibility, responsive design, icons and animation. The system design half walks a fixed interview framework, then applies it to twenty-four classic problems end to end.
+The design system half is twenty chapters in five groups. It walks the atomic design ladder in order — **tokens → atoms → molecules → organisms → templates → pages** — then goes deep on the concerns that break real systems: color, elevation, spacing, layout, typography, forms, data display, feedback, icons, charts, scientific charts, overlays, accessibility, responsive design, animation, theming, navigation and governance. The system design half walks a fixed interview framework, then applies it to twenty-four classic problems end to end.
 
 No signup. No tracking. No cookies. Every route is a static page that renders in a few milliseconds.
 
@@ -31,26 +31,55 @@ No signup. No tracking. No cookies. Every route is a static page that renders in
 
 ### Design System
 
-Six chapters, each with its own page — an overview, examples, rules, and a worked code sample:
+Twenty chapters in five groups, each with its own page — an overview, examples, rules, and a worked code sample:
 
-- **Components** — the atomic design ladder, end to end. The six levels (**tokens → atoms → molecules → organisms → templates → pages**) with the principles that justify each layer, the practice that keeps it healthy, and a repo layout that matches.
+**Foundations** — the primitives every other chapter builds on.
+
 - **Design tokens** — primitive and semantic layers, naming by purpose, generating CSS variables and other platforms from one JSON source, theming and dark mode, and how to migrate a token set without breaking consumers.
-- **Fonts** — two families and one job each, a modular scale named by role, weights and measure, loading without a flash, and the typography rules that keep text readable.
+- **Colors** — a palette with a job for every token, contrast, semantic colour, and adapting the whole set between light and dark themes.
+- **Typography** — two families and one job each, a modular scale named by role, weights and measure, loading without a flash, and the typography rules that keep text readable.
+- **Spacing** — a consistent spacing scale, applying it with gap and padding, and the rhythm that keeps layouts calm.
+
+**Structure** — how the pieces are organised into a system.
+
+- **Atomic design** — the atomic design ladder, end to end. The six levels (**tokens → atoms → molecules → organisms → templates → pages**) with the principles that justify each layer, the practice that keeps it healthy, and a repo layout that matches.
+- **Layout** — containers, grids, stack and alignment: page structure that holds together across screen sizes.
+- **Elevation** — depth, shadows and z-index as a scale, with shadows that adapt to light and dark modes without arbitrary pixel values.
+- **Icongraphy** — a single grid, consistent stroke and corner rules, and a registry that keeps icons tree-shakeable.
+
+**Data & charts** — showing information, from tables to scientific plots.
+
+- **Data display** — tables, lists and the density and alignment rules that keep dense data scannable.
 - **Charts** — the parts of a chart, choosing the right form, categorical vs sequential vs diverging colour, accessible charts, responsive charts, and the empty, loading and error states nobody designs.
+- **Scientific charts** — the extra discipline that technical plots need: units, log scales, error bars and multi-panel figures.
+- **Feedback** — status, alerts, toasts and empty states: how the interface tells the user what just happened.
+
+**Interaction** — the pieces a person actually operates.
+
+- **Forms** — labels, states, validation and error messaging, and the accessibility that stops a form from being a dead end.
+- **Navigation** — headers, sidebars, tabs and breadcrumbs, built from the atomic ladder and made responsive and accessible.
+- **Overlays** — modals, drawers, popovers, menus and tooltips, with the focus, dismissal and stacking rules that keep them predictable.
+- **Animation** — easing, duration, choreography and reduced-motion, so movement explains change instead of decorating it.
+
+**Practice** — the cross-cutting concerns that keep a system healthy.
+
 - **Accessibility** — WCAG 2.2 AA as the baseline, contrast, keyboard support, semantics and ARIA, motion, and the three kinds of testing that catch real problems.
 - **Responsive design** — a strategy instead of a device list, breakpoints as tokens, fluid values with `clamp()`, container queries, touch targets, responsive images, and how to test the range.
+- **Theming** — one token set driving light and dark, plus the switch that keeps both honest.
+- **Governance** — how a system ships, evolves and stays adopted: documentation, semantic versioning, contribution and adoption.
 
-The **Components** chapter also carries six **principles** (tokens not values, accessible by default, composition over configuration, constrain on purpose, document the why, treat it as a product) and six **practice** guides covering theming and dark mode, accessibility, versioning and releases, testing, documentation, and governance.
+The **Atomic design** chapter also carries six **principles** (tokens not values, accessible by default, composition over configuration, constrain on purpose, document the why, treat it as a product) and six **practice** guides covering theming and dark mode, accessibility, versioning and releases, testing, documentation, and governance.
 
 ### System Design
 
-A repeatable **framework** first — clarify requirements, estimate, sketch the API and data model, draw the high-level design, go deep on the hard parts, find bottlenecks and failures — then twenty-four problems worked through with it:
+A repeatable **framework** first — clarify requirements, estimate, sketch the API and data model, draw the high-level design, go deep on the hard parts, find bottlenecks and failures — then twenty-four problems in six groups of four, worked through with it:
 
-- **Foundations** — URL shortener, rate limiter, unique ID generator, distributed key-value store, chat system.
-- **Consumer products** — Twitter feed, photo sharing, video streaming, ride-hailing, notification service.
-- **Collaboration and commerce** — file sync, collaborative editor, ticket booking, payments, recommendations.
-- **Search and media** — web crawler, typeahead, content delivery network.
-- **Building blocks** — distributed cache, message queue, API gateway, load balancer, service discovery, distributed lock service.
+- **Foundations** — URL shortener, rate limiter, unique ID generator, distributed key-value store.
+- **Consumer products** — Twitter feed, photo sharing, video streaming, ride-hailing.
+- **Collaboration & commerce** — chat system, notification service, file sync, recommendations.
+- **Search & media** — collaborative editor, ticket booking, payments, typeahead.
+- **Building blocks** — web crawler, content delivery network, distributed cache, message queue.
+- **Platform services** — distributed lock service, API gateway, load balancer, service discovery.
 
 Each problem page carries functional and non-functional requirements, back-of-the-envelope numbers, an ASCII architecture diagram, the design decisions with their trade-offs, and a Q&A section built on native `<details>` so you can reveal answers one at a time.
 
@@ -130,7 +159,7 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 
 ## Use Cases
 
-- **Learning a design system from scratch** — follow the twelve chapters in order and understand why each one exists before you build it.
+- **Learning a design system from scratch** — follow the twenty chapters in order and understand why each one exists before you build it.
 - **Reviewing a design system you already have** — use the six principles and six practice guides as a checklist against your own component library.
 - **Interview preparation** — work through the framework once, then use the problems as timed practice and the Q&A sections as a self-test.
 - **Onboarding a new designer or engineer** — hand them one URL instead of a folder of links and a wiki page.
@@ -146,8 +175,8 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 
 ## Project Status and Trust
 
-- **Maturity:** A working reference site with all twelve design system chapters and all twenty-four system design problems complete. Content is still being extended.
-- **Routes:** 41 prerendered pages — the landing page, a design system chapter index, twelve chapter pages, a system design index and twenty-four problem pages.
+- **Maturity:** A working reference site with all twenty design system chapters in five groups and all twenty-four system design problems complete. Content is still being extended.
+- **Routes:** 49 prerendered pages — the landing page, a design system chapter index, twenty chapter pages, a system design index and twenty-four problem pages.
 - **Stack:** Next.js 16.4.2 (App Router), React 19.3.1, TypeScript 6.0.3, Tailwind CSS 4.3.3, Bricolage Grotesque and JetBrains Mono.
 - **Assets:** Icons at 16/32/48/64/96/128/152/167/180/192/256/384/512 plus a multi-resolution `favicon.ico`; the social card is a 1200×630 vector source with a matching PNG.
 - **Privacy:** No trackers, no third-party cookies, no analytics, no accounts. Fonts are self-hosted.

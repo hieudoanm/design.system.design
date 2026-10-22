@@ -6,6 +6,7 @@ export const youtubeVideoSharing: Problem = {
   tagline: 'Ingest, transcode and stream video to every screen through a CDN.',
   difficulty: 'Hard',
   tags: ['cdn', 'social', 'video'],
+  group: 'consumer-products',
   functional: [
     'Upload a video and have it transcoded into several renditions.',
     'Watch with adaptive bitrate, pause, resume and seek.',

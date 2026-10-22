@@ -6,6 +6,7 @@ export const urlShortener: Problem = {
   tagline: 'Turn long URLs into short links and redirect billions of clicks with low latency.',
   difficulty: 'Easy',
   tags: ['Key generation', 'Caching', 'Sharding'],
+  group: 'foundations',
   functional: [
     'Create a short link from a long URL, with an optional custom alias and expiry date.',
     'Redirect a short link to its long URL.',

@@ -6,6 +6,7 @@ export const instagramPhotoSharing: Problem = {
   tagline: 'Upload, process and serve a photo feed for billions of images.',
   difficulty: 'Easy',
   tags: ['photo', 'social', 'storage'],
+  group: 'consumer-products',
   functional: [
     'Upload a photo with a caption; follow and unfollow accounts.',
     'View a feed of photos and videos from followed accounts.',

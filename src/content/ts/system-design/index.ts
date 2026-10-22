@@ -24,36 +24,76 @@ import { urlShortener } from './url-shortener';
 import { webCrawlerSearchEngine } from './web-crawler-search-engine';
 import { youtubeVideoSharing } from './youtube-video-sharing';
 
+export type { Problem } from './types';
+
+/** The six groups the problems are arranged into, in reading order. Four each. */
+export const problemGroups = [
+  {
+    id: 'foundations',
+    title: 'Foundations',
+    intro: 'The classic primitives every interview starts from.',
+  },
+  {
+    id: 'consumer-products',
+    title: 'Consumer products',
+    intro: 'Feeds, media and marketplaces at consumer scale.',
+  },
+  {
+    id: 'collaboration-commerce',
+    title: 'Collaboration & commerce',
+    intro: 'Multi-user editing, money and recommendations.',
+  },
+  {
+    id: 'search-media',
+    title: 'Search & media',
+    intro: 'Crawling, ranking and serving content near the user.',
+  },
+  {
+    id: 'building-blocks',
+    title: 'Building blocks',
+    intro: 'The infrastructure components the other designs lean on.',
+  },
+  {
+    id: 'platform-services',
+    title: 'Platform services',
+    intro: 'The shared services every large system eventually grows.',
+  },
+] as const;
+
+export type ProblemGroupId = (typeof problemGroups)[number]['id'];
+
 export const problems: Problem[] = [
   urlShortener,
   rateLimiter,
   uniqueIdGenerator,
   keyValueStore,
-  chatSystem,
   twitterFeed,
   instagramPhotoSharing,
   youtubeVideoSharing,
   uberRideHailing,
+  chatSystem,
   notificationService,
   dropboxFileSync,
+  recommendationSystem,
   googleDocsCollaboration,
   ticketmasterEventBooking,
   stripePayments,
-  recommendationSystem,
-  webCrawlerSearchEngine,
   autocompleteTypeahead,
+  webCrawlerSearchEngine,
   contentDeliveryNetwork,
   distributedCache,
   distributedMessageQueue,
+  distributedLockService,
   apiGateway,
   loadBalancer,
   serviceDiscovery,
-  distributedLockService,
 ];
 
-export const getProblem = (slug: string) => problems.find((p) => p.slug === slug);
+/** The problems of one group, in reading order. */
+export const problemsByGroup = (group: ProblemGroupId): Problem[] =>
+  problems.filter((problem) => problem.group === group);
 
-export type { Problem } from './types';
+export const getProblem = (slug: string) => problems.find((p) => p.slug === slug);
 
 /** The steps to follow in any system design interview. */
 export const framework: { step: string; detail: string }[] = [

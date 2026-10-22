@@ -1,12 +1,102 @@
 import type { Topic } from '../index';
 import { anatomy, states, layout, validation, controls } from './svg-generated';
 
+const formFieldTsx = `export function FormField({ 
+  label, 
+  hint, 
+  error, 
+  required,
+  children 
+}: FormFieldProps) {
+  const id = useId();
+  const hintId = hint ? \`\${id}-hint\` : undefined;
+  const errorId = error ? \`\${id}-error\` : undefined;
+  const describedBy = [hintId, errorId].filter(Boolean).join(' ');
+  
+  return (
+    <div className="form-field">
+      <Label htmlFor={id} required={required}>
+        {label}
+      </Label>
+      {cloneElement(children, { 
+        id, 
+        "aria-invalid": !!error,
+        "aria-describedby": describedBy || undefined,
+        required
+      })}
+      {hint && <p id={hintId} className="field-hint">{hint}</p>}
+      {error && <p id={errorId} className="field-error" role="alert">{error}</p>}
+    </div>
+  );
+}`;
+
+const validationTs = `function validateEmail(email: string): string | null {
+  if (!email) return "Email is required";
+  const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return "Please enter a valid email address (e.g., name@example.com)";
+  }
+  return null;
+}
+
+function validatePassword(password: string): string | null {
+  if (!password) return "Password is required";
+  if (password.length < 8) {
+    return "Password must be at least 8 characters long";
+  }
+  if (!/[A-Z]/.test(password)) {
+    return "Password must include at least one uppercase letter";
+  }
+  return null;
+}`;
+
+const accessibleFormHtml = `<form novalidate>
+  <fieldset>
+    <legend>Contact Information</legend>
+    
+    <div class="form-field">
+      <label for="email">Email Address <span aria-label="required">*</span></label>
+      <input 
+        id="email" 
+        type="email" 
+        required 
+        aria-required="true"
+        aria-describedby="email-hint email-error"
+      />
+      <p id="email-hint" class="hint">We'll never share your email</p>
+      <p id="email-error" class="error" role="alert" aria-live="polite"></p>
+    </div>
+  </fieldset>
+  
+  <button type="submit">Submit</button>
+</form>`;
+
+const autocompleteExampleTsx = `<input
+  type="email"
+  name="email"
+  autoComplete="email"
+  placeholder="you@example.com"
+/>
+<input
+  type="tel"
+  name="phone"
+  autoComplete="tel"
+  placeholder="+1 (555) 000-0000"
+/>
+<input
+  type="text"
+  name="name"
+  autoComplete="name"
+  placeholder="Full name"
+/>`;
+
 export const forms: Topic = {
   slug: 'forms',
   title: 'Forms',
   tagline: 'Accessible, usable forms that guide users to success.',
   summary:
     'Forms are critical interaction points where users provide information. Well-designed forms are clear, accessible, forgiving of errors, and guide users efficiently to completion with proper validation and feedback.',
+  group: 'interaction',
   sections: [
     {
       id: 'philosophy',
@@ -119,34 +209,7 @@ export const forms: Topic = {
       ],
       code: {
         label: 'FormField.tsx',
-        source: `export function FormField({ 
-  label, 
-  hint, 
-  error, 
-  required,
-  children 
-}: FormFieldProps) {
-  const id = useId();
-  const hintId = hint ? \`\${id}-hint\` : undefined;
-  const errorId = error ? \`\${id}-error\` : undefined;
-  const describedBy = [hintId, errorId].filter(Boolean).join(' ');
-  
-  return (
-    <div className="form-field">
-      <Label htmlFor={id} required={required}>
-        {label}
-      </Label>
-      {cloneElement(children, { 
-        id, 
-        "aria-invalid": !!error,
-        "aria-describedby": describedBy || undefined,
-        required
-      })}
-      {hint && <p id={hintId} className="field-hint">{hint}</p>}
-      {error && <p id={errorId} className="field-error" role="alert">{error}</p>}
-    </div>
-  );
-}`,
+        source: formFieldTsx,
       },
     },
     {
@@ -210,25 +273,7 @@ export const forms: Topic = {
       ],
       code: {
         label: 'validation.ts',
-        source: `function validateEmail(email: string): string | null {
-  if (!email) return "Email is required";
-  const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return "Please enter a valid email address (e.g., name@example.com)";
-  }
-  return null;
-}
-
-function validatePassword(password: string): string | null {
-  if (!password) return "Password is required";
-  if (password.length < 8) {
-    return "Password must be at least 8 characters long";
-  }
-  if (!/[A-Z]/.test(password)) {
-    return "Password must include at least one uppercase letter";
-  }
-  return null;
-}`,
+        source: validationTs,
       },
     },
     {
@@ -248,26 +293,7 @@ function validatePassword(password: string): string | null {
       ],
       code: {
         label: 'accessible-form.html',
-        source: `<form novalidate>
-  <fieldset>
-    <legend>Contact Information</legend>
-    
-    <div class="form-field">
-      <label for="email">Email Address <span aria-label="required">*</span></label>
-      <input 
-        id="email" 
-        type="email" 
-        required 
-        aria-required="true"
-        aria-describedby="email-hint email-error"
-      />
-      <p id="email-hint" class="hint">We'll never share your email</p>
-      <p id="email-error" class="error" role="alert" aria-live="polite"></p>
-    </div>
-  </fieldset>
-  
-  <button type="submit">Submit</button>
-</form>`,
+        source: accessibleFormHtml,
       },
     },
     {
@@ -299,24 +325,7 @@ function validatePassword(password: string): string | null {
       ],
       code: {
         label: 'autocomplete-example.tsx',
-        source: `<input
-  type="email"
-  name="email"
-  autoComplete="email"
-  placeholder="you@example.com"
-/>
-<input
-  type="tel"
-  name="phone"
-  autoComplete="tel"
-  placeholder="+1 (555) 000-0000"
-/>
-<input
-  type="text"
-  name="name"
-  autoComplete="name"
-  placeholder="Full name"
-/>`,
+        source: autocompleteExampleTsx,
       },
     },
     {

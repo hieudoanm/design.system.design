@@ -1,11 +1,84 @@
 import type { Topic } from './index';
 
+const tokensTokensJson = `{
+  "primitive": {
+    "blue": { "600": { "$value": "#1f4fd8", "$type": "color" } },
+    "gray": { "900": { "$value": "#111827", "$type": "color" } },
+    "space": { "4": { "$value": "16px", "$type": "dimension" } }
+  },
+  "semantic": {
+    "color": {
+      "action-bg": { "$value": "{primitive.blue.600}", "$type": "color" },
+      "text":     { "$value": "{primitive.gray.900}", "$type": "color" }
+    },
+    "space": {
+      "inline": { "$value": "{primitive.space.4}", "$type": "dimension" }
+    }
+  }
+}`;
+
+const tokensCss = `:root {
+  /* primitives — raw values */
+  --blue-600: #1f4fd8;
+  --gray-900: #111827;
+  --space-4: 16px;
+
+  /* semantics — purpose */
+  --color-action-bg: var(--blue-600);
+  --color-text: var(--gray-900);
+  --space-inline: var(--space-4);
+}`;
+
+const scriptsBuildTokensMjs = `import StyleDictionary from "style-dictionary";
+
+const sd = new StyleDictionary({
+  source: ["tokens/tokens.json"],
+  platforms: {
+    css: {
+      transformGroup: "css",
+      buildPath: "packages/ui/src/",
+      files: [{ destination: "tokens.css", format: "css/variables" }],
+    },
+    ts: {
+      transformGroup: "js",
+      buildPath: "packages/ui/src/",
+      files: [{ destination: "tokens.ts", format: "javascript/es6" }],
+    },
+  },
+});
+
+await sd.buildAll();`;
+
+const appGlobalsCss = `:root {
+  --color-action-bg: var(--blue-600);
+  --color-text: var(--gray-900);
+}
+
+[data-theme="dark"] {
+  --color-action-bg: #5b86f5;
+  --color-text: #f3f4f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-action-bg: #5b86f5;
+    --color-text: #f3f4f6;
+  }
+}`;
+
+const tokensCss2 = `:root {
+  /* Deprecated in v3 — use --color-action-bg. Removed in v4. */
+  --color-primary: var(--color-action-bg);
+  --color-action-bg: var(--blue-600);
+}`;
+
 export const designTokens: Topic = {
   slug: 'design-tokens',
   title: 'Design tokens',
   tagline: 'The one source of truth for every value that can change.',
   summary:
     'Tokens are named values for colour, type, space, radius, shadow and motion. A component never contains a raw hex code or pixel value; it refers to a token, and changing the token changes everything that uses it.',
+  group: 'foundations',
   sections: [
     {
       id: 'layers',
@@ -24,22 +97,7 @@ export const designTokens: Topic = {
       ],
       code: {
         label: 'tokens/tokens.json',
-        source: `{
-  "primitive": {
-    "blue": { "600": { "$value": "#1f4fd8", "$type": "color" } },
-    "gray": { "900": { "$value": "#111827", "$type": "color" } },
-    "space": { "4": { "$value": "16px", "$type": "dimension" } }
-  },
-  "semantic": {
-    "color": {
-      "action-bg": { "$value": "{primitive.blue.600}", "$type": "color" },
-      "text":     { "$value": "{primitive.gray.900}", "$type": "color" }
-    },
-    "space": {
-      "inline": { "$value": "{primitive.space.4}", "$type": "dimension" }
-    }
-  }
-}`,
+        source: tokensTokensJson,
       },
     },
     {
@@ -55,17 +113,7 @@ export const designTokens: Topic = {
       ],
       code: {
         label: 'tokens.css',
-        source: `:root {
-  /* primitives — raw values */
-  --blue-600: #1f4fd8;
-  --gray-900: #111827;
-  --space-4: 16px;
-
-  /* semantics — purpose */
-  --color-action-bg: var(--blue-600);
-  --color-text: var(--gray-900);
-  --space-inline: var(--space-4);
-}`,
+        source: tokensCss,
       },
     },
     {
@@ -80,25 +128,7 @@ export const designTokens: Topic = {
       ],
       code: {
         label: 'scripts/build-tokens.mjs',
-        source: `import StyleDictionary from "style-dictionary";
-
-const sd = new StyleDictionary({
-  source: ["tokens/tokens.json"],
-  platforms: {
-    css: {
-      transformGroup: "css",
-      buildPath: "packages/ui/src/",
-      files: [{ destination: "tokens.css", format: "css/variables" }],
-    },
-    ts: {
-      transformGroup: "js",
-      buildPath: "packages/ui/src/",
-      files: [{ destination: "tokens.ts", format: "javascript/es6" }],
-    },
-  },
-});
-
-await sd.buildAll();`,
+        source: scriptsBuildTokensMjs,
       },
     },
     {
@@ -114,22 +144,7 @@ await sd.buildAll();`,
       ],
       code: {
         label: 'app/globals.css',
-        source: `:root {
-  --color-action-bg: var(--blue-600);
-  --color-text: var(--gray-900);
-}
-
-[data-theme="dark"] {
-  --color-action-bg: #5b86f5;
-  --color-text: #f3f4f6;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --color-action-bg: #5b86f5;
-    --color-text: #f3f4f6;
-  }
-}`,
+        source: appGlobalsCss,
       },
     },
     {
@@ -145,11 +160,7 @@ await sd.buildAll();`,
       ],
       code: {
         label: 'tokens.css (deprecation)',
-        source: `:root {
-  /* Deprecated in v3 — use --color-action-bg. Removed in v4. */
-  --color-primary: var(--color-action-bg);
-  --color-action-bg: var(--blue-600);
-}`,
+        source: tokensCss2,
       },
     },
     {

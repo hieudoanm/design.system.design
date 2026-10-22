@@ -6,6 +6,7 @@ export const loadBalancer: Problem = {
   tagline: 'Spread traffic across healthy backends with L4 and L7 strategies.',
   difficulty: 'Hard',
   tags: ['infra'],
+  group: 'platform-services',
   functional: [
     'Distribute connections or requests across a backend pool.',
     'Health-check backends and drain the unhealthy ones.',

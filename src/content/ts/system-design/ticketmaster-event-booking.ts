@@ -6,6 +6,7 @@ export const ticketmasterEventBooking: Problem = {
   tagline: 'Hold seats under contention and never sell the same ticket twice.',
   difficulty: 'Medium',
   tags: ['booking', 'payments', 'search'],
+  group: 'search-media',
   functional: [
     'Browse and search events and view a seat map.',
     'Hold seats for a short window and then purchase them.',

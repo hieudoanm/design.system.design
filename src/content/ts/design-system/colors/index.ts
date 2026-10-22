@@ -1,12 +1,50 @@
 import type { Topic } from '../index';
 import { palette, contrast, surfaces, semantic, dark_mode } from './svg-generated';
 
+const contrastCheckTs = `function getContrast(fg: string, bg: string): number {
+  const l1 = getLuminance(fg);
+  const l2 = getLuminance(bg);
+  const brightest = Math.max(l1, l2);
+  const darkest = Math.min(l1, l2);
+  return (brightest + 0.05) / (darkest + 0.05);
+}
+
+// WCAG AA: >= 4.5 for normal text, >= 3 for large/UI
+const passesAA = (ratio: number, isLarge = false) => 
+  isLarge ? ratio >= 3 : ratio >= 4.5;`;
+
+const tokensCss = `:root {
+  /* Light theme */
+  --color-paper: #ffffff;
+  --color-surface: #f9fafb;
+  --color-text: #111827;
+  --color-action-bg: #1f4fd8;
+}
+
+[data-theme="dark"] {
+  /* Dark theme */
+  --color-paper: #0f172a;
+  --color-surface: #111827;
+  --color-text: #f3f4f6;
+  --color-action-bg: #5b86f5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-paper: #0f172a;
+    --color-surface: #111827;
+    --color-text: #f3f4f6;
+    --color-action-bg: #5b86f5;
+  }
+}`;
+
 export const colors: Topic = {
   slug: 'colors',
   title: 'Colors',
   tagline: 'A systematic approach to color with purpose, contrast, and accessibility.',
   summary:
     'Colors communicate hierarchy, state, and brand identity. A color system uses primitives for raw values and semantics for meaning, ensuring consistent theming, accessibility, and maintainability across light and dark modes.',
+  group: 'foundations',
   sections: [
     {
       id: 'philosophy',
@@ -134,17 +172,7 @@ export const colors: Topic = {
       ],
       code: {
         label: 'contrast-check.ts',
-        source: `function getContrast(fg: string, bg: string): number {
-  const l1 = getLuminance(fg);
-  const l2 = getLuminance(bg);
-  const brightest = Math.max(l1, l2);
-  const darkest = Math.min(l1, l2);
-  return (brightest + 0.05) / (darkest + 0.05);
-}
-
-// WCAG AA: >= 4.5 for normal text, >= 3 for large/UI
-const passesAA = (ratio: number, isLarge = false) => 
-  isLarge ? ratio >= 3 : ratio >= 4.5;`,
+        source: contrastCheckTs,
       },
     },
     {
@@ -172,30 +200,7 @@ const passesAA = (ratio: number, isLarge = false) =>
       ],
       code: {
         label: 'tokens.css',
-        source: `:root {
-  /* Light theme */
-  --color-paper: #ffffff;
-  --color-surface: #f9fafb;
-  --color-text: #111827;
-  --color-action-bg: #1f4fd8;
-}
-
-[data-theme="dark"] {
-  /* Dark theme */
-  --color-paper: #0f172a;
-  --color-surface: #111827;
-  --color-text: #f3f4f6;
-  --color-action-bg: #5b86f5;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --color-paper: #0f172a;
-    --color-surface: #111827;
-    --color-text: #f3f4f6;
-    --color-action-bg: #5b86f5;
-  }
-}`,
+        source: tokensCss,
       },
     },
     {

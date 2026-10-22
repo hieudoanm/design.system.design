@@ -6,6 +6,7 @@ export const notificationService: Problem = {
   tagline: 'Deliver email, SMS, push and in-app messages reliably, without spamming users.',
   difficulty: 'Medium',
   tags: ['event-driven', 'notification'],
+  group: 'collaboration-commerce',
   functional: [
     'Accept notification requests from other services.',
     'Fan a request out to millions of users.',

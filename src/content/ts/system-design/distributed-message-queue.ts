@@ -6,6 +6,7 @@ export const distributedMessageQueue: Problem = {
   tagline: 'A durable, ordered log that producers write to and consumer groups read from.',
   difficulty: 'Medium',
   tags: ['distributed', 'messaging', 'queue'],
+  group: 'building-blocks',
   functional: [
     'Publish a message to a topic.',
     'Subscribe as a consumer group and read in partition order.',

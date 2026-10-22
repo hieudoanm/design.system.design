@@ -1,54 +1,19 @@
-import type { Topic } from './index';
+import type { Topic } from '../index';
 
 /*
- * Scientific chart drawings: each chart is generated from a single data array
- * so the SVG and its data table can never drift apart. Colors use the
- * categorical chart tokens in fixed order.
+ * Scientific chart drawings. They live in ./svg as files and are exposed by
+ * the generated module ./svg-generated — run
+ * `node scripts/ts/generate-svg.mts scientific-charts` to regenerate it after
+ * editing one.
+ *
+ * The arrays below hold the numbers the drawings show. Each one also builds
+ * the table of its chart, so the table and the drawing stay in step. Colours
+ * come from the categorical chart tokens, in fixed order.
  */
 
-const CAT = [
-  'var(--color-chart-1)',
-  'var(--color-chart-2)',
-  'var(--color-chart-3)',
-  'var(--color-chart-4)',
-  'var(--color-chart-5)',
-];
+import { box_plot, density_plot, heatmap, histogram, qq_plot, violin_plot } from './svg-generated';
 
-const svg = (title: string, id: string, body: string, viewBox = '0 0 520 280') =>
-  [
-    `<svg viewBox='${viewBox}' width='100%' role='img' aria-labelledby='${id}' xmlns='http://www.w3.org/2000/svg'>`,
-    `<title id='${id}'>${title}</title>`,
-    body,
-    `</svg>`,
-  ].join('\n');
-
-/* --- shared helpers ------------------------------------------------------ */
-
-const grid = (ticks: number[], toY: (v: number) => number, unit = '') =>
-  [
-    `<g stroke='var(--color-rule)' stroke-width='1' fill='none'>`,
-    ticks.map((t) => `<line x1='60' y1='${toY(t)}' x2='460' y2='${toY(t)}' />`).join(''),
-    `</g>`,
-    `<g font-size='11' fill='var(--color-mute)' text-anchor='end'>`,
-    ticks.map((t) => `<text x='52' y='${toY(t) + 4}'>${t}${unit}</text>`).join(''),
-    `</g>`,
-  ].join('');
-
-const axes = [
-  `<line x1='60' y1='20' x2='60' y2='240' stroke='var(--color-rule)' stroke-width='1' />`,
-  `<line x1='60' y1='240' x2='460' y2='240' stroke='var(--color-ink)' stroke-opacity='0.45' stroke-width='1' />`,
-].join('');
-
-const xLabels = (labels: string[], xs: number[]) =>
-  [
-    `<g font-size='11' fill='var(--color-mute)' text-anchor='middle'>`,
-    labels.map((l, i) => `<text x='${xs[i]}' y='258'>${l}</text>`).join(''),
-    `</g>`,
-  ].join('');
-
-/* ============================================================
- * 1. BOX PLOT
- * ============================================================ */
+/* --- box plot ----------------------------------------------------------- */
 
 const boxData = [
   { label: 'Control', q1: 12, median: 18, q3: 24, min: 6, max: 30, outliers: [3, 34] },
@@ -56,48 +21,6 @@ const boxData = [
   { label: 'Treatment B', q1: 10, median: 15, q3: 22, min: 4, max: 28, outliers: [2, 35] },
   { label: 'Treatment C', q1: 14, median: 20, q3: 26, min: 8, max: 30, outliers: [] },
 ];
-
-const boxX = (i: number) => 90 + i * 95;
-const boxY = (v: number) => 240 - v * 5;
-
-const boxPlot = svg(
-  'Box plots comparing four groups: quartiles, median, whiskers, and outliers',
-  'box-plot',
-  [
-    grid([0, 10, 20, 30, 40], boxY),
-    axes,
-    xLabels(
-      boxData.map((d) => d.label),
-      boxData.map((_, i) => boxX(i)),
-    ),
-    boxData
-      .map((d, i) => {
-        const x = boxX(i);
-        const w = 30;
-        const whiskerTop = boxY(d.max);
-        const whiskerBottom = boxY(d.min);
-        const q1y = boxY(d.q1);
-        const q3y = boxY(d.q3);
-        const medianY = boxY(d.median);
-        const color = CAT[i];
-        const outliers = d.outliers
-          .map((o) => `<circle cx='${x + w / 2}' cy='${boxY(o)}' r='3' fill='${color}' />`)
-          .join('');
-        return [
-          `<g stroke='${color}' stroke-width='1.5'>`,
-          `<line x1='${x + w / 2}' y1='${whiskerTop}' x2='${x + w / 2}' y2='${q3y}' />`,
-          `<line x1='${x + w / 2}' y1='${whiskerBottom}' x2='${x + w / 2}' y2='${q1y}' />`,
-          `<line x1='${x}' y1='${whiskerTop}' x2='${x + w}' y2='${whiskerTop}' />`,
-          `<line x1='${x}' y1='${whiskerBottom}' x2='${x + w}' y2='${whiskerBottom}' />`,
-          `<rect x='${x}' y='${q1y}' width='${w}' height='${q3y - q1y}' fill='${color}' fill-opacity='0.3' />`,
-          `<line x1='${x}' y1='${medianY}' x2='${x + w}' y2='${medianY}' stroke-width='2' />`,
-          `</g>`,
-          outliers,
-        ].join('\n');
-      })
-      .join('\n'),
-  ].join('\n'),
-);
 
 const boxTable = {
   columns: ['Group', 'Min', 'Q1', 'Median', 'Q3', 'Max', 'Outliers'],
@@ -112,49 +35,7 @@ const boxTable = {
   ]),
 };
 
-/* ============================================================
- * 2. VIOLIN PLOT
- * ============================================================ */
-
-const violinData = [
-  { label: 'Control', density: [2, 4, 8, 14, 20, 24, 26, 24, 20, 14, 8, 4, 2] },
-  { label: 'Treatment A', density: [1, 3, 7, 12, 18, 24, 28, 24, 18, 12, 7, 3, 1] },
-  { label: 'Treatment B', density: [3, 6, 10, 15, 18, 20, 20, 20, 18, 15, 10, 6, 3] },
-  { label: 'Treatment C', density: [2, 5, 9, 14, 19, 23, 25, 23, 19, 14, 9, 5, 2] },
-];
-
-const violinX = (i: number) => 90 + i * 95;
-
-const violinPlot = svg(
-  'Violin plots: kernel density estimation mirrored for each group',
-  'violin-plot',
-  [
-    grid([0, 10, 20, 30, 40], (v) => 240 - v * 5),
-    axes,
-    xLabels(
-      violinData.map((d) => d.label),
-      violinData.map((_, i) => violinX(i)),
-    ),
-    violinData
-      .map((d, i) => {
-        const x = violinX(i);
-        const maxDensity = Math.max(...d.density);
-        const scale = 25 / maxDensity;
-        const left = d.density.map((v, j) => `${x + 15 - v * scale},${240 - j * 17}`).join(' L');
-        const right = d.density
-          .map((v, j) => `${x + 15 + v * scale},${240 - j * 17}`)
-          .reverse()
-          .join(' L');
-        const color = CAT[i];
-        return [
-          `<path d='M${x + 15},240 L${left} L${right} Z' fill='${color}' fill-opacity='0.35' stroke='${color}' stroke-width='1.5' />`,
-          `<line x1='${x}' y1='${240 - 10 * 17}' x2='${x + 30}' y2='${240 - 10 * 17}' stroke='${color}' stroke-width='2' />`,
-          `<circle cx='${x + 15}' cy='${240 - 10 * 17}' r='3' fill='${color}' />`,
-        ].join('\n');
-      })
-      .join('\n'),
-  ].join('\n'),
-);
+/* --- violin plot -------------------------------------------------------- */
 
 const violinTable = {
   columns: ['Group', 'N', 'Mean', 'SD', 'Skewness'],
@@ -166,9 +47,7 @@ const violinTable = {
   ],
 };
 
-/* ============================================================
- * 3. HISTOGRAM
- * ============================================================ */
+/* --- histogram ---------------------------------------------------------- */
 
 const histValues = [
   12, 14, 15, 15, 16, 16, 16, 17, 17, 17, 17, 18, 18, 18, 18, 18, 19, 19, 19, 19, 20, 20, 20, 20,
@@ -182,41 +61,6 @@ for (const v of histValues) {
   bins.set(bin, (bins.get(bin) || 0) + 1);
 }
 const binArray = Array.from(bins.entries()).sort((a, b) => a[0] - b[0]);
-const maxCount = Math.max(...binArray.map(([, c]) => c));
-
-const histX = (i: number) => 80 + i * 35;
-const histY = (count: number) => 240 - (count / maxCount) * 180;
-
-const histogram = svg(
-  'Histogram of 38 observations with 1-unit bins, showing approximate normal distribution',
-  'histogram',
-  [
-    grid([0, 5, 10, 15, 20], (v) => 240 - (v / maxCount) * 180),
-    axes,
-    xLabels(
-      binArray.map(([b]) => String(b)),
-      binArray.map((_, i) => histX(i)),
-    ),
-    binArray
-      .map(([, count], i) => {
-        const x = histX(i);
-        const y = histY(count);
-        const h = 240 - y;
-        return `<rect x='${x}' y='${y}' width='30' height='${h}' rx='1' fill='${CAT[0]}' fill-opacity='0.85' stroke='${CAT[0]}' stroke-width='1' />`;
-      })
-      .join('\n'),
-    `<g font-size='10' fill='var(--color-ink)' text-anchor='middle'>`,
-    binArray
-      .map(([, count], i) => {
-        if (count === 0) return '';
-        const x = histX(i) + 15;
-        const y = histY(count) - 4;
-        return `<text x='${x}' y='${y}'>${count}</text>`;
-      })
-      .join(''),
-    `</g>`,
-  ].join('\n'),
-);
 
 const histTable = {
   columns: ['Bin', 'Count', 'Density', 'Cumulative %'],
@@ -234,57 +78,12 @@ const histTable = {
   })(),
 };
 
-/* ============================================================
- * 4. DENSITY (KDE) PLOT
- * ============================================================ */
-
-const kdeData = [
-  { x: 10, y: 0.02 },
-  { x: 12, y: 0.05 },
-  { x: 14, y: 0.11 },
-  { x: 16, y: 0.22 },
-  { x: 18, y: 0.35 },
-  { x: 20, y: 0.48 },
-  { x: 22, y: 0.52 },
-  { x: 24, y: 0.45 },
-  { x: 26, y: 0.32 },
-  { x: 28, y: 0.18 },
-  { x: 30, y: 0.08 },
-  { x: 32, y: 0.03 },
-];
-
-const kdeX = (v: number) => 60 + ((v - 10) / 22) * 400;
-const kdeY = (v: number) => 240 - v * 400;
-
-const densityPlot = svg(
-  'Kernel density estimate (Gaussian kernel, bandwidth=1.5) with rug plot',
-  'kde-plot',
-  [
-    grid([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6], kdeY, ''),
-    axes,
-    xLabels(['10', '14', '18', '22', '26', '30', '34'], [10, 14, 18, 22, 26, 30, 34].map(kdeX)),
-    `<path d='M${kdeData
-      .map((p) => `${kdeX(p.x)},${kdeY(p.y)}`)
-      .join(' L')}' fill='none' stroke='${CAT[0]}' stroke-width='2.5' />`,
-    `<path d='M${kdeX(10)},240 L${kdeData
-      .map((p) => `${kdeX(p.x)},${kdeY(p.y)}`)
-      .join(' L')} L${kdeX(32)},240 Z' fill='${CAT[0]}' fill-opacity='0.15' />`,
-    kdeData
-      .filter((_, i) => i % 2 === 0)
-      .map(
-        (p) =>
-          `<line x1='${kdeX(p.x)}' y1='240' x2='${kdeX(p.x)}' y2='246' stroke='var(--color-mute)' stroke-width='1' />`,
-      )
-      .join(''),
-    `<text x='460' y='${kdeY(0.52) + 4}' font-size='12' font-weight='600' fill='${CAT[0]}'>Density</text>`,
-    `<text x='260' y='272' font-size='11' fill='var(--color-mute)'>Value</text>`,
-  ].join('\n'),
-);
+/* --- density (KDE) plot ------------------------------------------------- */
 
 const kdeTable = {
   columns: ['Statistic', 'Value'],
   rows: [
-    ['N', '38'],
+    ['N', '36'],
     ['Bandwidth (Silverman)', '1.5'],
     ['Kernel', 'Gaussian'],
     ['Mean', '19.4'],
@@ -294,9 +93,7 @@ const kdeTable = {
   ],
 };
 
-/* ============================================================
- * 5. Q-Q PLOT
- * ============================================================ */
+/* --- Q-Q plot ----------------------------------------------------------- */
 
 const qqData = [
   { theoretical: -2.0, sample: -2.1 },
@@ -310,34 +107,6 @@ const qqData = [
   { theoretical: 2.0, sample: 2.1 },
 ];
 
-const qqMin = -2.5;
-const qqMax = 2.5;
-const qqX = (v: number) => 60 + ((v - qqMin) / (qqMax - qqMin)) * 360;
-const qqY = (v: number) => 240 - ((v - qqMin) / (qqMax - qqMin)) * 220;
-
-const qqPlot = svg(
-  'Q-Q plot: sample quantiles vs. theoretical normal quantiles. Points on the diagonal indicate normality.',
-  'qq-plot',
-  [
-    `<g stroke='var(--color-rule)' stroke-width='1' fill='none'>`,
-    `<line x1='60' y1='20' x2='420' y2='240' />`,
-    `</g>`,
-    axes,
-    xLabels(
-      ['-2.5', '-1.5', '-0.5', '0.5', '1.5', '2.5'],
-      [-2.5, -1.5, -0.5, 0.5, 1.5, 2.5].map(qqX),
-    ),
-    qqData
-      .map(
-        (p) => `<circle cx='${qqX(p.theoretical)}' cy='${qqY(p.sample)}' r='4' fill='${CAT[0]}' />`,
-      )
-      .join(''),
-    `<text x='60' y='20' font-size='11' fill='var(--color-mute)'>Sample quantiles</text>`,
-    `<text x='420' y='260' font-size='11' fill='var(--color-mute)'>Theoretical quantiles</text>`,
-    `<text x='430' y='${qqY(2) + 4}' font-size='12' font-weight='600' fill='${CAT[0]}'>y = x</text>`,
-  ].join('\n'),
-);
-
 const qqTable = {
   columns: ['Theoretical', 'Sample', 'Deviation'],
   rows: qqData.map((p) => [
@@ -347,9 +116,7 @@ const qqTable = {
   ]),
 };
 
-/* ============================================================
- * 6. CORRELATION MATRIX HEATMAP
- * ============================================================ */
+/* --- correlation matrix heatmap ----------------------------------------- */
 
 const corrLabels = ['Revenue', 'Users', 'Sessions', 'Bounce', 'Conv. Rate', 'Avg. Order'];
 const corrMatrix = [
@@ -360,53 +127,6 @@ const corrMatrix = [
   [0.73, 0.69, 0.71, -0.54, 1.0, 0.56],
   [0.45, 0.38, 0.42, -0.31, 0.56, 1.0],
 ];
-
-const cellSize = 60;
-const heatX = (j: number) => 60 + j * cellSize + cellSize / 2;
-const heatY = (i: number) => 40 + i * cellSize + cellSize / 2;
-
-const heatmap = svg(
-  'Correlation matrix heatmap: six business metrics. Blue = positive, red = negative, intensity = strength.',
-  'heatmap',
-  [
-    `<defs>`,
-    `<linearGradient id='corrGrad' x1='0%' y1='0%' x2='100%' y2='0%'>`,
-    `<stop offset='0%' stop-color='var(--color-chart-2)' />`,
-    `<stop offset='50%' stop-color='var(--color-paper)' />`,
-    `<stop offset='100%' stop-color='var(--color-chart-1)' />`,
-    `</linearGradient>`,
-    `</defs>`,
-    corrMatrix
-      .map((row, i) =>
-        row.map((v, j) => {
-          const intensity = Math.abs(v);
-          const color = v >= 0 ? CAT[0] : CAT[1];
-          return `<rect x='${60 + j * cellSize}' y='${40 + i * cellSize}' width='${cellSize}' height='${cellSize}' fill='${color}' fill-opacity='${0.15 + intensity * 0.7}' stroke='var(--color-rule)' stroke-width='0.5' />`;
-        }),
-      )
-      .join(''),
-    corrMatrix
-      .map((row, i) =>
-        row
-          .map(
-            (v, j) =>
-              `<text x='${heatX(j)}' y='${heatY(i)}' font-size='12' font-weight='600' fill='var(--color-ink)' text-anchor='middle' dominant-baseline='middle'>${v.toFixed(2)}</text>`,
-          )
-          .join(''),
-      )
-      .join(''),
-    `<g font-size='11' fill='var(--color-ink)' text-anchor='end'>`,
-    corrLabels.map((l, i) => `<text x='52' y='${heatY(i)}'>${l}</text>`).join(''),
-    `</g>`,
-    `<g font-size='11' fill='var(--color-ink)' text-anchor='middle'>`,
-    corrLabels.map((l, j) => `<text x='${heatX(j)}' y='30'>${l}</text>`).join(''),
-    `</g>`,
-    `<g font-size='10' fill='var(--color-mute)'>`,
-    `<text x='300' y='420'>Blue = positive correlation | Red = negative correlation | Intensity = strength</text>`,
-    `</g>`,
-  ].join('\n'),
-  '0 0 520 440',
-);
 
 const corrTable = {
   columns: ['', ...corrLabels],
@@ -465,7 +185,7 @@ export const scientificCharts: Topic = {
           title: 'Box plot — four treatment groups',
           caption:
             'Each box spans Q1 to Q3 with median line. Whiskers extend to 1.5×IQR. Dots beyond are outliers. Treatment B shows the widest spread and two low outliers.',
-          svg: boxPlot,
+          svg: box_plot,
           full: true,
           minWidth: 420,
           maxWidth: 620,
@@ -521,7 +241,7 @@ export function BoxPlot({ data, yDomain }: { data: BoxPlotData[]; yDomain: [numb
           title: 'Violin plot — four treatment groups',
           caption:
             'Width = kernel density. White dot = median. Horizontal bar = IQR. Treatment B is bimodal (two peaks) — invisible in a box plot.',
-          svg: violinPlot,
+          svg: violin_plot,
           full: true,
           minWidth: 420,
           maxWidth: 620,
@@ -567,7 +287,7 @@ export function BoxPlot({ data, yDomain }: { data: BoxPlotData[]; yDomain: [numb
           title: 'Kernel density estimate with rug plot',
           caption:
             'Gaussian kernel, bandwidth 1.5 (Silverman). Rug ticks at bottom show raw observations. Area under curve = 1. Overlaid normal curve (dashed) for reference.',
-          svg: densityPlot,
+          svg: density_plot,
           full: true,
           minWidth: 420,
           maxWidth: 620,
@@ -590,7 +310,7 @@ export function BoxPlot({ data, yDomain }: { data: BoxPlotData[]; yDomain: [numb
           title: 'Q-Q plot vs. Normal distribution',
           caption:
             'Points close to the diagonal y=x line indicate the sample follows a normal distribution. Systematic S-curve = skewness. Curved ends = heavy/light tails.',
-          svg: qqPlot,
+          svg: qq_plot,
           full: true,
           minWidth: 420,
           maxWidth: 620,

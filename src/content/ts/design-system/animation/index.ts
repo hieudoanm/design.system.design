@@ -1,48 +1,15 @@
-import type { Topic } from './index';
+import type { Topic } from '../index';
 
 /*
  * The animation diagrams below are plain SVG. Each shows a timing diagram
  * or state transition. The easing curves use the system's motion tokens.
+ *
+ * The drawings live in ./svg as files and are exposed by the generated
+ * module ./svg-generated. Run `node scripts/ts/generate-svg.mts animation`
+ * to regenerate it after editing one.
  */
 
-const svg = (title: string, id: string, viewBox: string, body: string) =>
-  [
-    `<svg viewBox='${viewBox}' width='100%' role='img' aria-labelledby='${id}' xmlns='http://www.w3.org/2000/svg'>`,
-    `<title id='${id}'>${title}</title>`,
-    body,
-    `</svg>`,
-  ].join('\n');
-
-/* --- easing curves ------------------------------------------------------- */
-
-const easingCurvesSvg = svg(
-  'Four easing curves: linear, ease-in, ease-out, ease-in-out',
-  'easing-curves',
-  '0 0 400 200',
-  [
-    `<g stroke='var(--color-rule)' stroke-width='1' fill='none'>`,
-    `<path d='M20,180 L380,20' />`,
-    `</g>`,
-    `<g stroke='var(--color-chart-1)' stroke-width='2' fill='none'>`,
-    `<path d='M20,180 C20,180 380,20 380,20' />`,
-    `</g>`,
-    `<g stroke='var(--color-chart-2)' stroke-width='2' fill='none'>`,
-    `<path d='M20,180 C100,180 300,20 380,20' />`,
-    `</g>`,
-    `<g stroke='var(--color-chart-3)' stroke-width='2' fill='none'>`,
-    `<path d='M20,180 C280,180 120,20 380,20' />`,
-    `</g>`,
-    `<g stroke='var(--color-chart-4)' stroke-width='2' fill='none'>`,
-    `<path d='M20,180 C100,180 280,20 380,20' />`,
-    `</g>`,
-    `<g font-size='10' fill='var(--color-mute)'>`,
-    `<text x='20' y='195'>linear</text>`,
-    `<text x='100' y='195'>ease-in</text>`,
-    `<text x='200' y='195'>ease-out</text>`,
-    `<text x='300' y='195'>ease-in-out</text>`,
-    `</g>`,
-  ].join('\n'),
-);
+import { choreography, easing_curves, state_transitions } from './svg-generated';
 
 /* --- motion tokens ------------------------------------------------------- */
 
@@ -61,71 +28,6 @@ const motionTable = {
     ['--ease-spring', 'cubic-bezier(0.34, 1.56, 0.64, 1)', 'Playful: toasts, celebrations'],
   ],
 };
-
-/* --- choreography -------------------------------------------------------- */
-
-const choreography = svg(
-  'Staggered entrance: parent → children with 50ms delay each',
-  'choreography',
-  '0 0 400 160',
-  [
-    `<g font-size='11' fill='var(--color-mute)'>`,
-    `<text x='10' y='25'>Parent</text>`,
-    `<text x='10' y='55'>Child 1</text>`,
-    `<text x='10' y='85'>Child 2</text>`,
-    `<text x='10' y='115'>Child 3</text>`,
-    `</g>`,
-    `<g stroke='var(--color-chart-1)' stroke-width='3' stroke-linecap='round'>`,
-    `<line x1='80' y1='20' x2='320' y2='20' />`,
-    `<line x1='130' y1='50' x2='320' y2='50' />`,
-    `<line x1='180' y1='80' x2='320' y2='80' />`,
-    `<line x1='230' y1='110' x2='320' y2='110' />`,
-    `</g>`,
-    `<g fill='var(--color-chart-1)'>`,
-    `<circle cx='80' cy='20' r='5' /><circle cx='320' cy='20' r='5' />`,
-    `<circle cx='130' cy='50' r='5' /><circle cx='320' cy='50' r='5' />`,
-    `<circle cx='180' cy='80' r='5' /><circle cx='320' cy='80' r='5' />`,
-    `<circle cx='230' cy='110' r='5' /><circle cx='320' cy='110' r='5' />`,
-    `</g>`,
-    `<g font-size='10' fill='var(--color-mute)'>`,
-    `<text x='80' y='15'>0ms</text><text x='320' y='15'>200ms</text>`,
-    `<text x='130' y='45'>50ms</text><text x='320' y='45'>250ms</text>`,
-    `<text x='180' y='75'>100ms</text><text x='320' y='75'>300ms</text>`,
-    `<text x='230' y='105'>150ms</text><text x='320' y='105'>350ms</text>`,
-    `</g>`,
-  ].join('\n'),
-);
-
-/* --- state transitions --------------------------------------------------- */
-
-const stateTransitions = svg(
-  'Button states and transitions: default → hover → active → focus → disabled',
-  'state-transitions',
-  '0 0 500 120',
-  [
-    `<g font-size='11' fill='var(--color-mute)'>`,
-    `<text x='10' y='20'>Default</text>`,
-    `<text x='110' y='20'>Hover</text>`,
-    `<text x='210' y='20'>Active</text>`,
-    `<text x='310' y='20'>Focus</text>`,
-    `<text x='410' y='20'>Disabled</text>`,
-    `</g>`,
-    `<g stroke='var(--color-ink)' stroke-width='2' fill='var(--color-paper)' stroke-linecap='round' rx='6'>`,
-    `<rect x='10' y='30' width='80' height='40' />`,
-    `<rect x='110' y='30' width='80' height='40' style='background:var(--color-ink)' fill-opacity='0.08' />`,
-    `<rect x='210' y='30' width='80' height='40' style='background:var(--color-ink)' fill-opacity='0.15' />`,
-    `<rect x='310' y='30' width='80' height='40' stroke='var(--color-cobalt)' stroke-width='3' />`,
-    `<rect x='410' y='30' width='80' height='40' stroke='var(--color-mute)' stroke-dasharray='4 2' fill-opacity='0.5' />`,
-    `</g>`,
-    `<g font-size='10' fill='var(--color-chart-2)'>`,
-    `<text x='50' y='85'>100ms</text>`,
-    `<text x='150' y='85'>50ms</text>`,
-    `<text x='250' y='85'>0ms</text>`,
-    `<text x='350' y='85'>0ms</text>`,
-    `<text x='450' y='85'>—</text>`,
-    `</g>`,
-  ].join('\n'),
-);
 
 /* --- reduced motion ------------------------------------------------------ */
 
@@ -273,7 +175,7 @@ export const animation: Topic = {
           title: 'Easing curves',
           caption:
             'Four standard easings. Linear for mechanical motion. Ease-in for arrivals (accelerating). Ease-out for departures (decelerating). Ease-in-out for in-place movement.',
-          svg: easingCurvesSvg,
+          svg: easing_curves,
           table: motionTable,
           minWidth: 320,
           maxWidth: 480,
@@ -334,7 +236,7 @@ export const animation: Topic = {
           title: 'Button state transitions',
           caption:
             'Hover: 100ms ease-out (quick response). Active: 0ms (instant feedback). Focus: 0ms (accessibility). Disabled: no transition, visual only.',
-          svg: stateTransitions,
+          svg: state_transitions,
           minWidth: 400,
           maxWidth: 560,
         },

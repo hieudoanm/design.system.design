@@ -1,11 +1,15 @@
-import type { Topic } from './index';
+import type { Topic } from '../index';
 
 /*
- * The five drawings below are plain SVG, but every number comes from one
- * array per chart, so a drawing and its data table can never drift apart.
+ * The five drawings below are plain SVG. They live in ./svg as files and are
+ * exposed by the generated module ./svg-generated — run
+ * `node scripts/ts/generate-svg.mts charts` to regenerate it after editing one.
+ *
+ * The arrays below hold the numbers the drawings show. Each one also builds
+ * the table of its chart, so the table and the drawing stay in step.
  */
 
-const CAT = ['var(--color-chart-1)', 'var(--color-chart-2)', 'var(--color-chart-3)'];
+import { area, bar, line, pie, scatter } from './svg-generated';
 
 const traffic = [
   { month: 'Jan', web: 20, ios: 12, android: 30 },
@@ -62,300 +66,6 @@ const points: [number, number][] = [
   [50, 5.9],
   [54, 7.0],
 ];
-
-/** Horizontal gridlines and the value axis of a plot that spans y 24 → 204. */
-const grid = (ticks: number[], toY: (value: number) => number, unit = '') =>
-  [
-    `<g style='stroke:var(--color-rule)' stroke-width='1'>`,
-    ticks.map((t) => `<line x1='56' y1='${toY(t)}' x2='420' y2='${toY(t)}' />`).join(''),
-    `</g>`,
-    `<g style='fill:var(--color-mute)' font-size='11' text-anchor='end'>`,
-    ticks.map((t) => `<text x='46' y='${toY(t) + 4}'>${t}${unit}</text>`).join(''),
-    `</g>`,
-  ].join('');
-
-const axes = [
-  `<line x1='56' y1='24' x2='56' y2='204' style='stroke:var(--color-rule)' stroke-width='1' />`,
-  `<line x1='56' y1='204' x2='420' y2='204' style='stroke:var(--color-ink)' stroke-opacity='0.45' stroke-width='1' />`,
-].join('');
-
-const xLabels = (labels: string[], xs: number[]) =>
-  [
-    `<g style='fill:var(--color-mute)' font-size='11' text-anchor='middle'>`,
-    labels.map((label, i) => `<text x='${xs[i]}' y='224'>${label}</text>`).join(''),
-    `</g>`,
-  ].join('');
-
-const svg = (title: string, id: string, body: string) =>
-  [
-    `<svg viewBox='0 0 520 250' width='100%' role='img' aria-labelledby='${id}' xmlns='http://www.w3.org/2000/svg'>`,
-    `<title id='${id}'>${title}</title>`,
-    body,
-    `</svg>`,
-  ].join('\n');
-
-/* --- line --------------------------------------------------------------- */
-
-const lineX = (i: number) => 70 + i * 70;
-const lineY = (value: number) => 204 - value * 1.8;
-
-const linePath = (values: number[]) =>
-  values.map((v, i) => `${i === 0 ? 'M' : 'L'}${lineX(i)},${lineY(v)}`).join(' ');
-
-const lineMarks = (values: number[], shape: 'dot' | 'square' | 'triangle') =>
-  values
-    .map((v, i) => {
-      const x = lineX(i);
-      const y = lineY(v);
-      if (shape === 'dot') return `<circle cx='${x}' cy='${y}' r='3.5' />`;
-      if (shape === 'square') return `<rect x='${x - 3}' y='${y - 3}' width='6' height='6' />`;
-      return `<path d='M${x},${y - 4.4} L${x + 4.2},${y + 3.4} L${x - 4.2},${y + 3.4} Z' />`;
-    })
-    .join('');
-
-const lineSeries = (
-  values: number[],
-  colour: string,
-  label: string,
-  shape: 'dot' | 'square' | 'triangle',
-) =>
-  [
-    `<g style='fill:${colour}'>`,
-    `<path d='${linePath(values)}' fill='none' style='stroke:${colour}' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' />`,
-    lineMarks(values, shape),
-    `<text x='428' y='${lineY(values[values.length - 1]) + 4}' font-size='12' font-weight='600'>${label}</text>`,
-    `</g>`,
-  ].join('');
-
-const lineChart = svg(
-  'Line chart of weekly active users over six months, with three directly labelled series',
-  'chart-line-title',
-  [
-    grid([0, 25, 50, 75, 100], lineY),
-    axes,
-    xLabels(
-      traffic.map((m) => m.month),
-      traffic.map((_, i) => lineX(i)),
-    ),
-    lineSeries(
-      traffic.map((m) => m.web),
-      CAT[0],
-      'Web',
-      'dot',
-    ),
-    lineSeries(
-      traffic.map((m) => m.ios),
-      CAT[1],
-      'iOS',
-      'square',
-    ),
-    lineSeries(
-      traffic.map((m) => m.android),
-      CAT[2],
-      'Android',
-      'triangle',
-    ),
-  ].join('\n'),
-);
-
-/* --- bar ---------------------------------------------------------------- */
-
-const barX = (i: number) => 105 + i * 70;
-const barY = (value: number) => 204 - value * 3;
-
-const barChart = svg(
-  'Grouped bar chart of sessions per weekday, split into direct and search, with a zero baseline',
-  'chart-bar-title',
-  [
-    grid([0, 20, 40, 60], barY),
-    axes,
-    xLabels(
-      sessions.map((s) => s.day),
-      sessions.map((_, i) => barX(i)),
-    ),
-    `<g>`,
-    sessions
-      .map(
-        (s, i) =>
-          `<rect x='${barX(i) - 24}' y='${barY(s.direct)}' width='22' height='${s.direct * 3}' rx='2' style='fill:${CAT[0]}' />` +
-          `<rect x='${barX(i) + 2}' y='${barY(s.search)}' width='22' height='${s.search * 3}' rx='2' style='fill:${CAT[1]}' />`,
-      )
-      .join(''),
-    `</g>`,
-    `<g style='fill:var(--color-mute)' font-size='10' text-anchor='middle'>`,
-    sessions
-      .map(
-        (s, i) =>
-          `<text x='${barX(i) - 13}' y='${barY(s.direct) - 6}'>${s.direct}</text>` +
-          `<text x='${barX(i) + 13}' y='${barY(s.search) - 6}'>${s.search}</text>`,
-      )
-      .join(''),
-    `</g>`,
-    `<text x='416' y='${barY(sessions[4].direct) + 4}' font-size='12' font-weight='600' style='fill:${CAT[0]}'>Direct</text>`,
-    `<text x='416' y='${barY(sessions[4].search) + 4}' font-size='12' font-weight='600' style='fill:${CAT[1]}'>Search</text>`,
-  ].join('\n'),
-);
-
-/* --- area ---------------------------------------------------------------- */
-
-const areaX = (i: number) => 70 + i * 50;
-const areaY = (value: number) => 204 - value * 3;
-
-const areaPoints = (values: number[]) =>
-  values
-    .map((v, i) => `${areaX(i)},${areaY(v)}`)
-    .join(' ')
-    .replace(/ /g, ' L');
-
-const desktopTop = areaPoints(monthly.map((m) => m.desktop));
-const totalTop = areaPoints(monthly.map((m) => m.desktop + m.mobile));
-const desktopBottom = monthly
-  .map((m, i) => `${areaX(i)},${areaY(m.desktop)}`)
-  .reverse()
-  .join(' L');
-
-const areaChart = svg(
-  'Stacked area chart of desktop and mobile sessions per month, showing the total as the upper edge',
-  'chart-area-title',
-  [
-    grid([0, 20, 40, 60], areaY),
-    axes,
-    xLabels(
-      monthly.map((m) => m.month),
-      monthly.map((_, i) => areaX(i)),
-    ),
-    `<path d='M70,204 L${desktopTop} L420,204 Z' style='fill:${CAT[0]}' fill-opacity='0.85' />`,
-    `<path d='M${totalTop} L${desktopBottom} Z' style='fill:${CAT[1]}' fill-opacity='0.85' />`,
-    `<path d='M${desktopTop}' fill='none' style='stroke:${CAT[0]}' stroke-width='2' />`,
-    `<path d='M${totalTop}' fill='none' style='stroke:${CAT[1]}' stroke-width='2' />`,
-    `<text x='428' y='${areaY(monthly[7].desktop + monthly[7].mobile) - 8}' font-size='12' font-weight='600' style='fill:${CAT[1]}'>Mobile</text>`,
-    `<text x='428' y='${areaY(monthly[7].desktop) + 16}' font-size='12' font-weight='600' style='fill:${CAT[0]}'>Desktop</text>`,
-  ].join('\n'),
-);
-
-/* --- pie ----------------------------------------------------------------- */
-
-const pieCenterX = 210;
-const pieCenterY = 124;
-const pieRadius = 76;
-const totalSessions = share.reduce((sum, s) => sum + s.sessions, 0);
-
-const pieSlices = share.map((s, i) => {
-  const startAngle = share
-    .slice(0, i)
-    .reduce((sum, s2) => sum + (s2.sessions / totalSessions) * 360, 0);
-  const endAngle = startAngle + (s.sessions / totalSessions) * 360;
-  const largeArc = endAngle - startAngle > 180 ? 1 : 0;
-
-  const toCoords = (angle: number) => {
-    const rad = ((angle - 90) * Math.PI) / 180;
-    return {
-      x: pieCenterX + pieRadius * Math.cos(rad),
-      y: pieCenterY + pieRadius * Math.sin(rad),
-    };
-  };
-
-  const start = toCoords(startAngle);
-  const end = toCoords(endAngle);
-
-  return {
-    colour: CAT[i],
-    label: s.device,
-    value: s.sessions,
-    start,
-    end,
-    largeArc,
-    percentage: Math.round((s.sessions / totalSessions) * 100),
-  };
-});
-
-const piePaths = pieSlices
-  .map(
-    (slice) =>
-      `<path d='M${pieCenterX},${pieCenterY} L${slice.start.x.toFixed(1)},${slice.start.y.toFixed(1)} A${pieRadius},${pieRadius} 0 ${slice.largeArc} 1 ${slice.end.x.toFixed(1)},${slice.end.y.toFixed(1)} Z' style='fill:${slice.colour}' />`,
-  )
-  .join('');
-
-const pieLabels = pieSlices
-  .map((slice) => {
-    const midAngle =
-      share
-        .slice(0, pieSlices.indexOf(slice))
-        .reduce((sum, s2) => sum + (s2.sessions / totalSessions) * 360, 0) +
-      ((slice.value / totalSessions) * 360) / 2;
-    const rad = ((midAngle - 90) * Math.PI) / 180;
-    const labelRadius = pieRadius + 30;
-    const x = pieCenterX + labelRadius * Math.cos(rad);
-    const y = pieCenterY + labelRadius * Math.sin(rad);
-    const anchor = x > pieCenterX ? 'start' : 'end';
-    return `<text x='${x.toFixed(1)}' y='${y.toFixed(1)}' font-size='12' font-weight='600' text-anchor='${anchor}' style='fill:${slice.colour}'>${slice.label} ${slice.percentage}%</text>`;
-  })
-  .join('');
-
-const pieLabelLines = pieSlices
-  .map((slice) => {
-    const midAngle =
-      share
-        .slice(0, pieSlices.indexOf(slice))
-        .reduce((sum, s2) => sum + (s2.sessions / totalSessions) * 360, 0) +
-      ((slice.value / totalSessions) * 360) / 2;
-    const rad = ((midAngle - 90) * Math.PI) / 180;
-    const innerRadius = pieRadius + 5;
-    const outerRadius = pieRadius + 20;
-    const x1 = pieCenterX + innerRadius * Math.cos(rad);
-    const y1 = pieCenterY + innerRadius * Math.sin(rad);
-    const x2 = pieCenterX + outerRadius * Math.cos(rad);
-    const y2 = pieCenterY + outerRadius * Math.sin(rad);
-    return `<line x1='${x1.toFixed(1)}' y1='${y1.toFixed(1)}' x2='${x2.toFixed(1)}' y2='${y2.toFixed(1)}' />`;
-  })
-  .join('');
-
-const pieChart = svg(
-  'Pie chart of sessions split across three devices, with every slice directly labelled',
-  'chart-pie-title',
-  [
-    `<g style='stroke:var(--color-paper)' stroke-width='2'>`,
-    piePaths,
-    `</g>`,
-    `<g style='stroke:var(--color-mute)' stroke-width='1'>`,
-    pieLabelLines,
-    `</g>`,
-    `<g style='font-size:12 font-weight:600'>`,
-    pieLabels,
-    `</g>`,
-  ].join('\n'),
-);
-
-/* --- scatter -------------------------------------------------------------- */
-
-const scatterX = (minutes: number) => 70 + (minutes * 350) / 60;
-const scatterY = (rate: number) => 204 - rate * 22.5;
-
-const scatterChart = svg(
-  'Scatter plot of conversion rate against time on site, with a least-squares trend line',
-  'chart-scatter-title',
-  [
-    grid([0, 2, 4, 6, 8], scatterY, '%'),
-    axes,
-    xLabels(
-      ['0', '15', '30', '45', '60'],
-      [0, 15, 30, 45, 60].map((m) => scatterX(m)),
-    ),
-    `<line x1='70' y1='198.8' x2='420' y2='39.5' style='stroke:var(--color-ink)' stroke-opacity='0.45' stroke-width='1.5' stroke-dasharray='6 4' />`,
-    `<g style='fill:${CAT[0]}' fill-opacity='0.9'>`,
-    points.map(([m, v]) => `<circle cx='${scatterX(m)}' cy='${scatterY(v)}' r='4' />`).join(''),
-    `</g>`,
-    `<g style='fill:${CAT[1]}'>`,
-    `<circle cx='${scatterX(12)}' cy='${scatterY(0.8)}' r='5' />`,
-    `<circle cx='${scatterX(44)}' cy='${scatterY(7.4)}' r='5' />`,
-    `<text x='${scatterX(44) + 10}' y='${scatterY(7.4) - 8}' font-size='11' font-weight='600' style='fill:${CAT[1]}'>outlier</text>`,
-    `</g>`,
-    `<text x='72' y='48' font-size='13' font-weight='600' style='fill:var(--color-ink)'>r = 0.94</text>`,
-    `<text x='72' y='64' font-size='11' style='fill:var(--color-mute)'>n = 18 sessions</text>`,
-    `<text x='16' y='114' font-size='11' text-anchor='middle' transform='rotate(-90 16 114)' style='fill:var(--color-mute)'>Conversion rate (%)</text>`,
-    `<text x='245' y='244' font-size='11' text-anchor='middle' style='fill:var(--color-mute)'>Time on site (minutes)</text>`,
-  ].join('\n'),
-);
 
 export const charts: Topic = {
   slug: 'charts',
@@ -422,7 +132,7 @@ export const charts: Topic = {
           title: 'Line — trend over time',
           caption:
             'Three series over six months, each with its own marker shape so the lines survive the loss of colour. The series are labelled where they end, not in a legend.',
-          svg: lineChart,
+          svg: line,
           full: true,
           minWidth: 420,
           maxWidth: 620,
@@ -436,7 +146,7 @@ export const charts: Topic = {
           title: 'Bar — comparison between two series',
           caption:
             'Direct and search sessions per weekday. The value axis starts at zero, every bar is labelled, and the two series are named on the plot.',
-          svg: barChart,
+          svg: bar,
           full: true,
           minWidth: 420,
           maxWidth: 620,
@@ -450,7 +160,7 @@ export const charts: Topic = {
           title: 'Area — parts making a total',
           caption:
             'Desktop and mobile stacked to a monthly total. The upper edge is the total, which is the number people actually read.',
-          svg: areaChart,
+          svg: area,
           full: true,
           minWidth: 420,
           maxWidth: 620,
@@ -469,7 +179,7 @@ export const charts: Topic = {
           title: 'Pie — one whole, divided',
           caption:
             'Three slices, and never more than four. If the parts do not add to the whole, or the reader must compare two slices closely, this is the wrong chart.',
-          svg: pieChart,
+          svg: pie,
           full: true,
           minWidth: 420,
           maxWidth: 620,
@@ -483,7 +193,7 @@ export const charts: Topic = {
           title: 'Scatter — two things moving together',
           caption:
             'Time on site against conversion. The trend line comes with the correlation and the sample size, and the two outliers are marked instead of hidden.',
-          svg: scatterChart,
+          svg: scatter,
           full: true,
           minWidth: 420,
           maxWidth: 620,

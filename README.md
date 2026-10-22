@@ -120,7 +120,7 @@ pnpm start       # serve the static export (out/)
 | `pnpm lint`      | ESLint, with `--fix`                       |
 | `pnpm format`    | Prettier, with the Tailwind plugin         |
 
-To add content, edit the TypeScript modules under `src/content/` — a new chapter or a new problem is one file, one array entry and one sitemap line. The route, the navigation and the metadata all follow. See [AGENTS.md](AGENTS.md) for the full map.
+To add content, edit the TypeScript modules under `src/content/ts/` — a new chapter or a new problem is one module, one array entry and one sitemap line. The route, the navigation and the metadata all follow. A chapter with drawings is a folder: `index.ts` for the prose, `svg/*.svg` for the drawings, and `svg-generated.ts` from `node scripts/ts/generate-svg.mts`. See [AGENTS.md](AGENTS.md) for the full map.
 
 ### Deploy it
 

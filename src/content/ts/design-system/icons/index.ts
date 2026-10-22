@@ -2,16 +2,16 @@ import type { Topic } from '../index';
 
 /*
  * Icon system: modular SVG files imported from generated module.
- * Run `node scripts/ts/generate-icons.mts` to regenerate svg-generated.ts
+ * Run `node scripts/ts/generate-svg.mts icons` to regenerate svg-generated.ts
  * when SVG files in ./svg/ are added or modified.
  */
 
 import {
   anatomy,
-  outline_home,
-  filled_home,
-  twotone_home,
-  sharp_home,
+  home_filled,
+  home_outline,
+  home_sharp,
+  home_twotone,
   grid_home,
   grid_search,
   grid_user,
@@ -59,22 +59,22 @@ const styleVariants = [
   {
     name: 'Outline (default)',
     body: '2px stroke, no fill. The standard style for toolbar and inline icons.',
-    svg: outline_home,
+    svg: home_outline,
   },
   {
     name: 'Filled',
     body: 'Solid fill, no stroke. Used for high-emphasis actions and tab bar selected states.',
-    svg: filled_home,
+    svg: home_filled,
   },
   {
     name: 'Two-tone',
     body: 'Primary stroke with secondary fill at 40% opacity. For complex icons needing visual hierarchy.',
-    svg: twotone_home,
+    svg: home_twotone,
   },
   {
     name: 'Sharp',
     body: 'Sharp corners, 2px stroke. For technical or developer-focused interfaces.',
-    svg: sharp_home,
+    svg: home_sharp,
   },
 ];
 

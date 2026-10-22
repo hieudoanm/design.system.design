@@ -1,6 +1,7 @@
 <svg viewBox='0 0 24 24' width='100%' role='img' aria-labelledby='icon-grid-user' xmlns='http://www.w3.org/2000/svg'>
 <title id='icon-grid-user'>Grid icon: User</title>
 <g fill='none' style='stroke:#111827' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+<circle cx='12' cy='8' r='4' />
 <path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2' />
 </g>
 </svg>

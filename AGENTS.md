@@ -73,8 +73,8 @@ src/
       Navbar.tsx          the site header and its three-way toggle (client)
       __tests__/          one test file per component
   content/
-    design-system/        six topic files plus index.ts (the barrel)
-    system-design/        one file per problem, plus index.ts and types.ts
+    ts/design-system/     one file or folder per topic, plus index.ts (the barrel)
+    ts/system-design/     one file per problem, plus index.ts and types.ts
   lib/
     paths.ts              the base path and withBasePath() for raw <a> hrefs
     __tests__/            one test file per module
@@ -82,6 +82,7 @@ scripts/
   sh/
     svg-to-png.sh         regenerates the PNG icons from icon.svg
   ts/
+    generate-svg.mts      turns every topic's svg/*.svg into svg-generated.ts
     serve.mts             static file server for the exported site in out/
     videos-to-mp4.mts     turns the Playwright WebM recording into assets/
 assets/
@@ -118,7 +119,7 @@ public/
 | `/`                     | `src/app/page.tsx`                                                                                        |
 | `/design-system`        | `topics` — the chapter index, one card per topic                                                          |
 | `/design-system/[slug]` | `topics` — ids `components`, `design-tokens`, `fonts`, `charts`, `accessibility`, `responsive`            |
-| `/system-design`        | `src/content/system-design/index.ts`                                                                      |
+| `/system-design`        | `src/content/ts/system-design/index.ts`                                                                   |
 | `/system-design/[slug]` | `problems` — ids `url-shortener`, `rate-limiter`, `unique-id-generator`, `key-value-store`, `chat-system` |
 
 - To add a topic or a problem:
@@ -158,7 +159,7 @@ type TopicSection = {
 type TopicVisual = {
   title: string;
   caption?: string;
-  svg?: string; // inline SVG markup, hand-written in this repo
+  svg?: string; // markup from the topic's svg/ folder, via svg-generated.ts
   table?: TopicTable; // the data behind the drawing
   full?: boolean; // span the whole width instead of one column
   minWidth?: number; // below it the figure scrolls sideways
@@ -184,20 +185,29 @@ type Problem = {
 };
 ```
 
-- `src/content/design-system/` holds exactly six topic files plus `index.ts`:
+- `src/content/ts/design-system/` holds one file or folder per topic, plus
+  `index.ts`:
 
-| File               | Exports                                                                     |
-| ------------------ | --------------------------------------------------------------------------- |
-| `components.ts`    | `components` plus `atomicLevels`, `principles`, `practice`, `repoStructure` |
-| `design-tokens.ts` | `designTokens`                                                              |
-| `fonts.ts`         | `fonts`                                                                     |
-| `charts.ts`        | `charts`                                                                    |
-| `accessibility.ts` | `accessibility`                                                             |
-| `responsive.ts`    | `responsive`                                                                |
-| `index.ts`         | the `Topic` types, the `topics` array and `getTopic()`                      |
+| Topic               | Shape                | Exports                                                                     |
+| ------------------- | -------------------- | --------------------------------------------------------------------------- |
+| `components`        | `components.ts`      | `components` plus `atomicLevels`, `principles`, `practice`, `repoStructure` |
+| `design-tokens`     | `design-tokens.ts`   | `designTokens`                                                              |
+| `accessibility`     | `accessibility.ts`   | `accessibility`                                                             |
+| `fonts`             | `fonts/`             | `fonts`                                                                     |
+| `charts`            | `charts/`            | `charts`                                                                    |
+| `responsive`        | `responsive/`        | `responsive`                                                                |
+| `icons`             | `icons/`             | `icons`                                                                     |
+| `animation`         | `animation/`         | `animation`                                                                 |
+| `scientific-charts` | `scientific-charts/` | `scientificCharts`                                                          |
+| `index.ts`          | —                    | the `Topic` types, the `topics` array and `getTopic()`                      |
 
+- A topic with drawings is a folder:
+  - `index.ts` holds the prose, the data arrays and the tables.
+  - `svg/*.svg` holds one file per drawing.
+  - `svg-generated.ts` is generated from `svg/` and must not be edited.
+- A topic without drawings stays a single `.ts` file.
 - `index.ts` is the only place the list is assembled.
-- Topic files import their type with `import type { Topic } from './index'`.
+- Topic files import their type with `import type { Topic } from '../index'`.
 - The import is erased at compile time, so there is no runtime cycle.
 - `Rich.tsx` renders the tiny markdown subset: `` `code` ``, `**bold**`,
   `[label](href)` and paragraphs separated by a blank line.
@@ -212,16 +222,24 @@ type Problem = {
   the visual carries data — the table of that data.
 - `Figures.tsx` lays a section's figures out in two columns on a wide screen.
 - `full: true` spans both columns.
-- The SVG is hand-written in the topic file, and it is trusted content.
+- The SVG is a file under the topic's `svg/` folder, and it is trusted content.
 - It is injected with `dangerouslySetInnerHTML`.
-- Four rules keep it honest:
+- `scripts/ts/generate-svg.mts` turns every `svg/*.svg` into the matching
+  `svg-generated.ts`, which `index.ts` imports.
+- Run it after adding or editing a drawing: `node scripts/ts/generate-svg.mts`.
+- Pass a topic to regenerate one: `node scripts/ts/generate-svg.mts charts`.
+- Five rules keep it honest:
   - **Colour comes from a token.** `style='fill:var(--color-chart-1)'`, never a
     hex value. `var()` resolves inside a `style` attribute only, never in an SVG
     presentation attribute.
   - **Every drawing has a `<title>`** with an `id`, pointed at by `role='img'`
     and `aria-labelledby`, so it is announced instead of ignored.
-  - **A drawing and its table come from one array.** The charts chapter builds
-    both from a single data array per chart, so they cannot drift apart.
+  - **Title ids are namespaced.** They share a page with the section anchor ids,
+    so prefix them: `chart-`, `font-`, `screen-`, `animation-`, `scientific-`,
+    `icon-`. A duplicate id breaks `aria-labelledby`.
+  - **A drawing and its table show the same numbers.** The data array in
+    `index.ts` builds the table; the `.svg` file draws the same values. Change
+    one, change the other.
   - **The ink stays inside the viewBox.** Draw within it and check `getBBox()`
     in the browser. Text is the usual thing that runs past the edge.
 
@@ -302,18 +320,23 @@ type Problem = {
 
 ## Adding a design system chapter
 
-1. Create `src/content/design-system/<slug>.ts` exporting one `Topic`.
-2. Add it to the `topics` array in `src/content/design-system/index.ts`. The
+1. Create `src/content/ts/design-system/<slug>.ts` exporting one `Topic`.
+2. Add it to the `topics` array in `src/content/ts/design-system/index.ts`. The
    array order drives the index page and the previous/next links.
 3. Add `/design-system/<slug>` to `public/sitemap.xml`.
 
+- If the topic has drawings, make it a folder instead.
+- Put the `Topic` in `<slug>/index.ts` with `import type { Topic } from '../index'`.
+- Put each drawing in `<slug>/svg/<name>.svg`.
+- Run `node scripts/ts/generate-svg.mts <slug>` to write `<slug>/svg-generated.ts`.
+- Import the drawings from `./svg-generated` in `<slug>/index.ts`.
 - The index page and the `[slug]` page both read `topics`.
 - Both pick it up automatically.
 
 ## Adding a system design problem
 
-1. Create `src/content/system-design/<slug>.ts` exporting one `Problem`.
-2. Add it to the `problems` array in `src/content/system-design/index.ts`.
+1. Create `src/content/ts/system-design/<slug>.ts` exporting one `Problem`.
+2. Add it to the `problems` array in `src/content/ts/system-design/index.ts`.
    The array order drives the index page and the "next problem" link.
 3. Add `/system-design/<slug>` to `public/sitemap.xml`.
 

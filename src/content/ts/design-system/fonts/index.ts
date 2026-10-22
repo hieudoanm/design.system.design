@@ -1,211 +1,16 @@
-import type { Topic } from './index';
+import type { Topic } from '../index';
 
 /*
- * The specimens below are drawn with the font stacks a reader's machine
- * already has, so the page shows what the reader actually sees. The stack
- * falls back, exactly as a web page falls back when a font is missing.
+ * The type drawings below are plain SVG. They live in ./svg as files and are
+ * exposed by the generated module ./svg-generated — run
+ * `node scripts/ts/generate-svg.mts fonts` to regenerate it after editing one.
+ *
+ * The specimens are drawn with the font stacks a reader’s machine already
+ * has, so the page shows what the reader actually sees. The stack falls back,
+ * exactly as a web page falls back when a font is missing.
  */
 
-const PANGRAM = 'The quick brown fox jumps over the lazy dog';
-
-const specimens = [
-  {
-    name: 'Arial',
-    category: 'Sans · neo-grotesque',
-    stack: `Arial, "Helvetica Neue", Helvetica, sans-serif`,
-  },
-  {
-    name: 'Helvetica',
-    category: 'Sans · neo-grotesque',
-    stack: `Helvetica, "Helvetica Neue", Arial, sans-serif`,
-  },
-  {
-    name: 'Georgia',
-    category: 'Serif · transitional',
-    stack: `Georgia, "Times New Roman", serif`,
-  },
-  {
-    name: 'Times New Roman',
-    category: 'Serif · transitional',
-    stack: `"Times New Roman", Times, serif`,
-  },
-  {
-    name: 'Verdana',
-    category: 'Sans · wide, made for screens',
-    stack: `Verdana, Geneva, "DejaVu Sans", sans-serif`,
-  },
-  {
-    name: 'Trebuchet MS',
-    category: 'Sans · humanist',
-    stack: `"Trebuchet MS", Tahoma, Geneva, sans-serif`,
-  },
-  {
-    name: 'Courier New',
-    category: 'Mono · slab serif',
-    stack: `"Courier New", Courier, monospace`,
-  },
-  {
-    name: 'Impact',
-    category: 'Display · condensed',
-    stack: `Impact, Haettenschweiler, "Arial Narrow", sans-serif`,
-  },
-  {
-    name: 'Comic Sans MS',
-    category: 'Informal · handwritten',
-    stack: `"Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive`,
-  },
-];
-
-const svg = (title: string, id: string, viewBox: string, body: string) =>
-  [
-    `<svg viewBox='${viewBox}' width='100%' role='img' aria-labelledby='${id}' xmlns='http://www.w3.org/2000/svg'>`,
-    `<title id='${id}'>${title}</title>`,
-    body,
-    `</svg>`,
-  ].join('\n');
-
-/* --- anatomy ------------------------------------------------------------- */
-
-const anatomy = svg(
-  'Diagram of the anatomy of a typeface, showing the cap height, the x-height, the baseline, the descender and a counter',
-  'font-anatomy-title',
-  '0 0 560 300',
-  [
-    `<g style='font-family:Georgia, "Times New Roman", serif;fill:var(--color-ink)' font-size='150'>`,
-    `<text x='30' y='230'>H</text>`,
-    `<text x='170' y='230'>x</text>`,
-    `<text x='250' y='230'>o</text>`,
-    `</g>`,
-    `<g style='stroke:var(--color-mute)' stroke-width='1' stroke-dasharray='4 4'>`,
-    `<line x1='16' y1='123' x2='350' y2='123' />`,
-    `<line x1='16' y1='151' x2='350' y2='151' />`,
-    `<line x1='16' y1='230' x2='350' y2='230' />`,
-    `<line x1='16' y1='261' x2='350' y2='261' />`,
-    `</g>`,
-    `<g style='stroke:var(--color-mute)' stroke-width='1'>`,
-    `<line x1='350' y1='123' x2='434' y2='123' />`,
-    `<line x1='350' y1='151' x2='434' y2='151' />`,
-    `<line x1='350' y1='230' x2='434' y2='230' />`,
-    `<line x1='350' y1='261' x2='434' y2='261' />`,
-    `</g>`,
-    `<g style='fill:var(--color-ink)' font-size='12'>`,
-    `<text x='440' y='127'>Cap height</text>`,
-    `<text x='440' y='155'>x-height</text>`,
-    `<text x='440' y='234'>Baseline</text>`,
-    `<text x='440' y='265'>Descender</text>`,
-    `</g>`,
-    `<circle cx='295' cy='188' r='7' fill='none' style='stroke:var(--color-marker)' stroke-width='1.5' />`,
-    `<line x1='303' y1='188' x2='356' y2='188' style='stroke:var(--color-marker)' stroke-width='1' />`,
-    `<text x='362' y='192' font-size='12' style='fill:var(--color-marker)'>Counter</text>`,
-    `<text x='16' y='28' font-size='12' style='fill:var(--color-mute)'>Georgia, 150px</text>`,
-  ].join('\n'),
-);
-
-/* --- scale ---------------------------------------------------------------- */
-
-const scaleRows = [
-  { token: 'text-caption', size: 12, ratio: '12 / 1.4', baseline: 28 },
-  { token: 'text-body', size: 16, ratio: '16 / 1.6', baseline: 60 },
-  { token: 'text-lead', size: 20, ratio: '20 / 1.5', baseline: 96 },
-  { token: 'text-heading', size: 31, ratio: '31 / 1.2', baseline: 142 },
-  { token: 'text-display', size: 49, ratio: '49 / 1.05', baseline: 202 },
-];
-
-const scale = svg(
-  'A five-step type scale, from a 12 pixel caption to a 49 pixel display size',
-  'font-scale-title',
-  '0 0 560 230',
-  [
-    `<g style='font-family:var(--font-sans);fill:var(--color-ink)'>`,
-    scaleRows
-      .map((row) => `<text x='170' y='${row.baseline}' font-size='${row.size}'>Typography</text>`)
-      .join(''),
-    `</g>`,
-    `<g style='font-family:var(--font-mono);fill:var(--color-mute)' font-size='10'>`,
-    scaleRows
-      .map((row) => `<text x='16' y='${row.baseline}'>${row.token} · ${row.ratio}</text>`)
-      .join(''),
-    `</g>`,
-  ].join('\n'),
-);
-
-/* --- measure -------------------------------------------------------------- */
-
-const narrowLines = [
-  'Typography is the craft',
-  'of arranging language so',
-  'that it can be read with',
-  'ease, and found again by',
-  'anyone who needs it, and',
-  'not hunted for. That is',
-  'the whole of the job, and',
-  'it is worth doing well.',
-];
-
-const wideLines = [
-  'Typography is the craft of arranging language so that it can be read with',
-  'ease, and found again by anyone who needs it, without hunting for it at all.',
-  'A type system is a set of decisions made once — about size, weight, colour',
-  'and space — and then applied everywhere, so that every screen speaks in the',
-  'same voice and at the same size, which is harder than it sounds and worth a',
-  'great deal more when it actually works than when it almost works. Measure',
-  'is the width of the column, and the column is the single cheapest way to',
-  'make a page comfortable to read. Keep the line between 45 and 75 characters.',
-];
-
-const measure = svg(
-  'Two columns of the same text, one too narrow at 28 characters per line and one comfortable at 60',
-  'font-measure-title',
-  '0 0 660 230',
-  [
-    `<text x='40' y='30' font-size='12' font-weight='600' style='fill:var(--color-ink)'>Too narrow · 28 characters</text>`,
-    `<g style='fill:var(--color-mute)' font-size='10'>`,
-    narrowLines.map((line, i) => `<text x='40' y='${56 + i * 16}'>${line}</text>`).join(''),
-    `</g>`,
-    `<text x='258' y='30' font-size='12' font-weight='600' style='fill:var(--color-ink)'>Comfortable · 60 characters</text>`,
-    `<g style='fill:var(--color-mute)' font-size='10'>`,
-    wideLines.map((line, i) => `<text x='258' y='${60 + i * 16}'>${line}</text>`).join(''),
-    `</g>`,
-    `<g style='stroke:var(--color-marker)' stroke-width='1'>`,
-    `<line x1='246' y1='48' x2='246' y2='180' />`,
-    `<line x1='246' y1='48' x2='252' y2='48' />`,
-    `<line x1='246' y1='180' x2='252' y2='180' />`,
-    `</g>`,
-    `<text x='238' y='114' font-size='11' text-anchor='middle' transform='rotate(-90 238 114)' style='fill:var(--color-marker)'>45–75 characters</text>`,
-    `<text x='40' y='212' font-size='11' style='fill:var(--color-mute)'>Same words, same size. Only the width of the column changed.</text>`,
-  ].join('\n'),
-);
-
-/* --- specimens ------------------------------------------------------------ */
-
-const specimenRows = specimens
-  .map((specimen, i) => {
-    const baseline = 56 + i * 44;
-    return [
-      `<g style='font-family:${specimen.stack}'>`,
-      `<text x='24' y='${baseline}' font-size='34' style='fill:var(--color-ink)'>Aa</text>`,
-      `</g>`,
-      `<text x='80' y='${baseline - 6}' font-size='12' font-weight='600' style='fill:var(--color-ink)'>${specimen.name}</text>`,
-      `<text x='80' y='${baseline + 10}' font-size='10' style='fill:var(--color-mute)'>${specimen.category}</text>`,
-      `<text x='190' y='${baseline + 2}' font-size='17' style='font-family:${specimen.stack};fill:var(--color-ink)'>${PANGRAM}</text>`,
-      `<line x1='24' y1='${baseline + 24}' x2='656' y2='${baseline + 24}' style='stroke:var(--color-rule)' stroke-width='1' />`,
-    ].join('');
-  })
-  .join('\n');
-
-const specimensSvg = svg(
-  'Type specimens of the most widely installed fonts, each showing the alphabet and the pangram The quick brown fox jumps over the lazy dog',
-  'font-specimens-title',
-  '0 0 680 440',
-  [
-    `<g style='font-family:var(--font-mono);fill:var(--color-mute)' font-size='10' letter-spacing='1'>`,
-    `<text x='80' y='26'>Family</text>`,
-    `<text x='190' y='26'>Specimen · 44 characters</text>`,
-    `</g>`,
-    `<line x1='24' y1='34' x2='656' y2='34' style='stroke:var(--color-rule)' stroke-width='1' />`,
-    specimenRows,
-  ].join('\n'),
-);
+import { anatomy, measure, scale, specimens } from './svg-generated';
 
 export const fonts: Topic = {
   slug: 'fonts',
@@ -290,7 +95,7 @@ body {
           title: 'Specimens — the pangram in nine families',
           caption:
             'Each row is the same 44 characters, so the differences you see are the differences between the letters themselves. Where a family is missing, the stack falls back — which is exactly what a web page does when it asks for a font it has not shipped.',
-          svg: specimensSvg,
+          svg: specimens,
           full: true,
           minWidth: 520,
           maxWidth: 760,

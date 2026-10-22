@@ -23,7 +23,7 @@ On top of that, design system material is often locked inside a company wiki, an
 
 `design.system.design` provides one focused, static reading experience: a **design system guide** and a **system design problem set**, reachable from a single landing page and signposted by a floating three-button toggle that slides a highlight across itself as you move between them.
 
-The design system half is nine chapters. The first walks the atomic design ladder in order — **tokens → atoms → molecules → organisms → templates → pages** — with the principles that justify each layer, the rules that keep it consistent and the practice that keeps it alive after launch. The other eight go deep on the concerns that break real systems: tokens, typography, charts, scientific charts, accessibility, responsive design, icons and animation. The system design half walks a fixed interview framework, then applies it to twenty-four classic problems end to end.
+The design system half is twelve chapters. It walks the atomic design ladder in order — **tokens → atoms → molecules → organisms → templates → pages** — then goes deep on the concerns that break real systems: color, spacing, typography, forms, charts, scientific charts, accessibility, responsive design, icons and animation. The system design half walks a fixed interview framework, then applies it to twenty-four classic problems end to end.
 
 No signup. No tracking. No cookies. Every route is a static page that renders in a few milliseconds.
 
@@ -107,7 +107,7 @@ Then open <http://localhost:3000>.
 
 ```sh
 pnpm typecheck   # tsc --noEmit
-pnpm build       # lint + type-check, then prerender all 36 routes into out/
+pnpm build       # lint + type-check, then prerender all 41 routes into out/
 pnpm start       # serve the static export (out/)
 ```
 
@@ -130,7 +130,7 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 
 ## Use Cases
 
-- **Learning a design system from scratch** — follow the nine chapters in order and understand why each one exists before you build it.
+- **Learning a design system from scratch** — follow the twelve chapters in order and understand why each one exists before you build it.
 - **Reviewing a design system you already have** — use the six principles and six practice guides as a checklist against your own component library.
 - **Interview preparation** — work through the framework once, then use the problems as timed practice and the Q&A sections as a self-test.
 - **Onboarding a new designer or engineer** — hand them one URL instead of a folder of links and a wiki page.
@@ -146,8 +146,8 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 
 ## Project Status and Trust
 
-- **Maturity:** A working reference site with all nine design system chapters and all twenty-four system design problems complete. Content is still being extended.
-- **Routes:** 36 prerendered pages — the landing page, a design system chapter index, nine chapter pages, a system design index and twenty-four problem pages.
+- **Maturity:** A working reference site with all twelve design system chapters and all twenty-four system design problems complete. Content is still being extended.
+- **Routes:** 41 prerendered pages — the landing page, a design system chapter index, twelve chapter pages, a system design index and twenty-four problem pages.
 - **Stack:** Next.js 16.4.2 (App Router), React 19.3.1, TypeScript 6.0.3, Tailwind CSS 4.3.3, Bricolage Grotesque and JetBrains Mono.
 - **Assets:** Icons at 16/32/48/64/96/128/152/167/180/192/256/384/512 plus a multi-resolution `favicon.ico`; the social card is a 1200×630 vector source with a matching PNG.
 - **Privacy:** No trackers, no third-party cookies, no analytics, no accounts. Fonts are self-hosted.

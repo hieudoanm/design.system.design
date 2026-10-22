@@ -1,0 +1,26 @@
+<svg viewBox='0 0 640 180' width='100%' role='img' xmlns='http://www.w3.org/2000/svg'>
+<title>Form controls: checkbox, radio, select, textarea, toggle</title>
+<text x='24' y='24' font-size='12' font-weight='600' fill='var(--color-ink)'>Form Controls</text>
+<rect x='30' y='50' width='12' height='12' rx='2' fill='var(--color-action-bg)'/>
+<text x='48' y='58' font-size='9' fill='var(--color-ink)'>Checkbox checked</text>
+<rect x='30' y='75' width='12' height='12' rx='2' fill='var(--color-surface)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='48' y='83' font-size='9' fill='var(--color-ink)'>Checkbox</text>
+<circle cx='36' cy='110' r='6' fill='var(--color-action-bg)'/>
+<circle cx='36' cy='110' r='3' fill='#ffffff'/>
+<text x='48' y='114' font-size='9' fill='var(--color-ink)'>Radio selected</text>
+<circle cx='36' cy='135' r='6' fill='var(--color-surface)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='48' y='139' font-size='9' fill='var(--color-ink)'>Radio</text>
+<rect x='170' y='50' width='120' height='32' rx='6' fill='var(--color-surface)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='185' y='69' font-size='9' fill='var(--color-ink)'>Select option</text>
+<polygon points='275,65 280,70 285,65' fill='var(--color-mute)'/>
+<rect x='170' y='95' width='120' height='60' rx='6' fill='var(--color-surface)' stroke='var(--color-rule)' stroke-width='1'/>
+<text x='185' y='112' font-size='9' fill='var(--color-mute)'>Textarea...</text>
+<rect x='330' y='50' width='40' height='22' rx='11' fill='var(--color-action-bg)'/>
+<circle cx='359' cy='61' r='8' fill='#ffffff'/>
+<text x='380' y='66' font-size='9' fill='var(--color-ink)'>Toggle on</text>
+<rect x='330' y='85' width='40' height='22' rx='11' fill='var(--color-rule)'/>
+<circle cx='341' cy='96' r='8' fill='#ffffff'/>
+<text x='380' y='101' font-size='9' fill='var(--color-ink)'>Toggle off</text>
+<rect x='330' y='120' width='120' height='32' rx='6' fill='var(--color-action-bg)'/>
+<text x='390' y='139' font-size='9' text-anchor='middle' fill='#ffffff'>Submit Button</text>
+</svg>

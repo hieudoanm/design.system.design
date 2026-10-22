@@ -21,12 +21,32 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://hieudoanm.github.io/design.system.design/design-system/colors</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hieudoanm.github.io/design.system.design/design-system/spacing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://hieudoanm.github.io/design.system.design/design-system/fonts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://hieudoanm.github.io/design.system.design/design-system/forms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://hieudoanm.github.io/design.system.design/design-system/charts</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hieudoanm.github.io/design.system.design/design-system/scientific-charts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -37,6 +57,16 @@
   </url>
   <url>
     <loc>https://hieudoanm.github.io/design.system.design/design-system/responsive</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hieudoanm.github.io/design.system.design/design-system/icons</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hieudoanm.github.io/design.system.design/design-system/animation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

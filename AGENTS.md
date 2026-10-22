@@ -114,13 +114,13 @@ public/
 - Dynamic routes use `generateStaticParams`.
 - They must call `notFound()` for an unknown slug.
 
-| Route                   | Source of truth                                                                                |
-| ----------------------- | ---------------------------------------------------------------------------------------------- |
-| `/`                     | `src/app/page.tsx`                                                                             |
-| `/design-system`        | `topics` — the chapter index, one card per topic                                               |
-| `/design-system/[slug]` | `topics` — ids `components`, `design-tokens`, `fonts`, `charts`, `accessibility`, `responsive` |
-| `/system-design`        | `src/content/ts/system-design/index.ts`                                                        |
-| `/system-design/[slug]` | `problems` — one page per problem, the id is the file name                                     |
+| Route                   | Source of truth                                            |
+| ----------------------- | ---------------------------------------------------------- |
+| `/`                     | `src/app/page.tsx`                                         |
+| `/design-system`        | `topics` — the chapter index, one card per topic           |
+| `/design-system/[slug]` | `topics` — one page per topic, the id is the slug          |
+| `/system-design`        | `src/content/ts/system-design/index.ts`                    |
+| `/system-design/[slug]` | `problems` — one page per problem, the id is the file name |
 
 - To add a topic or a problem:
   - Add it to the array in the matching `index.ts`.
@@ -194,13 +194,16 @@ type Problem = {
 | ------------------- | -------------------- | --------------------------------------------------------------------------- |
 | `components`        | `components.ts`      | `components` plus `atomicLevels`, `principles`, `practice`, `repoStructure` |
 | `design-tokens`     | `design-tokens.ts`   | `designTokens`                                                              |
-| `accessibility`     | `accessibility.ts`   | `accessibility`                                                             |
+| `colors`            | `colors/`            | `colors`                                                                    |
+| `spacing`           | `spacing/`           | `spacing`                                                                   |
 | `fonts`             | `fonts/`             | `fonts`                                                                     |
+| `forms`             | `forms/`             | `forms`                                                                     |
 | `charts`            | `charts/`            | `charts`                                                                    |
+| `scientific-charts` | `scientific-charts/` | `scientificCharts`                                                          |
+| `accessibility`     | `accessibility.ts`   | `accessibility`                                                             |
 | `responsive`        | `responsive/`        | `responsive`                                                                |
 | `icons`             | `icons/`             | `icons`                                                                     |
 | `animation`         | `animation/`         | `animation`                                                                 |
-| `scientific-charts` | `scientific-charts/` | `scientificCharts`                                                          |
 | `index.ts`          | —                    | the `Topic` types, the `topics` array and `getTopic()`                      |
 
 - A topic with drawings is a folder:

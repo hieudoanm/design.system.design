@@ -60,29 +60,38 @@ export type Topic = {
 
 import { components } from './components';
 import { designTokens } from './design-tokens';
+import { colors } from './colors';
+import { spacing } from './spacing';
 import { fonts } from './fonts';
+import { forms } from './forms';
 import { charts } from './charts';
+import { scientificCharts } from './scientific-charts';
 import { accessibility } from './accessibility';
 import { responsive } from './responsive';
 import { icons } from './icons';
 import { animation } from './animation';
-import { scientificCharts } from './scientific-charts';
 
 export { components, atomicLevels, principles, practice, repoStructure } from './components';
 export { designTokens } from './design-tokens';
+export { colors } from './colors';
+export { spacing } from './spacing';
 export { fonts } from './fonts';
+export { forms } from './forms';
 export { charts } from './charts';
+export { scientificCharts } from './scientific-charts';
 export { accessibility } from './accessibility';
 export { responsive } from './responsive';
 export { icons } from './icons';
 export { animation } from './animation';
-export { scientificCharts } from './scientific-charts';
 
-/** The nine topics, in reading order. */
+/** The twelve topics, in reading order. */
 export const topics: Topic[] = [
   components,
   designTokens,
+  colors,
+  spacing,
   fonts,
+  forms,
   charts,
   scientificCharts,
   accessibility,

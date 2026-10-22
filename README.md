@@ -23,7 +23,7 @@ On top of that, design system material is often locked inside a company wiki, an
 
 `design.system.design` provides one focused, static reading experience: a **design system guide** and a **system design problem set**, reachable from a single landing page and signposted by a floating three-button toggle that slides a highlight across itself as you move between them.
 
-The design system half is six chapters. The first walks the atomic design ladder in order — **tokens → atoms → molecules → organisms → templates → pages** — with the principles that justify each layer, the rules that keep it consistent and the practice that keeps it alive after launch. The other five go deep on the concerns that break real systems: tokens, typography, charts, accessibility and responsive design. The system design half walks a fixed interview framework, then applies it to five classic problems end to end.
+The design system half is nine chapters. The first walks the atomic design ladder in order — **tokens → atoms → molecules → organisms → templates → pages** — with the principles that justify each layer, the rules that keep it consistent and the practice that keeps it alive after launch. The other eight go deep on the concerns that break real systems: tokens, typography, charts, scientific charts, accessibility, responsive design, icons and animation. The system design half walks a fixed interview framework, then applies it to twenty-four classic problems end to end.
 
 No signup. No tracking. No cookies. Every route is a static page that renders in a few milliseconds.
 
@@ -44,13 +44,13 @@ The **Components** chapter also carries six **principles** (tokens not values, a
 
 ### System Design
 
-A repeatable **framework** first — clarify requirements, estimate, sketch the API and data model, draw the high-level design, go deep on the hard parts, find bottlenecks and failures — then five problems worked through with it:
+A repeatable **framework** first — clarify requirements, estimate, sketch the API and data model, draw the high-level design, go deep on the hard parts, find bottlenecks and failures — then twenty-four problems worked through with it:
 
-- **URL shortener** (Easy) — key generation, redirects, read-heavy caching, click analytics.
-- **Rate limiter** (Medium) — token bucket, sliding window and leaky bucket, where the counters live, and how to keep them honest across servers.
-- **Unique ID generator** (Medium) — UUIDs, Snowflake layouts, clock problems, and how to assign node IDs safely.
-- **Distributed key-value store** (Hard) — partitioning, replication and consistency, conflict resolution, failure detection and repair, storage engines.
-- **Chat system** (Hard) — connections, message delivery, storage, group chat, presence.
+- **Foundations** — URL shortener, rate limiter, unique ID generator, distributed key-value store, chat system.
+- **Consumer products** — Twitter feed, photo sharing, video streaming, ride-hailing, notification service.
+- **Collaboration and commerce** — file sync, collaborative editor, ticket booking, payments, recommendations.
+- **Search and media** — web crawler, typeahead, content delivery network.
+- **Building blocks** — distributed cache, message queue, API gateway, load balancer, service discovery, distributed lock service.
 
 Each problem page carries functional and non-functional requirements, back-of-the-envelope numbers, an ASCII architecture diagram, the design decisions with their trade-offs, and a Q&A section built on native `<details>` so you can reveal answers one at a time.
 
@@ -60,7 +60,7 @@ Each problem page carries functional and non-functional requirements, back-of-th
 - **Design tokens throughout.** One `@theme` block in `globals.css` defines the whole palette, and the page background is a drafting-table graph paper — a 24px minor grid and a 120px major grid.
 - **Real 404, error and loading pages.** A not-found page that routes you back into the material, an error boundary with a retry, a root-level critical error page, and a loading state that keeps the layout stable.
 - **Every platform covered.** Multi-resolution favicon, PWA and maskable icons from 16px to 512px, an Apple touch icon, a web manifest, `robots.txt`, `sitemap.xml`, `humans.txt`, and a hand-built 1200×630 social card in both PNG and SVG.
-- **Typed end to end.** Content lives in TypeScript modules, so the six chapters and five problems are checked by the compiler, not by a Markdown linter.
+- **Typed end to end.** Content lives in TypeScript modules, so every chapter and problem is checked by the compiler, not by a Markdown linter.
 
 ## Key Benefits
 
@@ -107,7 +107,7 @@ Then open <http://localhost:3000>.
 
 ```sh
 pnpm typecheck   # tsc --noEmit
-pnpm build       # lint + type-check, then prerender all 14 routes into out/
+pnpm build       # lint + type-check, then prerender all 36 routes into out/
 pnpm start       # serve the static export (out/)
 ```
 
@@ -130,9 +130,9 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 
 ## Use Cases
 
-- **Learning a design system from scratch** — follow the six chapters in order and understand why each one exists before you build it.
+- **Learning a design system from scratch** — follow the nine chapters in order and understand why each one exists before you build it.
 - **Reviewing a design system you already have** — use the six principles and six practice guides as a checklist against your own component library.
-- **Interview preparation** — work through the framework once, then use the five problems as timed practice and the Q&A sections as a self-test.
+- **Interview preparation** — work through the framework once, then use the problems as timed practice and the Q&A sections as a self-test.
 - **Onboarding a new designer or engineer** — hand them one URL instead of a folder of links and a wiki page.
 - **Teaching the analogy** — the site is a live demonstration that "design system" and "system design" are different disciplines that happen to share a word.
 
@@ -146,8 +146,8 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 
 ## Project Status and Trust
 
-- **Maturity:** A working reference site with all six design system chapters and all five system design problems complete. Content is still being extended.
-- **Routes:** 14 prerendered pages — the landing page, a design system chapter index, six chapter pages, a system design index and five problem pages.
+- **Maturity:** A working reference site with all nine design system chapters and all twenty-four system design problems complete. Content is still being extended.
+- **Routes:** 36 prerendered pages — the landing page, a design system chapter index, nine chapter pages, a system design index and twenty-four problem pages.
 - **Stack:** Next.js 16.4.2 (App Router), React 19.3.1, TypeScript 6.0.3, Tailwind CSS 4.3.3, Bricolage Grotesque and JetBrains Mono.
 - **Assets:** Icons at 16/32/48/64/96/128/152/167/180/192/256/384/512 plus a multi-resolution `favicon.ico`; the social card is a 1200×630 vector source with a matching PNG.
 - **Privacy:** No trackers, no third-party cookies, no analytics, no accounts. Fonts are self-hosted.

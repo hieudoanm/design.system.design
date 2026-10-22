@@ -10,6 +10,10 @@ import { withBasePath } from '@/lib/paths';
 
 type Params = { slug: string };
 
+/** "an" before a vowel sound: an API gateway. A URL and a unique id take "a". */
+const article = (title: string) =>
+  /^[aeiou]/i.test(title) && !/^u(rl|nique|ser)/i.test(title) ? 'an' : 'a';
+
 export const generateStaticParams: () => Params[] = () => {
   return problems.map((p) => ({ slug: p.slug }));
 };
@@ -71,7 +75,7 @@ const ProblemPage: NextPage<{ params: Promise<Params> }> = async ({ params }) =>
             System Design · {problem.difficulty}
           </p>
           <h1 className='mt-4 max-w-3xl text-4xl leading-tight font-semibold tracking-tight sm:text-6xl'>
-            Design a {problem.title.toLowerCase()}
+            Design {article(problem.title)} {problem.title.toLowerCase()}
           </h1>
           <p className='text-mute mt-6 max-w-2xl text-xl leading-relaxed'>{problem.tagline}</p>
         </header>

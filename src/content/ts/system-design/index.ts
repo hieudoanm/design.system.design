@@ -1,9 +1,28 @@
 import type { Problem } from './types';
-import { urlShortener } from './url-shortener';
-import { rateLimiter } from './rate-limiter';
-import { uniqueIdGenerator } from './unique-id-generator';
-import { keyValueStore } from './key-value-store';
+import { apiGateway } from './api-gateway';
+import { autocompleteTypeahead } from './autocomplete-typeahead';
 import { chatSystem } from './chat-system';
+import { contentDeliveryNetwork } from './content-delivery-network';
+import { distributedCache } from './distributed-cache';
+import { distributedLockService } from './distributed-lock-service';
+import { distributedMessageQueue } from './distributed-message-queue';
+import { dropboxFileSync } from './dropbox-file-sync';
+import { googleDocsCollaboration } from './google-docs-collaboration';
+import { instagramPhotoSharing } from './instagram-photo-sharing';
+import { keyValueStore } from './key-value-store';
+import { loadBalancer } from './load-balancer';
+import { notificationService } from './notification-service';
+import { rateLimiter } from './rate-limiter';
+import { recommendationSystem } from './recommendation-system';
+import { serviceDiscovery } from './service-discovery';
+import { stripePayments } from './stripe-payments';
+import { ticketmasterEventBooking } from './ticketmaster-event-booking';
+import { twitterFeed } from './twitter-x-feed';
+import { uberRideHailing } from './uber-ride-hailing';
+import { uniqueIdGenerator } from './unique-id-generator';
+import { urlShortener } from './url-shortener';
+import { webCrawlerSearchEngine } from './web-crawler-search-engine';
+import { youtubeVideoSharing } from './youtube-video-sharing';
 
 export const problems: Problem[] = [
   urlShortener,
@@ -11,6 +30,25 @@ export const problems: Problem[] = [
   uniqueIdGenerator,
   keyValueStore,
   chatSystem,
+  twitterFeed,
+  instagramPhotoSharing,
+  youtubeVideoSharing,
+  uberRideHailing,
+  notificationService,
+  dropboxFileSync,
+  googleDocsCollaboration,
+  ticketmasterEventBooking,
+  stripePayments,
+  recommendationSystem,
+  webCrawlerSearchEngine,
+  autocompleteTypeahead,
+  contentDeliveryNetwork,
+  distributedCache,
+  distributedMessageQueue,
+  apiGateway,
+  loadBalancer,
+  serviceDiscovery,
+  distributedLockService,
 ];
 
 export const getProblem = (slug: string) => problems.find((p) => p.slug === slug);

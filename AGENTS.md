@@ -114,13 +114,13 @@ public/
 - Dynamic routes use `generateStaticParams`.
 - They must call `notFound()` for an unknown slug.
 
-| Route                   | Source of truth                                                                                           |
-| ----------------------- | --------------------------------------------------------------------------------------------------------- |
-| `/`                     | `src/app/page.tsx`                                                                                        |
-| `/design-system`        | `topics` — the chapter index, one card per topic                                                          |
-| `/design-system/[slug]` | `topics` — ids `components`, `design-tokens`, `fonts`, `charts`, `accessibility`, `responsive`            |
-| `/system-design`        | `src/content/ts/system-design/index.ts`                                                                   |
-| `/system-design/[slug]` | `problems` — ids `url-shortener`, `rate-limiter`, `unique-id-generator`, `key-value-store`, `chat-system` |
+| Route                   | Source of truth                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| `/`                     | `src/app/page.tsx`                                                                             |
+| `/design-system`        | `topics` — the chapter index, one card per topic                                               |
+| `/design-system/[slug]` | `topics` — ids `components`, `design-tokens`, `fonts`, `charts`, `accessibility`, `responsive` |
+| `/system-design`        | `src/content/ts/system-design/index.ts`                                                        |
+| `/system-design/[slug]` | `problems` — one page per problem, the id is the file name                                     |
 
 - To add a topic or a problem:
   - Add it to the array in the matching `index.ts`.
@@ -177,10 +177,12 @@ type Problem = {
   title: string;
   tagline: string;
   difficulty: 'Easy' | 'Medium' | 'Hard';
-  requirements: Block[];
-  estimate: Block[];
-  architecture: string; // ASCII diagram
-  decisions: Block[];
+  tags: string[];
+  functional: string[];
+  nonFunctional: string[];
+  estimation: string[]; // back-of-the-envelope numbers
+  diagram: string; // ASCII architecture diagram
+  design: Block[]; // { title, body }
   qa: { q: string; a: string }[];
 };
 ```
@@ -211,6 +213,7 @@ type Problem = {
 - The import is erased at compile time, so there is no runtime cycle.
 - `Rich.tsx` renders the tiny markdown subset: `` `code` ``, `**bold**`,
   `[label](href)` and paragraphs separated by a blank line.
+- A block whose lines all start with `- ` renders as a bullet list.
 - It is deliberately not a full markdown parser.
 - `Code.tsx` renders fenced code.
 - `Qa.tsx` renders `<details>` lists.

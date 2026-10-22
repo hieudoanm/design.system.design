@@ -43,6 +43,26 @@ describe('Rich', () => {
     );
   });
 
+  it('renders a block of "- " lines as a bullet list', () => {
+    const { container } = render(<Rich text={'- One.\n- Two with `code`.'} />);
+    const items = container.querySelectorAll('li');
+    expect(container.querySelectorAll('p')).toHaveLength(0);
+    expect(container.querySelector('ul')).toBeInTheDocument();
+    expect(items).toHaveLength(2);
+    expect(items[0]).toHaveTextContent('One.');
+    expect(items[1]).toHaveTextContent('Two with code.');
+    expect(items[1].querySelector('code')).toHaveTextContent('code');
+  });
+
+  it('keeps a list separate from the paragraph around it', () => {
+    const { container } = render(<Rich text={'Before.\n\n- One.\n- Two.\n\nAfter.'} />);
+    const blocks = container.children;
+    expect(blocks).toHaveLength(3);
+    expect(blocks[0].tagName).toBe('P');
+    expect(blocks[1].tagName).toBe('UL');
+    expect(blocks[2].tagName).toBe('P');
+  });
+
   it('applies the class name to every paragraph', () => {
     const { container } = render(<Rich text={'One.\n\nTwo.'} className='inline' />);
     const paragraphs = container.querySelectorAll('p');

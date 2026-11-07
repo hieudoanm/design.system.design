@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
 import IndexCard from '@/components/molecules/IndexCard';
@@ -18,6 +20,8 @@ export interface IndexItem {
   sections: readonly { id: string; title: string }[];
   /** Optional tags (used by system-design problems). */
   tags?: readonly string[];
+  /** Optional extra content next to the title (e.g., a difficulty badge). */
+  accessory?: ReactNode;
 }
 
 /** Style configuration for a specific index page. */
@@ -46,16 +50,15 @@ export interface TopicsTemplateProps<TGroup extends IndexGroup<string>, TItem ex
   };
   /** Groups in display order. */
   groups: readonly TGroup[];
-  /** Function to get items for a group. */
-  itemsByGroup: (groupId: TGroup['id']) => readonly TItem[];
+  /** Items for each group, keyed by group id. A record, not a function, so a
+   *  server page can pass it across the client boundary. */
+  itemsByGroupId: Readonly<Record<string, readonly TItem[]>>;
   /** Base URL path for item links (e.g., '/design-system', '/system-design'). */
   basePath: string;
   /** Style configuration for theming. */
   style: IndexStyleConfig;
   /** Singular/plural label for item count (e.g., 'chapter'/'chapters', 'problem'/'problems'). */
   itemLabel: { singular: string; plural: string };
-  /** Render function for extra content in the card title area (e.g., difficulty badge for system-design). */
-  renderTitleAccessory?: (item: IndexItem) => ReactNode;
   /** Optional footer section rendered after all groups. */
   footer?: ReactNode;
   /** CSS class for the eyebrow label (uppercase category name). Defaults to style.eyebrowColorClass. */
@@ -71,11 +74,10 @@ export interface TopicsTemplateProps<TGroup extends IndexGroup<string>, TItem ex
 export const TopicIndexTemplate = <TGroup extends IndexGroup<string>, TItem extends IndexItem>({
   header,
   groups,
-  itemsByGroup,
+  itemsByGroupId,
   basePath,
   style,
   itemLabel,
-  renderTitleAccessory,
   footer,
   eyebrowClass,
   color,
@@ -98,7 +100,7 @@ export const TopicIndexTemplate = <TGroup extends IndexGroup<string>, TItem exte
       </motion.header>
 
       {groups.map((group, groupIndex) => {
-        const groupItems = itemsByGroup(group.id);
+        const groupItems = itemsByGroupId[group.id] ?? [];
 
         return (
           <motion.section
@@ -125,7 +127,6 @@ export const TopicIndexTemplate = <TGroup extends IndexGroup<string>, TItem exte
                   item={item}
                   basePath={basePath}
                   style={style}
-                  renderTitleAccessory={renderTitleAccessory}
                   index={groupIndex * 4 + itemIndex}
                   color={color}
                 />

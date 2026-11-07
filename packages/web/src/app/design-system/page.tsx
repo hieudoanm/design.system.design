@@ -1,5 +1,3 @@
-'use client';
-
 import { topicGroups, topicsByGroup } from '@/content/ts/design-system';
 import type { NextPage } from 'next';
 import { TopicIndexTemplate } from '@/components/templates/TopicsTemplate';
@@ -22,7 +20,9 @@ const DesignSystemPage: NextPage = () => (
         'A design system is a set of tokens, components and guidelines that lets many people build a consistent product quickly. These twenty chapters, in five groups, cover the layers it is built from and the concerns that keep it healthy.',
     }}
     groups={topicGroups}
-    itemsByGroup={topicsByGroup}
+    itemsByGroupId={Object.fromEntries(
+      topicGroups.map((group) => [group.id, topicsByGroup(group.id)]),
+    )}
     basePath='/design-system'
     style={style}
     itemLabel={{ singular: 'chapter', plural: 'chapters' }}

@@ -6,7 +6,7 @@ import type { FC } from 'react';
 
 export type QaItem = { q: string; a: string };
 
-/** Question and answer list built on native <details>: no client JS needed. */
+/** Question and answer list built on native <details>: the browser toggles it. */
 const Qa: FC<{ items: QaItem[] }> = ({ items }) => {
   return (
     <div className='divide-ink/15 border-ink/15 divide-y border-y'>
@@ -19,19 +19,15 @@ const Qa: FC<{ items: QaItem[] }> = ({ items }) => {
           className='group'>
           <summary className='hover:text-marker flex cursor-pointer list-none items-start gap-4 py-4 pr-1 text-left marker:content-none [&::-webkit-details-marker]:hidden'>
             <span className='flex-1 text-lg leading-snug font-medium'>{item.q}</span>
-            <motion.span
+            <span
               aria-hidden
               className='text-mute mt-0.5 text-2xl leading-none transition-transform duration-300 group-open:rotate-45'>
               +
-            </motion.span>
+            </span>
           </summary>
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            transition={{ duration: 0.3 }}
-            className='text-ink/85 max-w-3xl space-y-3 pr-8 pb-6 text-[1.0625rem] leading-relaxed'>
+          <div className='text-ink/85 max-w-3xl space-y-3 pr-8 pb-6 text-[1.0625rem] leading-relaxed'>
             <Rich text={item.a} />
-          </motion.div>
+          </div>
         </motion.details>
       ))}
     </div>

@@ -11,19 +11,11 @@ interface IndexCardProps {
   style: {
     hoverBorderClass: string;
   };
-  renderTitleAccessory?: (item: IndexItem) => React.ReactNode;
   index: number;
   color: 'marker' | 'cobalt';
 }
 
-const IndexCard: FC<IndexCardProps> = ({
-  item,
-  basePath,
-  style,
-  renderTitleAccessory,
-  index,
-  color,
-}) => {
+const IndexCard: FC<IndexCardProps> = ({ item, basePath, style, index, color }) => {
   const badgeTextClass = color === 'marker' ? 'text-marker' : 'text-cobalt';
   const badgeBgClass = color === 'marker' ? 'bg-marker/10' : 'bg-cobalt/10';
   const tagClass =
@@ -42,7 +34,7 @@ const IndexCard: FC<IndexCardProps> = ({
         <div>
           <div className='flex items-center justify-between gap-3'>
             <h3 className='text-2xl font-semibold tracking-tight'>{item.title}</h3>
-            {renderTitleAccessory ? renderTitleAccessory(item) : null}
+            {item.accessory ?? null}
           </div>
           <p className='text-mute mt-2 leading-relaxed'>{item.tagline}</p>
         </div>

@@ -24,6 +24,7 @@ vi.mock('@/lib/paths', async (importOriginal) => {
 import Navbar from '@/components/organisms/Navbar';
 
 const pill = () => document.querySelector('.toggle-pill') as HTMLElement;
+const pillClass = () => pill().parentElement?.className ?? '';
 
 beforeEach(() => {
   pathnameRef.current = '/';
@@ -49,8 +50,10 @@ describe('Navbar', () => {
     pathnameRef.current = '/';
     render(<Navbar />);
     expect(pill()).toHaveStyle({ left: '33.33333333333333%', width: '33.33333333333333%' });
-    expect(pill()).toHaveStyle({ backgroundColor: 'rgba(17, 24, 39, 0.92)' });
-    expect(screen.getByLabelText('System (home)')).toHaveClass('text-white');
+    // jsdom cannot resolve var() in computed style, so check the inline value.
+    expect(pill().style.backgroundColor).toBe('var(--pill-bg)');
+    expect(pillClass()).toContain('pill-landing');
+    expect(screen.getByLabelText('System (home)')).toHaveClass('[color:var(--pill-fg)]');
     expect(screen.getByLabelText('Design System')).toHaveClass('text-ink/60');
   });
 
@@ -58,9 +61,9 @@ describe('Navbar', () => {
     pathnameRef.current = '/design-system';
     render(<Navbar />);
     expect(pill()).toHaveStyle({ left: '0%', width: '66.66666666666666%' });
-    expect(pill()).toHaveStyle({ backgroundColor: 'rgba(194, 37, 92, 0.95)' });
-    expect(screen.getByLabelText('Design System')).toHaveClass('text-white');
-    expect(screen.getByLabelText('System (home)')).toHaveClass('text-white');
+    expect(pillClass()).toContain('pill-design-system');
+    expect(screen.getByLabelText('Design System')).toHaveClass('[color:var(--pill-fg)]');
+    expect(screen.getByLabelText('System (home)')).toHaveClass('[color:var(--pill-fg)]');
     expect(screen.getByLabelText('System Design')).toHaveClass('text-ink/60');
   });
 
@@ -68,9 +71,9 @@ describe('Navbar', () => {
     pathnameRef.current = '/system-design';
     render(<Navbar />);
     expect(pill()).toHaveStyle({ left: '33.33333333333333%', width: '66.66666666666666%' });
-    expect(pill()).toHaveStyle({ backgroundColor: 'rgba(31, 79, 216, 0.95)' });
-    expect(screen.getByLabelText('System (home)')).toHaveClass('text-white');
-    expect(screen.getByLabelText('System Design')).toHaveClass('text-white');
+    expect(pillClass()).toContain('pill-system-design');
+    expect(screen.getByLabelText('System (home)')).toHaveClass('[color:var(--pill-fg)]');
+    expect(screen.getByLabelText('System Design')).toHaveClass('[color:var(--pill-fg)]');
     expect(screen.getByLabelText('Design System')).toHaveClass('text-ink/60');
   });
 
@@ -79,7 +82,7 @@ describe('Navbar', () => {
     pathnameRef.current = '/design.system.design/system-design';
     render(<Navbar />);
     expect(screen.getByLabelText('System Design')).toHaveAttribute('aria-current', 'page');
-    expect(pill()).toHaveStyle({ backgroundColor: 'rgba(31, 79, 216, 0.95)' });
+    expect(pillClass()).toContain('pill-system-design');
   });
 
   it('moves the highlight on click, before the route changes', async () => {
@@ -90,7 +93,7 @@ describe('Navbar', () => {
     // Keep jsdom from trying to follow the link.
     link.addEventListener('click', (event) => event.preventDefault());
     await user.click(link);
-    expect(pill()).toHaveStyle({ backgroundColor: 'rgba(31, 79, 216, 0.95)' });
-    expect(screen.getByLabelText('System Design')).toHaveClass('text-white');
+    expect(pillClass()).toContain('pill-system-design');
+    expect(screen.getByLabelText('System Design')).toHaveClass('[color:var(--pill-fg)]');
   });
 });

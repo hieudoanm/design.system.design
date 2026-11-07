@@ -100,7 +100,7 @@ e2e/
 public/
   icons/                  favicon, PWA icons, the SVG mark
   images/                 og.png and og.svg (the social card)
-  manifest.json  robots.txt  sitemap.xml  humans.txt
+  manifest.json  robots.txt  humans.txt
 ```
 
 - `src/components` is split by atomic design level.
@@ -129,8 +129,7 @@ public/
 
 - To add a topic or a problem:
   - Add it to the array in the matching `index.ts`.
-  - Add the route to `public/sitemap.xml`.
-  - The page appears with no other change.
+  - The page appears with no other change; `sitemap.xml` is generated from `out/` on every build.
 - The atomic design levels (tokens, atoms, molecules, organisms, templates, pages) are sections of the `atomic-design` topic.
 - They are not routes of their own.
 

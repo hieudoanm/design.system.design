@@ -12,5 +12,5 @@
 - To move the site to a custom domain:
   - Point `origin` at the domain.
   - Blank `basePath` in `site.config.json`.
-  - Update `public/sitemap.xml` and `public/robots.txt`.
+  - Update the `Sitemap:` URL in `public/robots.txt` (`sitemap.xml` itself is generated from `out/` on every build).
 - Nothing else needs to change: the base path is the only thing that differs between the two shapes.

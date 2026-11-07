@@ -1,5 +1,3 @@
-'use client';
-
 import { framework, problemGroups, problemsByGroup } from '@/content/ts/system-design';
 import type { NextPage } from 'next';
 import type { Difficulty, Problem } from '@/content/ts/system-design/types';
@@ -26,7 +24,7 @@ interface AdaptedProblem {
   tagline: string;
   sections: readonly { id: string; title: string }[];
   tags: string[];
-  difficulty: Difficulty;
+  accessory: React.ReactNode;
 }
 
 const problemToIndexItem = (problem: Problem): AdaptedProblem => ({
@@ -38,7 +36,7 @@ const problemToIndexItem = (problem: Problem): AdaptedProblem => ({
     title: block.title,
   })),
   tags: problem.tags,
-  difficulty: problem.difficulty,
+  accessory: <span className={difficultyStyle[problem.difficulty]}>{problem.difficulty}</span>,
 });
 
 const SystemDesignPage: NextPage = () => (
@@ -50,16 +48,14 @@ const SystemDesignPage: NextPage = () => (
         'Twenty-four problems in six groups of four. Each one walks through requirements, rough numbers, a diagram, the key design choices, and a list of follow-up questions with answers.',
     }}
     groups={problemGroups}
-    itemsByGroup={(groupId) => problemsByGroup(groupId).map(problemToIndexItem)}
+    itemsByGroupId={Object.fromEntries(
+      problemGroups.map((group) => [group.id, problemsByGroup(group.id).map(problemToIndexItem)]),
+    )}
     basePath='/system-design'
     style={style}
     itemLabel={{ singular: 'problem', plural: 'problems' }}
     eyebrowClass='text-cobalt'
     color='cobalt'
-    renderTitleAccessory={(item) => {
-      const adapted = item as AdaptedProblem;
-      return <span className={difficultyStyle[adapted.difficulty]}>{adapted.difficulty}</span>;
-    }}
     footer={
       <section aria-labelledby='framework' className='border-ink/15 border-t py-12'>
         <h2 id='framework' className='text-3xl font-semibold tracking-tight'>

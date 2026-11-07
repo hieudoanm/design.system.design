@@ -2,7 +2,6 @@
 
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import mermaid from 'mermaid';
 
 const getTheme = (): 'neutral' | 'dark' => {
   if (typeof document === 'undefined') return 'neutral';
@@ -44,33 +43,35 @@ const Diagram: FC<{ chart: string; title?: string }> = ({ chart, title }) => {
     const cobalt = resolve('--color-cobalt') || '#1f4fd8';
     const marker = resolve('--color-marker') || '#c2255c';
 
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'base',
-      securityLevel: 'loose',
-      fontFamily: 'var(--font-sans)',
-      themeVariables: {
-        background: 'transparent',
-        primaryColor: card,
-        primaryTextColor: ink,
-        primaryBorderColor: rule,
-        secondaryColor: marker,
-        tertiaryColor: paper,
-        mainBkg: card,
-        nodeBorder: cobalt,
-        nodeTextColor: ink,
-        lineColor: mute,
-        textColor: ink,
-        titleColor: ink,
-        edgeLabelBackground: paper,
-        clusterBkg: 'transparent',
-        clusterBorder: rule,
-        fontFamily: 'var(--font-sans)',
-      },
-    });
-
-    mermaid
-      .render(id, chart)
+    // Mermaid is big; load it only when a diagram actually renders.
+    import('mermaid')
+      .then(({ default: mermaid }) => {
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'base',
+          securityLevel: 'loose',
+          fontFamily: 'var(--font-sans)',
+          themeVariables: {
+            background: 'transparent',
+            primaryColor: card,
+            primaryTextColor: ink,
+            primaryBorderColor: rule,
+            secondaryColor: marker,
+            tertiaryColor: paper,
+            mainBkg: card,
+            nodeBorder: cobalt,
+            nodeTextColor: ink,
+            lineColor: mute,
+            textColor: ink,
+            titleColor: ink,
+            edgeLabelBackground: paper,
+            clusterBkg: 'transparent',
+            clusterBorder: rule,
+            fontFamily: 'var(--font-sans)',
+          },
+        });
+        return mermaid.render(id, chart);
+      })
       .then(({ svg }) => {
         if (!cancelled && ref.current) ref.current.innerHTML = svg;
       })

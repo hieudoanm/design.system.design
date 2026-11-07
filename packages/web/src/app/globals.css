@@ -25,7 +25,43 @@
 }
 
 /*
- * The theme is one attribute on <html>: `data-theme="dark"`.
+ * The navbar highlight. One class per mode on the grid container; the pill
+ * and the lit labels read the three variables, so the colours flip with the
+ * theme without any JavaScript.
+ */
+.pill-landing {
+  --pill-bg: rgba(17, 24, 39, 0.92);
+  --pill-fg: #ffffff;
+  --pill-glow: rgba(17, 24, 39, 0.28);
+}
+
+[data-theme='dark'] .pill-landing {
+  --pill-bg: rgba(233, 236, 241, 0.92);
+  --pill-fg: #10141b;
+  --pill-glow: rgba(233, 236, 241, 0.24);
+}
+
+.pill-design-system {
+  --pill-bg: rgba(194, 37, 92, 0.95);
+  --pill-fg: #ffffff;
+  --pill-glow: rgba(194, 37, 92, 0.38);
+}
+
+[data-theme='dark'] .pill-design-system {
+  --pill-glow: rgba(194, 37, 92, 0.45);
+}
+
+.pill-system-design {
+  --pill-bg: rgba(31, 79, 216, 0.95);
+  --pill-fg: #ffffff;
+  --pill-glow: rgba(31, 79, 216, 0.38);
+}
+
+[data-theme='dark'] .pill-system-design {
+  --pill-glow: rgba(31, 79, 216, 0.45);
+}
+
+/* The theme is one attribute on <html>: `data-theme="dark"`.
  *
  * These blocks sit outside every Tailwind layer, so they beat the palette
  * above and the utilities built on it. The colours are the same tokens with

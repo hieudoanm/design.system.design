@@ -133,7 +133,8 @@ type Problem = {
 2. Give it a `group` — one of the six ids in `topicGroups`.
 3. Add it to the group's `index.ts` barrel.
 4. Add it to the `topics` array in `src/content/ts/design-system/index.ts`. The array order drives the previous/next links and the order within its group.
-5. Add `/design-system/<slug>` to `public/sitemap.xml`.
+
+- `sitemap.xml` is generated from `out/` on every build — no manual step.
 
 - New sections should use `blocks`.
 - The `[slug]` page converts legacy flat fields (`body`, `items`, `examples`, `rules`, `code`, `visuals`) to blocks, so old chapters keep working.
@@ -170,7 +171,6 @@ type Problem = {
 2. Give it a `group` — one of the six ids in `problemGroups`.
 3. Add it to the group's `index.ts` barrel.
 4. Add it to the `problems` array in `src/content/ts/system-design/index.ts`. The array order drives the "next problem" link and the order within its group.
-5. Add `/system-design/<slug>` to `public/sitemap.xml`.
 
 - The six groups live in `problemGroups` in `index.ts`, four problems each.
 - `/system-design` renders one section per group, in `problemGroups` order.

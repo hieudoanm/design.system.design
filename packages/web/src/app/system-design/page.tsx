@@ -57,7 +57,7 @@ const SystemDesignPage: NextPage = () => (
     eyebrowClass='text-cobalt'
     color='cobalt'
     footer={
-      <section aria-labelledby='framework' className='border-ink/15 border-t py-12'>
+      <section aria-labelledby='framework'>
         <h2 id='framework' className='text-3xl font-semibold tracking-tight'>
           A framework for any question
         </h2>

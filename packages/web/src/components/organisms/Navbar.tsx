@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { basePath } from '@/lib/paths';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import type { FC } from 'react';
 
@@ -45,14 +45,12 @@ const modeFor = (pathname: string): Mode => {
 
 const Navbar: FC = () => {
   const pathname = usePathname();
-  // Move the highlight on click, before the route has finished loading.
-  const [pending, setPending] = useState<Mode | null>(null);
+  // Move the highlight on click, before the route has finished loading. The
+  // pending mode only counts while the pathname is still the old one, so it
+  // expires on its own — no effect needed to clear it.
+  const [pending, setPending] = useState<{ mode: Mode; from: string } | null>(null);
 
-  useEffect(() => {
-    setPending(null);
-  }, [pathname]);
-
-  const mode = pending ?? modeFor(pathname);
+  const mode = pending?.from === pathname ? pending.mode : modeFor(pathname);
   const pill = PILL[mode];
   const lit = (index: number) => index >= pill.start && index < pill.start + pill.span;
 
@@ -79,7 +77,7 @@ const Navbar: FC = () => {
               aria-label={item.name}
               aria-current={item.id === modeFor(pathname) ? 'page' : undefined}
               title={item.name}
-              onClick={() => setPending(item.id)}
+              onClick={() => setPending({ mode: item.id, from: pathname })}
               className={`relative z-10 rounded-full px-4 py-2 text-center text-sm font-semibold tracking-wide transition-colors duration-300 ${
                 lit(i) ? '[color:var(--pill-fg)]' : 'text-ink/60 hover:text-ink'
               }`}>

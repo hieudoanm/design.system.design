@@ -1,6 +1,6 @@
 'use client';
 
-import { withBasePath } from '@/lib/paths';
+import Link from 'next/link';
 import logger from '@/lib/log';
 import { useEffect } from 'react';
 import type { FC } from 'react';
@@ -25,11 +25,11 @@ const Error: FC<{ error: Error & { digest?: string }; reset: () => void }> = ({ 
           className='border-ink/20 hover:border-cobalt hover:text-cobalt rounded-full border px-5 py-2 text-sm transition'>
           Try again
         </button>
-        <a
-          href={withBasePath('/')}
+        <Link
+          href='/'
           className='border-ink/20 hover:border-marker hover:text-marker rounded-full border px-5 py-2 text-sm transition'>
           Return home
-        </a>
+        </Link>
       </div>
     </div>
   );

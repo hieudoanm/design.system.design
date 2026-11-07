@@ -3,6 +3,7 @@
 - Technical reference for working in this repository.
 - The README explains what the site is.
 - This file is the index; each area has its own file under `docs/agents/`.
+- Paths in the guides are relative to `packages/web/` unless they say otherwise.
 - Every file is kept under ~200 lines.
 
 ## Read this first
@@ -12,8 +13,8 @@
   - **System Design** — system design interview problems.
 - Every route is prerendered into `out/`.
 - There is no backend, no database and no client data fetching.
-- `src/components/organisms/Navbar.tsx` owns all navigation state.
-- Everything is a static server component except the navbar, landing page, `Qa`, `AnimatedCard` and `ThemeToggle`.
+- `packages/web/src/components/organisms/Navbar.tsx` owns all navigation state.
+- Everything is a static server component except the client islands: the navbar, `Hero`, `AnimatedCard`, `IndexCard`, `TopicsTemplate`, `Qa`, `Diagram`, `ThemeToggle`, `Init` and the two error boundaries.
 - `pnpm build` and `pnpm test` must pass before a change is done.
 
 ## Guides

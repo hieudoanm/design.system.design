@@ -36,6 +36,7 @@ const ProblemPage: NextPage<{ params: Promise<Params> }> = async ({ params }) =>
   if (!problem) notFound();
 
   const index = problems.findIndex((p) => p.slug === slug);
+  const prev = problems[(index - 1 + problems.length) % problems.length];
   const next = problems[(index + 1) % problems.length];
 
   const sections: TopicSectionData[] = [
@@ -87,7 +88,9 @@ const ProblemPage: NextPage<{ params: Promise<Params> }> = async ({ params }) =>
       sections={sections}
       backLink={{ href: '/system-design', label: 'All problems' }}
       footer={{
+        prev: { href: `/system-design/${prev.slug}`, title: prev.title, label: 'Previous problem' },
         next: { href: `/system-design/${next.slug}`, title: next.title, label: 'Next problem' },
+        backToIndex: { href: '/system-design', label: 'Back to problems' },
       }}
     />
   );

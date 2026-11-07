@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { withBasePath } from '@/lib/paths';
 import { Fragment, type FC } from 'react';
 
@@ -18,11 +19,19 @@ const inline = (text: string) =>
     }
     const link = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
     if (link) {
+      const className =
+        'decoration-ink/30 hover:decoration-ink underline underline-offset-2 transition';
+      // Internal links go through next/link (the base path is added for us);
+      // anything else stays a plain anchor.
+      if (link[2].startsWith('/') && !link[2].startsWith('//')) {
+        return (
+          <Link key={key} href={link[2]} className={className}>
+            {link[1]}
+          </Link>
+        );
+      }
       return (
-        <a
-          key={key}
-          href={withBasePath(link[2])}
-          className='decoration-ink/30 hover:decoration-ink underline underline-offset-2 transition'>
+        <a key={key} href={withBasePath(link[2])} className={className}>
           {link[1]}
         </a>
       );

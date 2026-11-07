@@ -136,3 +136,21 @@ test('the navbar walks from the landing page to both chapters', async ({ page })
   expect((await pillSize(page)).width).toBeGreaterThan(200);
   await page.waitForTimeout(1200);
 });
+
+test('a topic page declares its canonical url and offers a skip link', async ({ page }) => {
+  // The baseURL has no trailing slash, so a relative goto loses the base
+  // path — spell the full path out instead.
+  await page.goto('/design.system.design/design-system/colors');
+
+  // The canonical carries the base path, like every other URL on the site.
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    'https://hieudoanm.github.io/design.system.design/design-system/colors',
+  );
+
+  // The skip link is visually hidden until it receives focus.
+  const skip = page.getByRole('link', { name: 'Skip to content' });
+  await expect(skip).toBeAttached();
+  await skip.focus();
+  await expect(skip).toBeVisible();
+});

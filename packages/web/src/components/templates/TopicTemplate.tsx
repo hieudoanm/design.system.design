@@ -116,7 +116,24 @@ export const TopicTemplate: FC<TopicTemplateProps> = ({
       </aside>
 
       <article className='min-w-0'>
-        <header className='pb-14'>
+        {/* The sidebar is desktop-only; small screens get the same list in a
+            native <details>, which needs no client JavaScript. */}
+        <nav aria-label='On this page' className='lg:hidden'>
+          <details className='border-ink/15 rounded-lg border px-4 py-3'>
+            <summary className='cursor-pointer text-sm font-semibold'>On this page</summary>
+            <ul className='mt-3 space-y-2 text-sm'>
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <a href={`#${section.id}`} className={`text-mute ${hover} transition`}>
+                    {section.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </nav>
+
+        <header className='pt-8 pb-14 lg:pt-0'>
           <p className={`${accent} font-mono text-sm tracking-[0.2em] uppercase`}>{category}</p>
           <h1 className='mt-4 max-w-3xl text-4xl leading-tight font-semibold tracking-tight sm:text-6xl'>
             {title}

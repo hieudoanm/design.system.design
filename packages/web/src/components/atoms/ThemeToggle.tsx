@@ -1,7 +1,7 @@
 'use client';
 
-import { applyTheme, readTheme, type Theme } from '@/lib/theme';
-import { useEffect, useState } from 'react';
+import { applyTheme, readTheme, THEME_EVENT, type Theme } from '@/lib/theme';
+import { useSyncExternalStore } from 'react';
 import type { FC } from 'react';
 
 /** The sun: the theme you switch to from the dark one. */
@@ -36,19 +36,20 @@ const Moon: FC = () => (
   </svg>
 );
 
+const subscribe = (onChange: () => void) => {
+  window.addEventListener(THEME_EVENT, onChange);
+  return () => window.removeEventListener(THEME_EVENT, onChange);
+};
+
 /**
  * The theme switch in the footer.
  *
  * The button names the theme it switches to, so it reads as an action. The
- * root layout sets the theme before the page paints, so this only has to keep
- * up with the choice.
+ * root layout sets the theme before the page paints; this subscribes to the
+ * same attribute through the theme event, so it never needs an effect.
  */
 const ThemeToggle: FC = () => {
-  const [theme, setTheme] = useState<Theme>('light');
-
-  useEffect(() => {
-    setTheme(readTheme());
-  }, []);
+  const theme = useSyncExternalStore<Theme>(subscribe, readTheme, () => 'light');
 
   const dark = theme === 'dark';
   const next: Theme = dark ? 'light' : 'dark';
@@ -56,10 +57,7 @@ const ThemeToggle: FC = () => {
   return (
     <button
       type='button'
-      onClick={() => {
-        applyTheme(next);
-        setTheme(next);
-      }}
+      onClick={() => applyTheme(next)}
       aria-label={`Switch to the ${next} theme`}
       title={`Switch to the ${next} theme`}
       className='glass text-ink hover:text-ink inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide transition-colors'>

@@ -101,6 +101,10 @@ export const TopicIndexTemplate = <TGroup extends IndexGroup<string>, TItem exte
 
       {groups.map((group, groupIndex) => {
         const groupItems = itemsByGroupId[group.id] ?? [];
+        // Stagger delay continues across groups, so count every earlier item.
+        const startIndex = groups
+          .slice(0, groupIndex)
+          .reduce((sum, g) => sum + (itemsByGroupId[g.id]?.length ?? 0), 0);
 
         return (
           <motion.section
@@ -127,7 +131,7 @@ export const TopicIndexTemplate = <TGroup extends IndexGroup<string>, TItem exte
                   item={item}
                   basePath={basePath}
                   style={style}
-                  index={groupIndex * 4 + itemIndex}
+                  index={startIndex + itemIndex}
                   color={color}
                 />
               ))}
@@ -141,7 +145,6 @@ export const TopicIndexTemplate = <TGroup extends IndexGroup<string>, TItem exte
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 + groups.length * 0.1 }}
-          aria-labelledby='framework'
           className='border-ink/15 border-t py-12'>
           {footer}
         </motion.section>

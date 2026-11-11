@@ -1,5 +1,8 @@
 # design.system.design
 
+[![CI](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml?branch=master)  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+
 **Two subjects that share a word, in one site — how to build a design system, and how to answer system design interview questions.**
 
 `design.system.design` is a small, fast, static reference that puts two unrelated disciplines side by side. The left half explains **design systems**: what they are, how to structure them with atomic design, how to theme them, how to type and chart them, and how to keep them from rotting. The right half explains **system design**: classic interview problems broken down into requirements, estimates, an architecture diagram, the design decisions, and the follow-up questions with answers.

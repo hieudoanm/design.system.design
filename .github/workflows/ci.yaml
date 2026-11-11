@@ -35,6 +35,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Typecheck
         run: pnpm typecheck
+      - name: Lint
+        run: pnpm --filter design.system.design lint
       # Unit tests with the 80% coverage threshold from vitest.config.mts.
       - name: Test
         run: pnpm test:coverage

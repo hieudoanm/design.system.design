@@ -13,7 +13,7 @@ pnpm dev
 
 ```bash
 pnpm typecheck   # tsc --noEmit
-pnpm lint:check  # eslint, no fix
+pnpm lint  # eslint, no fix
 pnpm test        # vitest, one run
 pnpm e2e         # playwright, against the exported site
 pnpm build       # lint + format check, then next build -> out/

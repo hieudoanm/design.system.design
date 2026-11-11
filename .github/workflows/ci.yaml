@@ -17,8 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build
+  landing-build:
+    name: Landing - Build
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -50,15 +50,16 @@ jobs:
       - name: Build
         run: pnpm build
       - name: Upload Pages Artifact
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: packages/web/out/
           retention-days: 1
 
-  deploy:
-    name: Deploy
-    needs: build
-    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+  landing-deploy:
+    name: Landing - Deploy
+    needs: landing-build
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:

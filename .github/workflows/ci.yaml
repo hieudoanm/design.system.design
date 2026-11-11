@@ -49,8 +49,10 @@ jobs:
         run: pnpm test:coverage
       # Browser tests: the exported site, driven with Playwright.
       - name: Install Playwright Browsers
+        working-directory: packages/web
         run: pnpm exec playwright install --with-deps chromium
       - name: Browser Test
+        working-directory: packages/web
         run: pnpm e2e
       # `pnpm build` runs `prebuild` first: eslint, then prettier --check.
       # `next build` writes the static export to out/.

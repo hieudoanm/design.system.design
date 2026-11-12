@@ -1,11 +1,14 @@
 {
   "name": "design.system.design",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
+  "version": "0.0.1",
+  "private": true,
+  "description": "design.system.design",
   "license": "MIT",
+  "author": {
+    "name": "Hieu Doan",
+    "email": "hieu.doan.professional@gmail.com",
+    "url": "https://hieudoanm.github.io"
+  },
   "packageManager": "pnpm@12.18.0",
   "type": "module",
   "engines": {
@@ -13,16 +16,16 @@
   },
   "scripts": {
     "dev": "turbo run dev",
-    "test": "turbo run test",
-    "test:coverage": "turbo run test:coverage",
+    "build": "turbo run build",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
-    "format": "turbo run format",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
     "typecheck": "turbo run typecheck",
-    "build": "turbo run build",
+    "format": "turbo run format",
     "prepare": "husky || true"
   },
-  "dependencies": {
+  "devDependencies": {
     "husky": "9.1.7",
     "turbo": "2.11.11"
   }

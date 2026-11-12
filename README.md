@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml?branch=master)  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-keywords: `design-system`, `system-design`, `interview-prep`, `nextjs`, `static-site`
+Topics: `design-system`, `system-design`, `interview-prep`, `nextjs`, `static-site`
 
 **Two subjects that share a word, in one site — how to build a design system, and how to answer system design interview questions.**
 

@@ -1,11 +1,19 @@
+# dependencies
 node_modules
+
+# next.js
 .next
 out
+next-env.d.ts
+
+# typescript
+*.tsbuildinfo
+
+# testing
 coverage
 test-results
 playwright-report
-videos
-next-env.d.ts
-*.tsbuildinfo
+
+# misc
 .DS_Store
 .env*.local

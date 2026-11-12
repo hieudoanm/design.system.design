@@ -75,7 +75,7 @@ src/
     __tests__/            one test file per component under each folder
   content/
     ts/types.ts           shared block and template types
-    ts/design-system/     one folder per group (6 groups, 25 topics), plus index.ts
+    ts/design-system/     one folder per group (6 groups, 26 topics), plus index.ts
     ts/system-design/     one folder per group (6 groups × 4 problems), plus index.ts and types.ts
   lib/
     paths.ts              the base path and withBasePath() for raw <a> hrefs

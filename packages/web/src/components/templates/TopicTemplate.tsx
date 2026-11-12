@@ -83,6 +83,8 @@ const Block: FC<{ block: TopicBlock; theme: TopicTheme }> = ({ block, theme }) =
       return <Qa items={block.items} />;
     case 'visuals':
       return <Figures visuals={block.visuals} />;
+    case 'demo':
+      return block.node;
   }
 };
 

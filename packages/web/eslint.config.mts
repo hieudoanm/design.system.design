@@ -14,5 +14,7 @@ export default defineConfig([
     'next-env.d.ts',
     'test-results/**',
     'videos/**',
+    // Vendored Exhibit apps — linted by their own toolchain upstream.
+    'src/exhibit/**',
   ]),
 ]);

@@ -77,19 +77,27 @@ import { designTokens, colors, typography, spacing } from './foundations';
 import { atomicDesign, layout, elevation, icongraphy } from './structure';
 import { charts, scientificCharts, dataDisplay, feedback } from './data-charts';
 import { animation, forms, navigation, overlays } from './interaction';
-import { accessibility, responsive, theming, governance, lawsOfUx } from './practice';
+import { accessibility, responsive, theming, governance, lawsOfUx, exhibits } from './practice';
 import { colorScience, componentApi, dataGrids, i18n } from './specialized';
 
 export { designTokens, colors, typography, spacing } from './foundations';
 export { atomicDesign, layout, elevation, icongraphy } from './structure';
 export { charts, scientificCharts, dataDisplay, feedback } from './data-charts';
 export { animation, forms, navigation, overlays } from './interaction';
-export { accessibility, responsive, theming, governance, lawsOfUx } from './practice';
+export { accessibility, responsive, theming, governance, lawsOfUx, exhibits } from './practice';
 export { getLaw, lawGroupTitle, lawGroups, lawsByGroup, uxLaws } from './practice';
+export {
+  exhibitApps,
+  exhibitAppsByCategory,
+  exhibitCategories,
+  exhibitCategoryTitle,
+  getExhibitApp,
+} from './practice';
+export type { ExhibitApp, ExhibitCategoryId, ExhibitChapter, ExhibitStatus } from './practice';
 export type { LawGroupId, UxLaw } from './practice';
 export { colorScience, componentApi, dataGrids, i18n } from './specialized';
 
-/** The twenty-five topics, in reading order. */
+/** The twenty-six topics, in reading order. */
 export const topics: Topic[] = [
   designTokens,
   colors,
@@ -116,6 +124,7 @@ export const topics: Topic[] = [
   i18n,
   governance,
   lawsOfUx,
+  exhibits,
 ];
 
 /** The topics of one group, in reading order. */

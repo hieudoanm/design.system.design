@@ -7,3 +7,4 @@ playwright-report/
 next-env.d.ts
 src-tauri/target/
 src-tauri/gen/
+src/exhibit/

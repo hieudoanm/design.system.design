@@ -1,14 +1,32 @@
 # design.system.design
 
-[![CI](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml?branch=master) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![CI](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml?branch=master)  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **Two subjects that share a word, in one site — how to build a design system, and how to answer system design interview questions.**
 
 `design.system.design` is a small, fast, static reference that puts two unrelated disciplines side by side. The left half explains **design systems**: what they are, how to structure them with atomic design, how to theme them, how to type and chart them, and how to keep them from rotting. The right half explains **system design**: classic interview problems broken down into requirements, estimates, an architecture diagram, the design decisions, and the follow-up questions with answers.
 
-[📖 Design System](#features) · [🧩 System Design](#features) · [🚀 Get Started](#get-started) · [🔧 Technical Docs](AGENTS.md)
+<p align="center">
+  <img src="assets/branding/png/og.png" alt="design.system.design — design systems and system design, side by side" width="720">
+</p>
 
-![design.system.design](assets/navigation.gif)
+## Table of Contents
+
+- [The Problem](#the-problem)
+- [The Solution](#the-solution)
+- [Features](#features)
+  - [Design System](#design-system)
+  - [System Design](#system-design)
+  - [The site itself](#the-site-itself)
+- [Key Benefits](#key-benefits)
+- [See It in Action](#see-it-in-action)
+- [Get Started](#get-started)
+- [Use Cases](#use-cases)
+- [Why This Project?](#why-this-project)
+- [Project Status and Trust](#project-status-and-trust)
+- [Community and Contributions](#community-and-contributions)
+- [Call to Action](#call-to-action)
+- [License](#license)
 
 ## The Problem
 
@@ -106,6 +124,8 @@ Each problem page carries functional and non-functional requirements, back-of-th
 ## See It in Action
 
 Live at **[design.system.design](https://hieudoanm.github.io/design.system.design)**.
+
+![design.system.design navigation](assets/navigation.gif)
 
 Start at the landing page, then use the toggle:
 

@@ -23,7 +23,7 @@
     }
   },
   "include": [
-    "packages/web/next-env.d.ts",
+    "packages/landing/next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.mts",

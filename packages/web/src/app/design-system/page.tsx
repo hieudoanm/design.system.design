@@ -17,7 +17,7 @@ const DesignSystemPage: NextPage = () => (
       eyebrow: 'Design System',
       title: 'Build it in layers, from tokens to pages.',
       description:
-        'A design system is a set of tokens, components and guidelines that lets many people build a consistent product quickly. These twenty chapters, in five groups, cover the layers it is built from and the concerns that keep it healthy.',
+        'A design system is a set of tokens, components and guidelines that lets many people build a consistent product quickly. These twenty-five chapters, in six groups, cover the layers it is built from and the concerns that keep it healthy.',
     }}
     groups={topicGroups}
     itemsByGroupId={Object.fromEntries(

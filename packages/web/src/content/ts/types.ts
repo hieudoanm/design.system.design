@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 /**
  * The shapes the shared TopicTemplate renders. Both subjects map their own
  * content into these types, so one template serves both routes.
@@ -46,7 +48,9 @@ export type TopicBlock =
   | { type: 'examples'; examples: string[] }
   | { type: 'rules'; rules: string[] }
   | { type: 'qa'; items: TopicQa[] }
-  | { type: 'visuals'; visuals: TopicVisual[] };
+  | { type: 'visuals'; visuals: TopicVisual[] }
+  /** A live embedded exhibit — a client island, never authored in content files. */
+  | { type: 'demo'; node: ReactNode };
 
 /** A section of a topic page: an anchor, a heading and its blocks. */
 export type TopicSectionData = {

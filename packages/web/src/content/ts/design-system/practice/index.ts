@@ -6,3 +6,12 @@ export { governance } from './governance';
 export { lawsOfUx } from './laws-of-ux';
 export { getLaw, lawGroupTitle, lawGroups, lawsByGroup, uxLaws } from './laws-of-ux/laws';
 export type { LawGroupId, UxLaw } from './laws-of-ux/laws';
+export { exhibits } from './exhibits';
+export {
+  exhibitApps,
+  exhibitAppsByCategory,
+  exhibitCategories,
+  exhibitCategoryTitle,
+  getExhibitApp,
+} from './exhibits/apps';
+export type { ExhibitApp, ExhibitCategoryId, ExhibitChapter, ExhibitStatus } from './exhibits/apps';

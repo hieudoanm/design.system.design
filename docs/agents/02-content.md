@@ -64,7 +64,7 @@ type Problem = {
 
 ## Design system content
 
-- `src/content/ts/design-system/` holds one folder per group (6 groups, 25 topics), plus `index.ts`:
+- `src/content/ts/design-system/` holds one folder per group (6 groups, 26 topics), plus `index.ts`:
 
 | Group         | Folder         | Topics                                                               |
 | ------------- | -------------- | -------------------------------------------------------------------- |
@@ -103,6 +103,7 @@ type Problem = {
   - `examples` / `rules` — bullet lists with those headings.
   - `qa` — `<details>` list, rendered by `Qa.tsx`.
   - `visuals` — drawings, rendered by `Figures.tsx`.
+  - `demo` — a live embedded app (`ReactNode`), never authored in content files; only the exhibit pages inject it.
 - Blocks stack in a single column; do not reintroduce a two-column text + code layout.
 - `Rich.tsx` renders the tiny markdown subset: `` `code` ``, `**bold**`, `[label](href)` and paragraphs separated by a blank line.
 - A block whose lines all start with `- ` renders as a bullet list.

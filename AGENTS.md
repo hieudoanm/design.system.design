@@ -14,7 +14,8 @@
 - Every route is prerendered into `out/`.
 - There is no backend, no database and no client data fetching.
 - `packages/web/src/components/organisms/Navbar.tsx` owns all navigation state.
-- Everything is a static server component except the client islands: the navbar, `Hero`, `AnimatedCard`, `IndexCard`, `TopicsTemplate`, `Qa`, `Diagram`, `ThemeToggle`, `Init` and the two error boundaries.
+- Everything is a static server component except the client islands: the navbar, `Hero`, `AnimatedCard`, `IndexCard`, `TopicsTemplate`, `Qa`, `Diagram`, `ThemeToggle`, `Init`, the two error boundaries and the nine Exhibit demos.
+- `src/exhibit/` is vendored from the Exhibit app — do not reformat it; `exhibit.css` maps its DaisyUI classes onto site tokens under the `.exhibit` scope.
 - `pnpm build` and `pnpm test` must pass before a change is done.
 
 ## Guides

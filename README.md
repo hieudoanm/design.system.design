@@ -1,7 +1,6 @@
 # design.system.design
 
-[![CI](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml?branch=master)  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
+[![CI](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml?branch=master) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **Two subjects that share a word, in one site — how to build a design system, and how to answer system design interview questions.**
 
@@ -26,7 +25,7 @@ On top of that, design system material is often locked inside a company wiki, an
 
 `design.system.design` provides one focused, static reading experience: a **design system guide** and a **system design problem set**, reachable from a single landing page and signposted by a floating three-button toggle that slides a highlight across itself as you move between them.
 
-The design system half is twenty chapters in six groups. It walks the atomic design ladder in order — **tokens → atoms → molecules → organisms → templates → pages** — then goes deep on the concerns that break real systems: color, elevation, spacing, layout, typography, forms, data display, feedback, icons, charts, scientific charts, overlays, accessibility, responsive design, animation, theming, navigation and governance. The system design half walks a fixed interview framework, then applies it to twenty-four classic problems end to end.
+The design system half is twenty-five chapters in six groups. It walks the atomic design ladder in order — **tokens → atoms → molecules → organisms → templates → pages** — then goes deep on the concerns that break real systems: color, elevation, spacing, layout, typography, forms, data display, feedback, icons, charts, scientific charts, overlays, accessibility, responsive design, animation, theming, navigation, governance and the laws of UX. The system design half walks a fixed interview framework, then applies it to twenty-four classic problems end to end.
 
 No signup. No tracking. No cookies. Every route is a static page that renders in a few milliseconds.
 
@@ -34,7 +33,7 @@ No signup. No tracking. No cookies. Every route is a static page that renders in
 
 ### Design System
 
-Twenty chapters in six groups, each with its own page — an overview, examples, rules, and a worked code sample:
+Twenty-five chapters in six groups, each with its own page — an overview, examples, rules, and a worked code sample:
 
 **Foundations** — the primitives every other chapter builds on.
 
@@ -70,6 +69,7 @@ Twenty chapters in six groups, each with its own page — an overview, examples,
 - **Responsive design** — a strategy instead of a device list, breakpoints as tokens, fluid values with `clamp()`, container queries, touch targets, responsive images, and how to test the range.
 - **Theming** — one token set driving light and dark, plus the switch that keeps both honest.
 - **Governance** — how a system ships, evolves and stays adopted: documentation, semantic versioning, contribution and adoption.
+- **Laws of UX** — the thirty named psychology principles behind why interfaces feel obvious: perception and grouping, memory and cognitive load, choice, speed and the experience principles, adapted from lawsofux.com.
 
 The **Atomic design** chapter also carries six **principles** (tokens not values, accessible by default, composition over configuration, constrain on purpose, document the why, treat it as a product) and six **practice** guides covering theming and dark mode, accessibility, versioning and releases, testing, documentation, and governance.
 
@@ -139,7 +139,7 @@ Then open <http://localhost:3000>.
 
 ```sh
 pnpm typecheck   # tsc --noEmit
-pnpm build       # lint + type-check, then prerender all 53 routes into out/
+pnpm build       # lint + type-check, then prerender all 84 routes into out/
 pnpm start       # serve the static export (out/)
 ```
 
@@ -162,7 +162,7 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 
 ## Use Cases
 
-- **Learning a design system from scratch** — follow the twenty chapters in order and understand why each one exists before you build it.
+- **Learning a design system from scratch** — follow the twenty-five chapters in order and understand why each one exists before you build it.
 - **Reviewing a design system you already have** — use the six principles and six practice guides as a checklist against your own component library.
 - **Interview preparation** — work through the framework once, then use the problems as timed practice and the Q&A sections as a self-test.
 - **Onboarding a new designer or engineer** — hand them one URL instead of a folder of links and a wiki page.
@@ -178,8 +178,8 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 
 ## Project Status and Trust
 
-- **Maturity:** A working reference site with all twenty design system chapters in six groups and all twenty-four system design problems complete. Content is still being extended.
-- **Routes:** 53 prerendered pages — the landing page, a design system chapter index, twenty chapter pages, a system design index and twenty-four problem pages.
+- **Maturity:** A working reference site with all twenty-five design system chapters in six groups and all twenty-four system design problems complete. Content is still being extended.
+- **Routes:** 84 prerendered pages — the landing page, a design system chapter index, twenty-five chapter pages, thirty Laws of UX pages, a system design index and twenty-four problem pages.
 - **Stack:** Next.js 16.4.2 (App Router), React 19.3.1, TypeScript 6.0.3, Tailwind CSS 4.3.3, Bricolage Grotesque and JetBrains Mono.
 - **Assets:** Icons at 16/32/48/64/96/128/152/167/180/192/256/384/512 plus a multi-resolution `favicon.ico`; the social card is a 1200×630 vector source with a matching PNG.
 - **Privacy:** No trackers, no third-party cookies, no analytics, no accounts. Fonts are self-hosted.

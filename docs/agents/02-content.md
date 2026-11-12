@@ -64,16 +64,16 @@ type Problem = {
 
 ## Design system content
 
-- `src/content/ts/design-system/` holds one folder per group (6 groups × 4 topics), plus `index.ts`:
+- `src/content/ts/design-system/` holds one folder per group (6 groups, 25 topics), plus `index.ts`:
 
-| Group         | Folder         | Topics (4 each)                                           |
-| ------------- | -------------- | --------------------------------------------------------- |
-| Foundations   | `foundations/` | `design-tokens`, `colors`, `typography`, `spacing`        |
-| Structure     | `structure/`   | `atomic-design`, `layout`, `elevation`, `icongraphy`      |
-| Data & charts | `data-charts/` | `charts`, `scientific-charts`, `data-display`, `feedback` |
-| Interaction   | `interaction/` | `animation`, `forms`, `navigation`, `overlays`            |
-| Practice      | `practice/`    | `accessibility`, `responsive`, `theming`, `governance`    |
-| Specialized   | `specialized/` | `color-science`, `component-api`, `data-grids`, `i18n`    |
+| Group         | Folder         | Topics                                                               |
+| ------------- | -------------- | -------------------------------------------------------------------- |
+| Foundations   | `foundations/` | `design-tokens`, `colors`, `typography`, `spacing`                   |
+| Structure     | `structure/`   | `atomic-design`, `layout`, `elevation`, `icongraphy`                 |
+| Data & charts | `data-charts/` | `charts`, `scientific-charts`, `data-display`, `feedback`            |
+| Interaction   | `interaction/` | `animation`, `forms`, `navigation`, `overlays`                       |
+| Practice      | `practice/`    | `accessibility`, `responsive`, `theming`, `governance`, `laws-of-ux` |
+| Specialized   | `specialized/` | `color-science`, `component-api`, `data-grids`, `i18n`               |
 
 - Each topic is a folder with an `index.ts` exporting one `Topic`.
 - Group folders have an `index.ts` barrel exporting their four topics.

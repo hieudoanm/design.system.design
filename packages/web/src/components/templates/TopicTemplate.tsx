@@ -63,7 +63,15 @@ const Block: FC<{ block: TopicBlock; theme: TopicTheme }> = ({ block, theme }) =
         <div className='space-y-10'>
           {block.items.map((item) => (
             <div key={item.title} className='max-w-3xl'>
-              <h3 className='text-2xl font-semibold tracking-tight'>{item.title}</h3>
+              <h3 className='text-2xl font-semibold tracking-tight'>
+                {item.href ? (
+                  <Link href={item.href} className='hover:underline'>
+                    {item.title}
+                  </Link>
+                ) : (
+                  item.title
+                )}
+              </h3>
               <div className='text-ink/85 mt-3 space-y-3 text-[1.0625rem] leading-relaxed'>
                 <Rich text={item.body} />
               </div>

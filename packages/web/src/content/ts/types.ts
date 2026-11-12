@@ -8,6 +8,8 @@ export type TopicTheme = 'system-design' | 'design-system';
 export type TopicItem = {
   title: string;
   body: string;
+  /** When set, the item title links to this path. */
+  href?: string;
 };
 
 export type TopicTable = {

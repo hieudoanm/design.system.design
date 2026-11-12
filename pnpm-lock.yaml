@@ -173,7 +173,7 @@ importers:
         specifier: 2.11.11
         version: 2.11.11
 
-  packages/web:
+  packages/landing:
     dependencies:
       '@fontsource-variable/bricolage-grotesque':
         specifier: 5.3.0

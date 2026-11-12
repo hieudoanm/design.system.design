@@ -3,7 +3,7 @@
 - Technical reference for working in this repository.
 - The README explains what the site is.
 - This file is the index; each area has its own file under `docs/agents/`.
-- Paths in the guides are relative to `packages/web/` unless they say otherwise.
+- Paths in the guides are relative to `packages/landing/` unless they say otherwise.
 - Every file is kept under ~200 lines.
 
 ## Read this first
@@ -13,7 +13,7 @@
   - **System Design** — system design interview problems.
 - Every route is prerendered into `out/`.
 - There is no backend, no database and no client data fetching.
-- `packages/web/src/components/organisms/Navbar.tsx` owns all navigation state.
+- `packages/landing/src/components/organisms/Navbar.tsx` owns all navigation state.
 - Everything is a static server component except the client islands: the navbar, `Hero`, `AnimatedCard`, `IndexCard`, `TopicsTemplate`, `Qa`, `Diagram`, `ThemeToggle`, `Init`, the two error boundaries and the nine Exhibit demos.
 - `src/exhibit/` is vendored from the Exhibit app — do not reformat it; `exhibit.css` maps its DaisyUI classes onto site tokens under the `.exhibit` scope.
 - `pnpm build` and `pnpm test` must pass before a change is done.

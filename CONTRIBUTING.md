@@ -29,7 +29,7 @@ pnpm build       # lint + format check, then prerender all routes into out/
 
 ## Adding content
 
-- Content lives in TypeScript modules under `packages/web/src/content/` — a new
+- Content lives in TypeScript modules under `packages/landing/src/content/` — a new
   chapter or problem is one module, one array entry, and one sitemap line.
 - A chapter with drawings is a folder: `index.ts` for prose, `svg/*.svg` for
   drawings, `svg-generated.ts` generated via `node scripts/ts/generate-svg.mts`.

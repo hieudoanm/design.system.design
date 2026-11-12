@@ -64,13 +64,14 @@ test('the navbar walks from the landing page to both chapters', async ({ page })
   const cardItems = page.locator('main ol');
   await expect(cardItems.first().locator('li')).toHaveText(topics.map((topic) => topic.title));
   await expect(cardItems.last().locator('li')).toHaveText(problems.map((problem) => problem.title));
-  await expect(page.locator('main a[href$="/design-system"]')).toHaveAttribute(
+  // trailingSlash: true makes next/link append a trailing slash to every href.
+  await expect(page.locator('main a[href$="/design-system/"]')).toHaveAttribute(
     'href',
-    '/design.system.design/design-system',
+    '/design.system.design/design-system/',
   );
-  await expect(page.locator('main a[href$="/system-design"]')).toHaveAttribute(
+  await expect(page.locator('main a[href$="/system-design/"]')).toHaveAttribute(
     'href',
-    '/design.system.design/system-design',
+    '/design.system.design/system-design/',
   );
 
   // The home button is the lit one.
@@ -81,7 +82,7 @@ test('the navbar walks from the landing page to both chapters', async ({ page })
   // 2. The design system chapter, opened from the navbar.
   await startRecording(page);
   await navbar(page).getByLabel('Design System').click();
-  await page.waitForURL('**/design-system');
+  await page.waitForURL('**/design-system/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
     'Build it in layers, from tokens to pages.',
   );
@@ -107,7 +108,7 @@ test('the navbar walks from the landing page to both chapters', async ({ page })
   // 3. The system design problems, opened from the navbar.
   await startRecording(page);
   await navbar(page).getByLabel('System Design').click();
-  await page.waitForURL('**/system-design');
+  await page.waitForURL('**/system-design/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
     'Popular problems, with the questions interviewers ask next.',
   );

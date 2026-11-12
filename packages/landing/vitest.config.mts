@@ -18,8 +18,15 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
       // Every source file counts, so a file with no test still shows up.
+      // src/exhibit is vendored and intentionally untested.
       include: ['src/**/*.{ts,tsx}'],
-      exclude: ['src/content/**', 'src/**/__tests__/**', 'src/**/*.d.ts', 'next-env.d.ts'],
+      exclude: [
+        'src/content/**',
+        'src/exhibit/**',
+        'src/**/__tests__/**',
+        'src/**/*.d.ts',
+        'next-env.d.ts',
+      ],
       thresholds: {
         statements: 80,
         branches: 80,

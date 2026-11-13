@@ -8,27 +8,31 @@ Topics: `design-system`, `system-design`, `interview-prep`, `nextjs`, `static-si
 
 `design.system.design` is a small, fast, static reference that puts two unrelated disciplines side by side. The left half explains **design systems**: what they are, how to structure them with atomic design, how to theme them, how to type and chart them, and how to keep them from rotting. The right half explains **system design**: classic interview problems broken down into requirements, estimates, an architecture diagram, the design decisions, and the follow-up questions with answers.
 
-<p align="center">
-  <img src="assets/branding/png/og.png" alt="design.system.design — design systems and system design, side by side" width="720">
-</p>
+![design.system.design — design systems and system design, side by side](assets/branding/png/og.png)
 
 ## Table of Contents
 
-- [The Problem](#the-problem)
-- [The Solution](#the-solution)
-- [Features](#features)
-  - [Design System](#design-system)
-  - [System Design](#system-design)
-  - [The site itself](#the-site-itself)
-- [Key Benefits](#key-benefits)
-- [See It in Action](#see-it-in-action)
-- [Get Started](#get-started)
-- [Use Cases](#use-cases)
-- [Why This Project?](#why-this-project)
-- [Project Status and Trust](#project-status-and-trust)
-- [Community and Contributions](#community-and-contributions)
-- [Call to Action](#call-to-action)
-- [License](#license)
+- [design.system.design](#designsystemdesign)
+  - [Table of Contents](#table-of-contents)
+  - [The Problem](#the-problem)
+  - [The Solution](#the-solution)
+  - [Features](#features)
+    - [Design System](#design-system)
+    - [System Design](#system-design)
+    - [The site itself](#the-site-itself)
+  - [Key Benefits](#key-benefits)
+  - [See It in Action](#see-it-in-action)
+  - [Get Started](#get-started)
+    - [Prerequisites](#prerequisites)
+    - [Run it locally](#run-it-locally)
+    - [Build it](#build-it)
+    - [Deploy it](#deploy-it)
+  - [Use Cases](#use-cases)
+  - [Why This Project?](#why-this-project)
+  - [Project Status and Trust](#project-status-and-trust)
+  - [Community and Contributions](#community-and-contributions)
+  - [Call to Action](#call-to-action)
+  - [License](#license)
 
 ## The Problem
 

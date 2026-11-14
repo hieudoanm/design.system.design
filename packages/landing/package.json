@@ -26,7 +26,8 @@
     "e2e": "playwright test",
     "e2e:video": "playwright test && node scripts/ts/generate-assets.mts",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky || true"
+    "prepare": "husky || true",
+    "mcp": "node scripts/ts/mcp-server.mts"
   },
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "5.3.0",

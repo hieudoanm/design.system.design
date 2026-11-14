@@ -23,7 +23,8 @@
     "test:coverage": "turbo run test:coverage",
     "typecheck": "turbo run typecheck",
     "format": "turbo run format",
-    "prepare": "husky || true"
+    "prepare": "husky || true",
+    "mcp": "pnpm --filter design.system.design mcp"
   },
   "devDependencies": {
     "husky": "9.1.7",

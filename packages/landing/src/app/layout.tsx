@@ -39,6 +39,17 @@ export const metadata: Metadata = {
     template: '%s | design.system.design',
   },
   description: SITE_DESCRIPTION,
+  keywords: [
+    'design system',
+    'system design',
+    'system design interview',
+    'atomic design',
+    'UX laws',
+    'component library',
+    'software architecture',
+  ],
+  authors: [{ name: 'hieudoan', url: 'https://github.com/hieudoanm/design.system.design' }],
+  category: 'education',
   applicationName: 'design.system.design',
   manifest: withBasePath('/manifest.json'),
   alternates: { canonical: withBasePath('/') },
@@ -78,10 +89,32 @@ export const viewport: Viewport = {
   colorScheme: 'light dark',
 };
 
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'design.system.design',
+      url: 'https://hieudoanm.github.io/design.system.design/',
+      description: SITE_DESCRIPTION,
+    },
+    {
+      '@type': 'CollectionPage',
+      name: 'Design system. System design.',
+      description: SITE_DESCRIPTION,
+      url: 'https://hieudoanm.github.io/design.system.design/',
+    },
+  ],
+};
+
 const RootLayout: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <html lang='en' suppressHydrationWarning>
       <body>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        />
         <Script id='theme-init' strategy='beforeInteractive'>
           {THEME_INIT}
         </Script>

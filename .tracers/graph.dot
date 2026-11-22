@@ -3093,7 +3093,11 @@ digraph tracers {
   "file:packages/landing/vitest.config.mts" [label="packages/landing/vitest.config.mts\nfile", color="blue"];
   "file:packages/landing/vitest.setup.ts" [label="packages/landing/vitest.setup.ts\nfile", color="blue"];
   "framework:nextjs:fontsource-variable" [label="Next.js\nframework", color="magenta"];
+  "framework:playwright:tailwindcss" [label="Playwright\nframework", color="magenta"];
   "framework:react:eslint" [label="React\nframework", color="magenta"];
+  "framework:tailwindcss:eslint" [label="Tailwind CSS\nframework", color="magenta"];
+  "framework:turborepo:commitlint" [label="Turborepo\nframework", color="magenta"];
+  "framework:vitest:fontsource-variable" [label="Vitest\nframework", color="magenta"];
   "function:packages/landing/e2e/navigation.spec.ts::navbar" [label="navbar\nfunction", color="red"];
   "function:packages/landing/e2e/navigation.spec.ts::pillColour" [label="pillColour\nfunction", color="red"];
   "function:packages/landing/e2e/navigation.spec.ts::pillSize" [label="pillSize\nfunction", color="red"];
@@ -29668,5 +29672,9 @@ digraph tracers {
   "repository:." -> "package:" [label="contains", style="solid"];
   "repository:." -> "package:packages/landing" [label="contains", style="solid"];
   "repository:." -> "framework:nextjs:fontsource-variable" [label="uses_framework", style="dashed"];
+  "repository:." -> "framework:playwright:tailwindcss" [label="uses_framework", style="dashed"];
   "repository:." -> "framework:react:eslint" [label="uses_framework", style="dashed"];
+  "repository:." -> "framework:tailwindcss:eslint" [label="uses_framework", style="dashed"];
+  "repository:." -> "framework:turborepo:commitlint" [label="uses_framework", style="dashed"];
+  "repository:." -> "framework:vitest:fontsource-variable" [label="uses_framework", style="dashed"];
 }

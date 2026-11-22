@@ -595,10 +595,38 @@
       "confidence": "high"
     },
     {
+      "name": "playwright",
+      "displayName": "Playwright",
+      "family": "ecmascript",
+      "version": "tailwindcss",
+      "confidence": "high"
+    },
+    {
       "name": "react",
       "displayName": "React",
       "family": "ecmascript",
       "version": "eslint",
+      "confidence": "high"
+    },
+    {
+      "name": "tailwindcss",
+      "displayName": "Tailwind CSS",
+      "family": "ecmascript",
+      "version": "eslint",
+      "confidence": "medium"
+    },
+    {
+      "name": "turborepo",
+      "displayName": "Turborepo",
+      "family": "ecmascript",
+      "version": "commitlint",
+      "confidence": "medium"
+    },
+    {
+      "name": "vitest",
+      "displayName": "Vitest",
+      "family": "ecmascript",
+      "version": "fontsource-variable",
       "confidence": "high"
     }
   ],
@@ -52105,6 +52133,16 @@
       }
     },
     {
+      "id": "framework:playwright:tailwindcss",
+      "kind": "framework",
+      "name": "Playwright",
+      "metadata": {
+        "confidence": "high",
+        "family": "ecmascript",
+        "framework": "playwright"
+      }
+    },
+    {
       "id": "framework:react:eslint",
       "kind": "framework",
       "name": "React",
@@ -52112,6 +52150,36 @@
         "confidence": "high",
         "family": "ecmascript",
         "framework": "react"
+      }
+    },
+    {
+      "id": "framework:tailwindcss:eslint",
+      "kind": "framework",
+      "name": "Tailwind CSS",
+      "metadata": {
+        "confidence": "medium",
+        "family": "ecmascript",
+        "framework": "tailwindcss"
+      }
+    },
+    {
+      "id": "framework:turborepo:commitlint",
+      "kind": "framework",
+      "name": "Turborepo",
+      "metadata": {
+        "confidence": "medium",
+        "family": "ecmascript",
+        "framework": "turborepo"
+      }
+    },
+    {
+      "id": "framework:vitest:fontsource-variable",
+      "kind": "framework",
+      "name": "Vitest",
+      "metadata": {
+        "confidence": "high",
+        "family": "ecmascript",
+        "framework": "vitest"
       }
     },
     {
@@ -425586,7 +425654,35 @@
     },
     {
       "source": "repository:.",
+      "target": "framework:playwright:tailwindcss",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
       "target": "framework:react:eslint",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:tailwindcss:eslint",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:turborepo:commitlint",
+      "kind": "uses_framework",
+      "status": "resolved_internal",
+      "origin": "syntax"
+    },
+    {
+      "source": "repository:.",
+      "target": "framework:vitest:fontsource-variable",
       "kind": "uses_framework",
       "status": "resolved_internal",
       "origin": "syntax"
@@ -427345,8 +427441,8 @@
   "statistics": {
     "files": 733,
     "packages": 2,
-    "nodes": 8120,
-    "edges": 21545,
+    "nodes": 8124,
+    "edges": 21549,
     "symbols": 5274,
     "unresolvedEdges": 3739,
     "diagnostics": 92,
@@ -427356,7 +427452,7 @@
       "constructor": 1,
       "external_symbol": 342,
       "file": 733,
-      "framework": 2,
+      "framework": 6,
       "function": 847,
       "interface": 367,
       "method": 38,
@@ -427375,7 +427471,7 @@
       "exports": 1951,
       "imports": 1663,
       "inherits": 4,
-      "uses_framework": 2,
+      "uses_framework": 6,
       "uses_type": 1230
     },
     "byLanguage": {
@@ -427387,12 +427483,16 @@
     },
     "byStatus": {
       "resolved_external": 1544,
-      "resolved_internal": 16262,
+      "resolved_internal": 16266,
       "unresolved": 3739
     },
     "byFramework": {
       "nextjs": 1,
-      "react": 1
+      "playwright": 1,
+      "react": 1,
+      "tailwindcss": 1,
+      "turborepo": 1,
+      "vitest": 1
     }
   }
 };</script>

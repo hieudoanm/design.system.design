@@ -146963,12 +146963,6 @@
       "language": "typescript"
     },
     {
-      "id": "unresolved:typescript:createPeer",
-      "kind": "unknown",
-      "name": "createPeer",
-      "language": "typescript"
-    },
-    {
       "id": "unresolved:typescript:decode",
       "kind": "unknown",
       "name": "decode",
@@ -147305,12 +147299,6 @@
       "language": "typescript"
     },
     {
-      "id": "unresolved:typescript:openChannels",
-      "kind": "unknown",
-      "name": "openChannels",
-      "language": "typescript"
-    },
-    {
       "id": "unresolved:typescript:pause",
       "kind": "unknown",
       "name": "pause",
@@ -147422,12 +147410,6 @@
       "id": "unresolved:typescript:restartIce",
       "kind": "unknown",
       "name": "restartIce",
-      "language": "typescript"
-    },
-    {
-      "id": "unresolved:typescript:scheduleReconnect",
-      "kind": "unknown",
-      "name": "scheduleReconnect",
       "language": "typescript"
     },
     {
@@ -147638,12 +147620,6 @@
       "id": "unresolved:typescript:setSpamReports",
       "kind": "unknown",
       "name": "setSpamReports",
-      "language": "typescript"
-    },
-    {
-      "id": "unresolved:typescript:setState",
-      "kind": "unknown",
-      "name": "setState",
       "language": "typescript"
     },
     {
@@ -352786,31 +352762,10 @@
     },
     {
       "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.acceptOffer",
-      "target": "unresolved:typescript:createAnswer",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.createPeer",
       "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
-      "sites": [
-        {
-          "start": {
-            "line": 124,
-            "column": 26,
-            "byte": 3570
-          },
-          "end": {
-            "line": 124,
-            "column": 48,
-            "byte": 3592
-          }
-        }
-      ]
-    },
-    {
-      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.acceptOffer",
-      "target": "unresolved:typescript:createPeer",
-      "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
+      "status": "resolved_internal",
+      "origin": "lexical",
       "sites": [
         {
           "start": {
@@ -352828,10 +352783,10 @@
     },
     {
       "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.acceptOffer",
-      "target": "unresolved:typescript:openChannels",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.openChannels",
       "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
+      "status": "resolved_internal",
+      "origin": "lexical",
       "sites": [
         {
           "start": {
@@ -352843,6 +352798,27 @@
             "line": 122,
             "column": 24,
             "byte": 3496
+          }
+        }
+      ]
+    },
+    {
+      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.acceptOffer",
+      "target": "unresolved:typescript:createAnswer",
+      "kind": "calls",
+      "status": "unresolved",
+      "origin": "syntax",
+      "sites": [
+        {
+          "start": {
+            "line": 124,
+            "column": 26,
+            "byte": 3570
+          },
+          "end": {
+            "line": 124,
+            "column": 48,
+            "byte": 3592
           }
         }
       ]
@@ -353071,6 +353047,27 @@
     },
     {
       "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.close",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.setState",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 199,
+            "column": 5,
+            "byte": 5534
+          },
+          "end": {
+            "line": 199,
+            "column": 28,
+            "byte": 5557
+          }
+        }
+      ]
+    },
+    {
+      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.close",
       "target": "unresolved:typescript:close",
       "kind": "calls",
       "status": "unresolved",
@@ -353103,22 +353100,43 @@
       ]
     },
     {
-      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.close",
-      "target": "unresolved:typescript:setState",
+      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.createOffer",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.createPeer",
       "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
+      "status": "resolved_internal",
+      "origin": "lexical",
       "sites": [
         {
           "start": {
-            "line": 199,
-            "column": 5,
-            "byte": 5534
+            "line": 106,
+            "column": 15,
+            "byte": 2959
           },
           "end": {
-            "line": 199,
-            "column": 28,
-            "byte": 5557
+            "line": 106,
+            "column": 32,
+            "byte": 2976
+          }
+        }
+      ]
+    },
+    {
+      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.createOffer",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.openChannels",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 107,
+            "column": 5,
+            "byte": 2982
+          },
+          "end": {
+            "line": 107,
+            "column": 24,
+            "byte": 3001
           }
         }
       ]
@@ -353140,48 +353158,6 @@
             "line": 108,
             "column": 46,
             "byte": 3048
-          }
-        }
-      ]
-    },
-    {
-      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.createOffer",
-      "target": "unresolved:typescript:createPeer",
-      "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
-      "sites": [
-        {
-          "start": {
-            "line": 106,
-            "column": 15,
-            "byte": 2959
-          },
-          "end": {
-            "line": 106,
-            "column": 32,
-            "byte": 2976
-          }
-        }
-      ]
-    },
-    {
-      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.createOffer",
-      "target": "unresolved:typescript:openChannels",
-      "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
-      "sites": [
-        {
-          "start": {
-            "line": 107,
-            "column": 5,
-            "byte": 2982
-          },
-          "end": {
-            "line": 107,
-            "column": 24,
-            "byte": 3001
           }
         }
       ]
@@ -353272,10 +353248,10 @@
     },
     {
       "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.createPeer",
-      "target": "unresolved:typescript:scheduleReconnect",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.scheduleReconnect",
       "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
+      "status": "resolved_internal",
+      "origin": "lexical",
       "sites": [
         {
           "start": {
@@ -353305,10 +353281,10 @@
     },
     {
       "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.createPeer",
-      "target": "unresolved:typescript:setState",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.setState",
       "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
+      "status": "resolved_internal",
+      "origin": "lexical",
       "sites": [
         {
           "start": {
@@ -353455,6 +353431,27 @@
     },
     {
       "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.onRemoteDataChannel",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.setState",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 166,
+            "column": 25,
+            "byte": 4694
+          },
+          "end": {
+            "line": 166,
+            "column": 51,
+            "byte": 4720
+          }
+        }
+      ]
+    },
+    {
+      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.onRemoteDataChannel",
       "target": "unresolved:typescript:onMessage",
       "kind": "calls",
       "status": "unresolved",
@@ -353470,27 +353467,6 @@
             "line": 161,
             "column": 32,
             "byte": 4608
-          }
-        }
-      ]
-    },
-    {
-      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.onRemoteDataChannel",
-      "target": "unresolved:typescript:setState",
-      "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
-      "sites": [
-        {
-          "start": {
-            "line": 166,
-            "column": 25,
-            "byte": 4694
-          },
-          "end": {
-            "line": 166,
-            "column": 51,
-            "byte": 4720
           }
         }
       ]
@@ -353560,6 +353536,27 @@
     },
     {
       "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.openChannels",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.setState",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 147,
+            "column": 25,
+            "byte": 4187
+          },
+          "end": {
+            "line": 147,
+            "column": 51,
+            "byte": 4213
+          }
+        }
+      ]
+    },
+    {
+      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.openChannels",
       "target": "unresolved:typescript:createDataChannel",
       "kind": "calls",
       "status": "unresolved",
@@ -353596,27 +353593,6 @@
             "line": 142,
             "column": 32,
             "byte": 4101
-          }
-        }
-      ]
-    },
-    {
-      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.openChannels",
-      "target": "unresolved:typescript:setState",
-      "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
-      "sites": [
-        {
-          "start": {
-            "line": 147,
-            "column": 25,
-            "byte": 4187
-          },
-          "end": {
-            "line": 147,
-            "column": 51,
-            "byte": 4213
           }
         }
       ]
@@ -353707,6 +353683,27 @@
     },
     {
       "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.scheduleReconnect",
+      "target": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.setState",
+      "kind": "calls",
+      "status": "resolved_internal",
+      "origin": "lexical",
+      "sites": [
+        {
+          "start": {
+            "line": 100,
+            "column": 7,
+            "byte": 2807
+          },
+          "end": {
+            "line": 100,
+            "column": 34,
+            "byte": 2834
+          }
+        }
+      ]
+    },
+    {
+      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.scheduleReconnect",
       "target": "unresolved:typescript:restartIce",
       "kind": "calls",
       "status": "unresolved",
@@ -353722,27 +353719,6 @@
             "line": 101,
             "column": 28,
             "byte": 2863
-          }
-        }
-      ]
-    },
-    {
-      "source": "method:packages/landing/src/exhibit/lib/chat/webrtc.ts::PeerConnection.scheduleReconnect",
-      "target": "unresolved:typescript:setState",
-      "kind": "calls",
-      "status": "unresolved",
-      "origin": "syntax",
-      "sites": [
-        {
-          "start": {
-            "line": 100,
-            "column": 7,
-            "byte": 2807
-          },
-          "end": {
-            "line": 100,
-            "column": 34,
-            "byte": 2834
           }
         }
       ]
@@ -449443,10 +449419,10 @@
   "statistics": {
     "files": 733,
     "packages": 2,
-    "nodes": 8542,
+    "nodes": 8538,
     "edges": 22935,
     "symbols": 5961,
-    "unresolvedEdges": 845,
+    "unresolvedEdges": 835,
     "diagnostics": 52,
     "byNodeKind": {
       "class": 3,
@@ -449463,7 +449439,7 @@
       "property": 1888,
       "repository": 1,
       "type": 76,
-      "unknown": 375,
+      "unknown": 371,
       "variable": 44
     },
     "byEdgeKind": {
@@ -449481,12 +449457,12 @@
       "javascript": 32,
       "markdown": 324,
       "tsx": 4640,
-      "typescript": 3531
+      "typescript": 3527
     },
     "byStatus": {
       "resolved_external": 3928,
-      "resolved_internal": 18162,
-      "unresolved": 845
+      "resolved_internal": 18172,
+      "unresolved": 835
     },
     "byFramework": {
       "nextjs": 1,

@@ -1,0 +1,16 @@
+export { AlbumDetailTemplate } from './AlbumDetailTemplate';
+export { AlbumsTemplate } from './AlbumsTemplate';
+export { ArtistsTemplate } from './ArtistsTemplate';
+export { ChartsTemplate } from './ChartsTemplate';
+export { ContinueWatchingTemplate } from './ContinueWatchingTemplate';
+export { LyricsTemplate } from './LyricsTemplate';
+export { MediaLibraryTemplate } from './MediaLibraryTemplate';
+export { MovieDetailTemplate } from './MovieDetailTemplate';
+export { MusicHomeTemplate } from './MusicHomeTemplate';
+export { MusicSearchTemplate } from './MusicSearchTemplate';
+export { MyListTemplate } from './MyListTemplate';
+export { NowPlayingTemplate } from './NowPlayingTemplate';
+export { PlaylistTemplate } from './PlaylistTemplate';
+export { StreamingHomeTemplate } from './StreamingHomeTemplate';
+export { TvSeriesTemplate } from './TvSeriesTemplate';
+export { VideoPlayerTemplate } from './VideoPlayerTemplate';

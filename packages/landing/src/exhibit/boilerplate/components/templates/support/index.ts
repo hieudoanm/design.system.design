@@ -1,0 +1,16 @@
+export { AboutTemplate } from './AboutTemplate';
+export { AnnouncementsTemplate } from './AnnouncementsTemplate';
+export { CookieConsentTemplate } from './CookieConsentTemplate';
+export { FaqTemplate } from './FaqTemplate';
+export { FeedbackTemplate } from './FeedbackTemplate';
+export { KnowledgeBaseTemplate } from './KnowledgeBaseTemplate';
+export { LiveChatTemplate } from './LiveChatTemplate';
+export { LoadingTemplate } from './LoadingTemplate';
+export { PaginationTemplate } from './PaginationTemplate';
+export { SearchTemplate } from './SearchTemplate';
+export { ServiceStatusTemplate } from './ServiceStatusTemplate';
+export { StepperTemplate } from './StepperTemplate';
+export { TicketDetailTemplate } from './TicketDetailTemplate';
+export { TicketsTemplate } from './TicketsTemplate';
+export { TooltipsTemplate } from './TooltipsTemplate';
+export { UploadTemplate } from './UploadTemplate';

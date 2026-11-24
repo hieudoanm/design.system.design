@@ -1,0 +1,16 @@
+export { AddressBookTemplate } from './AddressBookTemplate';
+export { CartTemplate } from './CartTemplate';
+export { CategoriesTemplate } from './CategoriesTemplate';
+export { CheckoutTemplate } from './CheckoutTemplate';
+export { CompareTemplate } from './CompareTemplate';
+export { DealsTemplate } from './DealsTemplate';
+export { GiftCardsTemplate } from './GiftCardsTemplate';
+export { OrderConfirmationTemplate } from './OrderConfirmationTemplate';
+export { OrderHistoryTemplate } from './OrderHistoryTemplate';
+export { OrderTrackingTemplate } from './OrderTrackingTemplate';
+export { PaymentMethodsTemplate } from './PaymentMethodsTemplate';
+export { ReviewsTemplate } from './ReviewsTemplate';
+export { StoreFrontTemplate } from './StoreFrontTemplate';
+export { StoreItemTemplate } from './StoreItemTemplate';
+export { SupportTemplate } from './SupportTemplate';
+export { WishlistTemplate } from './WishlistTemplate';

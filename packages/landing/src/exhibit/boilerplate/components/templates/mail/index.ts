@@ -1,0 +1,16 @@
+export { AllocationTemplate } from './AllocationTemplate';
+export { ComposeTemplate } from './ComposeTemplate';
+export { DraftsTemplate } from './DraftsTemplate';
+export { GameCatalogTemplate } from './GameCatalogTemplate';
+export { ImportTemplate } from './ImportTemplate';
+export { InboxTemplate } from './InboxTemplate';
+export { LabelsTemplate } from './LabelsTemplate';
+export { LaunchStatusTemplate } from './LaunchStatusTemplate';
+export { MailSearchTemplate } from './MailSearchTemplate';
+export { OnboardingTemplate } from './OnboardingTemplate';
+export { SentTemplate } from './SentTemplate';
+export { SpamTemplate } from './SpamTemplate';
+export { ThreadTemplate } from './ThreadTemplate';
+export { TimesheetsTemplate } from './TimesheetsTemplate';
+export { TransactionsTemplate } from './TransactionsTemplate';
+export { WatchlistTemplate } from './WatchlistTemplate';

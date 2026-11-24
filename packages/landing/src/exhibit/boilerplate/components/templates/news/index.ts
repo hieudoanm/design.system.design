@@ -1,0 +1,16 @@
+export { ArticleTemplate } from './ArticleTemplate';
+export { BreakingNewsTemplate } from './BreakingNewsTemplate';
+export { EditorialTemplate } from './EditorialTemplate';
+export { FavoriteTeamsTemplate } from './FavoriteTeamsTemplate';
+export { FixturesTemplate } from './FixturesTemplate';
+export { LiveScoresTemplate } from './LiveScoresTemplate';
+export { MagazineGridTemplate } from './MagazineGridTemplate';
+export { MatchDetailTemplate } from './MatchDetailTemplate';
+export { NewsCategoriesTemplate } from './NewsCategoriesTemplate';
+export { NewsletterSignupTemplate } from './NewsletterSignupTemplate';
+export { OpinionTemplate } from './OpinionTemplate';
+export { PlayerStatsTemplate } from './PlayerStatsTemplate';
+export { PressReleasesTemplate } from './PressReleasesTemplate';
+export { SeasonStandingsTemplate } from './SeasonStandingsTemplate';
+export { SportsNewsTemplate } from './SportsNewsTemplate';
+export { TeamRosterTemplate } from './TeamRosterTemplate';

@@ -18,6 +18,7 @@ const demos = {
   password: dynamic(() => import('./demos/password')),
   video: dynamic(() => import('./demos/video')),
   gallery: dynamic(() => import('./demos/gallery')),
+  library: dynamic(() => import('./demos/library')),
 } as const;
 
 export type ExhibitDemoSlug = keyof typeof demos;

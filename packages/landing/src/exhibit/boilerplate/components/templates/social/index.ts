@@ -1,0 +1,16 @@
+export { EventsTemplate } from './EventsTemplate';
+export { FeedTemplate } from './FeedTemplate';
+export { FollowersTemplate } from './FollowersTemplate';
+export { GameChallengesTemplate } from './GameChallengesTemplate';
+export { GameNewsTemplate } from './GameNewsTemplate';
+export { GroupsTemplate } from './GroupsTemplate';
+export { LeaderboardsTemplate } from './LeaderboardsTemplate';
+export { LiveChannelsTemplate } from './LiveChannelsTemplate';
+export { LiveMatchesTemplate } from './LiveMatchesTemplate';
+export { MessagesTemplate } from './MessagesTemplate';
+export { PlayerProfilesTemplate } from './PlayerProfilesTemplate';
+export { ProfileTemplate } from './ProfileTemplate';
+export { ReportsTemplate } from './ReportsTemplate';
+export { StreamingSearchTemplate } from './StreamingSearchTemplate';
+export { TournamentsTemplate } from './TournamentsTemplate';
+export { WatchHistoryTemplate } from './WatchHistoryTemplate';

@@ -1,0 +1,16 @@
+export { ApiKeysTemplate } from './ApiKeysTemplate';
+export { AutomationsTemplate } from './AutomationsTemplate';
+export { BackupsTemplate } from './BackupsTemplate';
+export { DeploymentsTemplate } from './DeploymentsTemplate';
+export { DeviceDashboardTemplate } from './DeviceDashboardTemplate';
+export { DeviceDetailTemplate } from './DeviceDetailTemplate';
+export { EndpointsTemplate } from './EndpointsTemplate';
+export { EnergyUsageTemplate } from './EnergyUsageTemplate';
+export { EnvironmentsTemplate } from './EnvironmentsTemplate';
+export { FeatureFlagsTemplate } from './FeatureFlagsTemplate';
+export { LogsTemplate } from './LogsTemplate';
+export { MonitorsTemplate } from './MonitorsTemplate';
+export { ScenesTemplate } from './ScenesTemplate';
+export { SensorDataTemplate } from './SensorDataTemplate';
+export { SmartHomeSettingsTemplate } from './SmartHomeSettingsTemplate';
+export { WebhooksTemplate } from './WebhooksTemplate';

@@ -1289,3 +1289,610 @@
   backdrop-filter: blur(8px);
   background-color: color-mix(in srgb, var(--ex-base-100) 70%, transparent);
 }
+
+/* ------------------------------------------------------------------ */
+/* Boilerplate additions                                                */
+/*                                                                      */
+/* The component-library port uses a wider slice of the DaisyUI          */
+/* vocabulary than the app exhibits did. These rules extend the same    */
+/* compat layer — same --ex-* tokens, same .exhibit scope.               */
+/* ------------------------------------------------------------------ */
+
+/* Buttons — extra variants */
+.exhibit .btn-square {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+.exhibit .btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.exhibit .btn-link {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ex-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.exhibit .btn-link:hover {
+  background: transparent;
+  color: var(--ex-primary);
+  filter: brightness(1.15);
+}
+
+/* Card — layout variants */
+.exhibit .card-bordered {
+  border-width: 2px;
+}
+.exhibit .card-side {
+  flex-direction: row;
+  align-items: stretch;
+}
+.exhibit .card-side .card-body {
+  flex: 1;
+}
+@media (max-width: 640px) {
+  .exhibit .card-side {
+    flex-direction: column;
+  }
+}
+
+/* Join — explicit item radius inside .join */
+.exhibit .join-item {
+  border-radius: 0;
+}
+.exhibit .join > .join-item:first-child,
+.exhibit .join > :first-child.join-item {
+  border-top-left-radius: var(--ex-radius-field);
+  border-bottom-left-radius: var(--ex-radius-field);
+}
+.exhibit .join > .join-item:last-child,
+.exhibit .join > :last-child.join-item {
+  border-top-right-radius: var(--ex-radius-field);
+  border-bottom-right-radius: var(--ex-radius-field);
+}
+.exhibit .join .join-item + .join-item {
+  margin-left: -1px;
+}
+
+/* Badge — large size */
+.exhibit .badge-lg {
+  font-size: 1rem;
+  padding: 0.5rem 0.875rem;
+  min-height: 2rem;
+}
+
+/* Avatar — placeholder tone */
+.exhibit .avatar-placeholder {
+  background-color: var(--ex-primary);
+  color: var(--ex-primary-content);
+}
+
+/* Fields — ghost variants and remaining controls */
+.exhibit .input-ghost,
+.exhibit .select-ghost {
+  background-color: transparent;
+  border-color: transparent;
+}
+.exhibit .input-ghost:focus,
+.exhibit .select-ghost:focus {
+  background-color: var(--ex-base-200);
+  outline: none;
+}
+.exhibit .file-input {
+  display: block;
+  width: 100%;
+  font-size: 0.875rem;
+  color: var(--ex-base-content);
+}
+.exhibit .file-input-bordered {
+  border: 1px solid var(--ex-base-300);
+  border-radius: var(--ex-radius-field);
+  padding: 0.5rem 0.75rem;
+  background-color: var(--ex-base-100);
+}
+.exhibit .radio {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--ex-base-300);
+  border-radius: 9999px;
+  background-color: var(--ex-base-100);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.exhibit .radio:checked {
+  border-color: var(--ex-primary);
+  background-color: var(--ex-primary);
+  box-shadow: inset 0 0 0 2px var(--ex-base-100);
+}
+.exhibit .radio-sm {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.exhibit .range-sm {
+  height: 0.375rem;
+}
+.exhibit .rating-xs {
+  font-size: 0.75rem;
+}
+.exhibit .theme-controller {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  border: 2px solid var(--ex-base-300);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+.exhibit .theme-controller:checked {
+  border-color: var(--ex-primary);
+  background-color: var(--ex-primary);
+}
+
+/* Links */
+.exhibit .link-hover:hover {
+  color: var(--ex-primary);
+}
+.exhibit .link-primary {
+  color: var(--ex-primary);
+}
+.exhibit .link-primary:hover {
+  color: var(--ex-primary);
+  filter: brightness(1.15);
+}
+
+/* Loading variants */
+.exhibit .loading-spinner,
+.exhibit .loading-spinner-sm,
+.exhibit .loading-spinner-lg {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  border: 2px solid var(--ex-base-300);
+  border-top-color: var(--ex-primary);
+  animation: exhibit-spin 0.7s linear infinite;
+}
+.exhibit .loading-spinner-sm {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-width: 1.5px;
+}
+.exhibit .loading-spinner-lg {
+  width: 2rem;
+  height: 2rem;
+  border-width: 3px;
+}
+.exhibit .loading.loading-ring {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  border: 3px solid color-mix(in srgb, var(--ex-primary) 25%, transparent);
+  border-top-color: var(--ex-primary);
+  animation: exhibit-spin 0.9s linear infinite;
+}
+.exhibit .loading.loading-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: auto;
+  height: auto;
+  border: none;
+  animation: none;
+  background: transparent;
+}
+.exhibit .loading.loading-dots::before,
+.exhibit .loading.loading-dots::after,
+.exhibit .loading.loading-dots > span {
+  content: '';
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: var(--ex-primary);
+  animation: exhibit-bounce 1.2s ease-in-out infinite;
+}
+.exhibit .loading.loading-dots::after {
+  animation-delay: 0.2s;
+}
+.exhibit .loading.loading-dots > span {
+  animation-delay: 0.4s;
+}
+@keyframes exhibit-bounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+.exhibit .loading-xs {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-width: 1.5px;
+}
+
+/* Progress — colour variants */
+.exhibit .progress-secondary::-webkit-progress-value,
+.exhibit .progress-secondary::-moz-progress-bar {
+  background-color: var(--ex-secondary);
+}
+.exhibit .progress-accent::-webkit-progress-value,
+.exhibit .progress-accent::-moz-progress-bar {
+  background-color: var(--ex-accent);
+}
+.exhibit .progress-info::-webkit-progress-value,
+.exhibit .progress-info::-moz-progress-bar {
+  background-color: var(--ex-info);
+}
+.exhibit .progress-success::-webkit-progress-value,
+.exhibit .progress-success::-moz-progress-bar {
+  background-color: var(--ex-success);
+}
+.exhibit .progress-warning::-webkit-progress-value,
+.exhibit .progress-warning::-moz-progress-bar {
+  background-color: var(--ex-warning);
+}
+.exhibit .progress-error::-webkit-progress-value,
+.exhibit .progress-error::-moz-progress-bar {
+  background-color: var(--ex-error);
+}
+.exhibit .progress-ghost::-webkit-progress-value,
+.exhibit .progress-ghost::-moz-progress-bar {
+  background-color: var(--ex-neutral);
+}
+
+/* Radial progress — conic-gradient ring */
+.exhibit .radial-progress {
+  --ex-radial-value: 0;
+  --ex-radial-size: 5rem;
+  width: var(--ex-radial-size);
+  height: var(--ex-radial-size);
+  border-radius: 9999px;
+  background: conic-gradient(
+    var(--ex-primary) calc(var(--ex-radial-value) * 1%),
+    var(--ex-base-300) 0
+  );
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.exhibit .radial-progress::before {
+  content: '';
+  position: absolute;
+  inset: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--ex-base-100);
+}
+.exhibit .radial-progress > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Steps — numbered stepper */
+.exhibit .steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  counter-reset: ex-step;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.exhibit .steps > * {
+  counter-increment: ex-step;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ex-mute, var(--color-mute));
+  font-size: 0.875rem;
+}
+.exhibit .steps > *::before {
+  content: counter(ex-step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  border: 2px solid var(--ex-base-300);
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.exhibit .steps .step-primary,
+.exhibit .steps > .step-primary {
+  color: var(--ex-primary);
+}
+.exhibit .steps .step-primary::before,
+.exhibit .steps > .step-primary::before {
+  border-color: var(--ex-primary);
+  background-color: var(--ex-primary);
+  color: var(--ex-primary-content);
+}
+.exhibit .steps-horizontal {
+  flex-direction: row;
+}
+.exhibit .steps-vertical {
+  flex-direction: column;
+}
+.exhibit .steps-sm > *::before {
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.6875rem;
+}
+
+/* Stats — horizontal layout */
+.exhibit .stats-horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.exhibit .stats-horizontal .stat {
+  flex: 1;
+  min-width: 8rem;
+}
+
+/* Menu — orientation and density variants */
+.exhibit .menu-vertical {
+  flex-direction: column;
+}
+.exhibit .menu-horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.exhibit .menu-sm li > a,
+.exhibit .menu-sm li > button,
+.exhibit .menu-sm li > span {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.8125rem;
+}
+.exhibit .menu-title {
+  padding: 0.5rem 0.75rem 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-mute);
+}
+
+/* Collapse — the components drive open state with collapse-open */
+.exhibit .collapse {
+  border: 1px solid var(--ex-base-300);
+  border-radius: var(--ex-radius-box);
+  background-color: var(--ex-base-100);
+  overflow: hidden;
+}
+.exhibit .collapse-title {
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.exhibit .collapse-title::-webkit-details-marker {
+  display: none;
+}
+.exhibit .collapse-arrow .collapse-title::after {
+  content: '▸';
+  transition: transform 0.15s ease;
+  color: var(--color-mute);
+}
+.exhibit .collapse-arrow.collapse-open .collapse-title::after,
+details.collapse-arrow[open] .collapse-title::after {
+  transform: rotate(90deg);
+}
+.exhibit .collapse-content {
+  padding: 0 1rem 1rem;
+}
+.exhibit .collapse:not(.collapse-open) > .collapse-content,
+details.collapse:not([open]) > .collapse-content {
+  display: none;
+}
+
+/* Drawer — slide-over panel */
+.exhibit .drawer {
+  position: relative;
+}
+.exhibit .drawer-side {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 40;
+  background-color: var(--ex-base-100);
+  box-shadow: 0 0 2rem rgba(15, 23, 42, 0.15);
+  transition: transform 0.2s ease;
+}
+.exhibit .drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background-color: rgba(15, 23, 42, 0.4);
+}
+.exhibit .drawer-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Carousel — horizontal scroll snap */
+.exhibit .carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 0.5rem;
+  scrollbar-width: none;
+}
+.exhibit .carousel::-webkit-scrollbar {
+  display: none;
+}
+.exhibit .carousel-item {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+.exhibit .carousel-start {
+  justify-content: flex-start;
+}
+
+/* Diff — before/after image comparison */
+.exhibit .diff {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: var(--ex-radius-box);
+}
+.exhibit .diff-item-1,
+.exhibit .diff-item-2 {
+  grid-area: 1 / 1;
+}
+.exhibit .diff-resizer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--ex-primary);
+  cursor: ew-resize;
+  z-index: 2;
+}
+
+/* Mockup — browser window and code block frames */
+.exhibit .mockup-window {
+  border: 1px solid var(--ex-base-300);
+  border-radius: var(--ex-radius-box);
+  background-color: var(--ex-base-100);
+  overflow: hidden;
+}
+.exhibit .mockup-window::before {
+  content: '';
+  display: block;
+  height: 1.75rem;
+  background-color: var(--ex-base-200);
+  border-bottom: 1px solid var(--ex-base-300);
+}
+.exhibit .mockup-code {
+  border: 1px solid var(--ex-base-300);
+  border-radius: var(--ex-radius-box);
+  background-color: var(--ex-base-200);
+  padding: 1rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8125rem;
+  overflow-x: auto;
+}
+
+/* Swap — cross-fade toggle visuals */
+.exhibit .swap {
+  position: relative;
+  display: inline-grid;
+}
+.exhibit .swap > * {
+  grid-area: 1 / 1;
+}
+.exhibit .swap-off {
+  opacity: 1;
+}
+.exhibit .swap-on {
+  opacity: 0;
+}
+.exhibit .swap-active .swap-on,
+.exhibit .swap:has(input:checked) .swap-on {
+  opacity: 1;
+}
+.exhibit .swap-active .swap-off,
+.exhibit .swap:has(input:checked) .swap-off {
+  opacity: 0;
+}
+.exhibit .swap-rotate .swap-on {
+  transform: rotate(180deg);
+}
+.exhibit .swap-rotate.swap-active .swap-on,
+.exhibit .swap-rotate:has(input:checked) .swap-on {
+  transform: rotate(0deg);
+}
+
+/* Mask — clip shapes used by rating stars and hotel badges */
+.exhibit .mask {
+  display: inline-block;
+  flex-shrink: 0;
+}
+.exhibit .mask-star-2 {
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+.exhibit .mask-squircle {
+  border-radius: 30%;
+}
+.exhibit .mask-heart {
+  clip-path: path(
+    'M12 21s-6.7-4.35-9.33-8.11C.5 9.6 1.56 5.9 4.7 5.07c1.94-.5 3.9.4 5.05 2.14L12 9l2.25-1.79c1.15-1.74 3.11-2.64 5.05-2.14 3.14.83 4.2 4.53 2.03 7.82C18.7 16.65 12 21 12 21z'
+  );
+}
+
+/* Chat — image bubble variant */
+.exhibit .chat-image {
+  border-radius: var(--ex-radius-box);
+  max-width: 16rem;
+  overflow: hidden;
+}
+.exhibit .chat-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Hero — landing header block */
+.exhibit .hero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+}
+.exhibit .hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* List — row variant for dense lists */
+.exhibit .list-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--ex-base-300);
+}
+.exhibit .list-row:last-child {
+  border-bottom: none;
+}
+
+/* Reduced motion for the new animations */
+@media (prefers-reduced-motion: reduce) {
+  .exhibit .loading-ring,
+  .exhibit .loading-dots::before,
+  .exhibit .loading-dots::after,
+  .exhibit .loading-dots > span {
+    animation-duration: 2s;
+  }
+}

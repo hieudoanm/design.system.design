@@ -5,7 +5,8 @@
  * teaches, and `chapters` links the patterns it demonstrates.
  */
 
-export type ExhibitCategoryId = 'business' | 'finance' | 'social' | 'ai' | 'security' | 'graphics';
+export type ExhibitCategoryId =
+  'business' | 'finance' | 'social' | 'ai' | 'security' | 'graphics' | 'library';
 
 export type ExhibitStatus = 'ready' | 'coming-soon';
 
@@ -71,6 +72,12 @@ export const exhibitCategories: {
     title: 'Graphics design',
     intro:
       'Tool-style apps turn a single job — compress, trim, convert — into a form plus a progress state. The craft is in the parameters and the preview.',
+  },
+  {
+    id: 'library',
+    title: 'Component library',
+    intro:
+      'Not an app but a kit: atoms, molecules and organisms composed into full screens across sixteen product themes. Browse it the way a team would adopt it — by namespace, then by screen.',
   },
 ];
 
@@ -313,6 +320,38 @@ export const exhibitApps: ExhibitApp[] = [
         slug: 'data-display',
         title: 'Data display',
         note: 'File queues and output lists are job-tracking tables with status at their core.',
+      },
+    ],
+  },
+  {
+    slug: 'library',
+    name: 'Component library',
+    category: 'library',
+    status: 'ready',
+    description:
+      'A themeable component kit: sixteen product namespaces of atoms, molecules and organisms, each composed into full template screens.',
+    takeaway:
+      'The scale test in reverse. Where Wallet shows one app reusing shared parts, the library shows the parts themselves — every screen is the same atoms and molecules recombined for a different product. It is also a study in theming: one set of semantic classes, two palettes, zero per-component colour decisions. Browse by namespace, then open a screen and follow its own navigation — the sidebar links work, because every route in the kit maps to a screen here.',
+    chapters: [
+      {
+        slug: 'atomic-design',
+        title: 'Atomic Design',
+        note: 'The kit is organised literally as atoms, molecules, organisms and templates per namespace — the ladder made browsable.',
+      },
+      {
+        slug: 'design-tokens',
+        title: 'Design tokens',
+        note: 'Sixteen themes share one semantic vocabulary; the palette is data, not code.',
+      },
+      {
+        slug: 'component-api',
+        title: 'Component API design',
+        note: 'Every organism takes plain props — the screens in the picker are the prop contracts made visible.',
+      },
+      {
+        slug: 'navigation',
+        title: 'Navigation',
+        note: 'Each namespace ships its own sidebar and breadcrumbs — sixteen answers to the same wayfinding problem.',
       },
     ],
   },

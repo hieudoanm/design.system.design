@@ -1,0 +1,16 @@
+export { ActivityLogTemplate } from './ActivityLogTemplate';
+export { AnalyticsTemplate } from './AnalyticsTemplate';
+export { CalendarTemplate } from './CalendarTemplate';
+export { ChatTemplate } from './ChatTemplate';
+export { ContactsTemplate } from './ContactsTemplate';
+export { DashboardTemplate } from './DashboardTemplate';
+export { FilesTemplate } from './FilesTemplate';
+export { GoalsTemplate } from './GoalsTemplate';
+export { HelpCenterTemplate } from './HelpCenterTemplate';
+export { InboxTemplate } from './InboxTemplate';
+export { IntegrationsTemplate } from './IntegrationsTemplate';
+export { KanbanTemplate } from './KanbanTemplate';
+export { MeetingsTemplate } from './MeetingsTemplate';
+export { MembersTemplate } from './MembersTemplate';
+export { NotificationsTemplate } from './NotificationsTemplate';
+export { TasksTemplate } from './TasksTemplate';

@@ -1,0 +1,16 @@
+export { CareersTemplate } from './CareersTemplate';
+export { ChangelogTemplate } from './ChangelogTemplate';
+export { ContactTemplate } from './ContactTemplate';
+export { GameDetailTemplate } from './GameDetailTemplate';
+export { LandingTemplate } from './LandingTemplate';
+export { LegalTemplate } from './LegalTemplate';
+export { NotesTemplate } from './NotesTemplate';
+export { PricingTemplate } from './PricingTemplate';
+export { ResumeTemplate } from './ResumeTemplate';
+export { RoadmapTemplate } from './RoadmapTemplate';
+export { SettingsTemplate } from './SettingsTemplate';
+export { ShortcutsTemplate } from './ShortcutsTemplate';
+export { SprintsTemplate } from './SprintsTemplate';
+export { TeamTemplate } from './TeamTemplate';
+export { VersionTemplate } from './VersionTemplate';
+export { WhiteboardTemplate } from './WhiteboardTemplate';

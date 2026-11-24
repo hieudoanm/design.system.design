@@ -12,3 +12,4 @@ e2e/artifacts/
 **/.intellijPlatform/
 *.tsbuildinfo
 .tracers/
+packages/landing/src/exhibit/

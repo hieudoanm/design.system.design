@@ -1,6 +1,6 @@
 # design.system.design
 
-[![CI](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml?branch=master)  [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![CI](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/hieudoanm/design.system.design/actions/workflows/ci.yaml?branch=master) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Topics: `design-system`, `system-design`, `interview-prep`, `nextjs`, `static-site`
 
@@ -205,7 +205,7 @@ The site lives at **<https://hieudoanm.github.io/design.system.design>** because
 ## Project Status and Trust
 
 - **Maturity:** A working reference site with all twenty-six design system chapters in six groups and all twenty-four system design problems complete. Content is still being extended.
-- **Routes:** 94 prerendered pages — the landing page, a design system chapter index, twenty-six chapter pages, thirty Laws of UX pages and nine Exhibit pages, a system design index and twenty-four problem pages.
+- **Routes:** 95 prerendered pages — the landing page, a design system chapter index, twenty-six chapter pages, thirty Laws of UX pages and ten Exhibit pages, a system design index and twenty-four problem pages.
 - **Stack:** Next.js 16.4.2 (App Router), React 19.3.1, TypeScript 6.0.3, Tailwind CSS 4.3.3, Bricolage Grotesque and JetBrains Mono.
 - **Assets:** Icons at 16/32/48/64/96/128/152/167/180/192/256/384/512 plus a multi-resolution `favicon.ico`; the social card is a 1200×630 vector source with a matching PNG.
 - **Privacy:** No trackers, no third-party cookies, no analytics, no accounts. Fonts are self-hosted.

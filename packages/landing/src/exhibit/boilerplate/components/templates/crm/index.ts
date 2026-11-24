@@ -1,0 +1,16 @@
+export { AccountsTemplate } from './AccountsTemplate';
+export { CampaignsTemplate } from './CampaignsTemplate';
+export { CouponsTemplate } from './CouponsTemplate';
+export { CrmContactsTemplate } from './CrmContactsTemplate';
+export { CustomersTemplate } from './CustomersTemplate';
+export { DealsTemplate } from './DealsTemplate';
+export { InventoryTemplate } from './InventoryTemplate';
+export { LeadsTemplate } from './LeadsTemplate';
+export { OrdersTemplate } from './OrdersTemplate';
+export { PipelineTemplate } from './PipelineTemplate';
+export { ProductsTemplate } from './ProductsTemplate';
+export { PromotionsTemplate } from './PromotionsTemplate';
+export { QuoteBuilderTemplate } from './QuoteBuilderTemplate';
+export { RefundsTemplate } from './RefundsTemplate';
+export { SalesReportsTemplate } from './SalesReportsTemplate';
+export { ShipmentsTemplate } from './ShipmentsTemplate';

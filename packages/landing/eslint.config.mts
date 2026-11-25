@@ -10,11 +10,13 @@ export default defineConfig([
     'node_modules/**',
     'public/**',
     'out/**',
+    'build/**',
     'coverage/**',
-    'next-env.d.ts',
     'test-results/**',
+    'playwright-report/**',
     'videos/**',
     // Vendored Exhibit apps — linted by their own toolchain upstream.
     'src/exhibit/**',
+    'next-env.d.ts',
   ]),
 ]);
